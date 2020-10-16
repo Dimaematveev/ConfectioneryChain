@@ -49,7 +49,7 @@ namespace ConfectioneryChain.WPF
 
         private void EditConfBut_Click(object sender, RoutedEventArgs e)
         {
-            
+            Edit.IsEnabled = true;
             switch (DataGrid1.SelectedIndex)
             {
                 case -1:
@@ -77,16 +77,19 @@ namespace ConfectioneryChain.WPF
 
         private void AddConf_Click(object sender, RoutedEventArgs e)
         {
+            Edit.IsEnabled = true;
             ID = -1;
             NameConf.Text = "";
             AdressConf.Text = "";
             RentPriceConf.Text = "0";
             BeginTime.Text = "00:00:00";
             EndTime.Text = "00:00:00";
+            
         }
 
         private void CancelConf_Click(object sender, RoutedEventArgs e)
         {
+            Edit.IsEnabled = false;
             ID = -1;
             NameConf.Text = "";
             AdressConf.Text = "";
@@ -97,14 +100,16 @@ namespace ConfectioneryChain.WPF
 
         private void SaveConf_Click(object sender, RoutedEventArgs e)
         {
-            
+            Edit.IsEnabled = false;
             if (ID==-1)
             {
                 Data.Local.Add(NewConfectionery());
             }
             else
             {
-                Data.Local[ID] = NewConfectionery();
+                var conf = NewConfectionery();
+                conf.IDConfectionery = (Data.Local[ID] as Confectionery).IDConfectionery;
+                Data.Local[ID] = conf;
             }
             Save();
 
@@ -119,10 +124,10 @@ namespace ConfectioneryChain.WPF
             conf.BeginWork = TimeSpan.Parse(BeginTime.Text);
             conf.EndWork = TimeSpan.Parse(EndTime.Text);
             return conf;
-
         }
         private void CloseConf_Click(object sender, RoutedEventArgs e)
         {
+            Edit.IsEnabled = false;
             DialogResult = true;
         }
 
