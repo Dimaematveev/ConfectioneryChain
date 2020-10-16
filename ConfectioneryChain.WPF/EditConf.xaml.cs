@@ -69,8 +69,9 @@ namespace ConfectioneryChain.WPF
             NameConf.Text = str.Name;
             AdressConf.Text = str.Address;
             RentPriceConf.Text = str.RentPricel.ToString();
-            BeginTime.Text = str.BeginWork.ToString("c");
-            EndTime.Text = str.EndWork.ToString("c");
+
+            BeginTime.Value = new DateTime(str.BeginWork.Ticks);
+            EndTime.Value = new DateTime(str.EndWork.Ticks); 
 
 
         }

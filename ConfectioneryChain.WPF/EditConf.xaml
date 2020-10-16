@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrl="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:ConfectioneryChain.WPF"
         mc:Ignorable="d"
         Title="EditConf" Height="450" Width="800">
@@ -49,9 +50,9 @@
                     <Label>Время работы кафе</Label>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="С "/>
-                        <TextBox x:Name="BeginTime" Text="00:00:00" Width="70"/>
+                        <ctrl:TimePicker  x:Name="BeginTime"  Width="90" Format="Custom" FormatString="HH:mm" StartTime="00:00" EndTime="23:59" TimeInterval="00:15" />
                         <TextBlock Text=" По "/>
-                        <TextBox x:Name="EndTime"  Text="00:00:00" Width="70"/>
+                        <ctrl:TimePicker  x:Name="EndTime"  Width="90" Format="Custom" FormatString="HH:mm" StartTime="00:00" EndTime="23:59" TimeInterval="00:15" />
                     </StackPanel>
                 </StackPanel>
             
