@@ -15,22 +15,54 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="DataGrid1" Grid.Row="0" Grid.Column="0"></DataGrid>
-        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="5">
-            <StackPanel Orientation="Vertical">
-                <Label>Название</Label>
-                <TextBox x:Name="NameConf"></TextBox>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="DataGrid1" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+                <Button x:Name="EditConfBut" Content="Изменить" Width="100"/>
+                <Button x:Name="AddConf" Content="Добавить" Width="100"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <Label>Адресс</Label>
-                <TextBox x:Name="NameConf"></TextBox>
-            </StackPanel>
-        </StackPanel>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
         
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <Button x:Name="OK" Content="OK" Width="100" Click="OK_Click"/>
-            <Button x:Name="SaveData" Content="Сохранить" Width="100" Click="Save_Click"/>
-            <Button x:Name="Cancel" Content="Отмена" Width="100" Click="Cancel_Click"/>
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+                <StackPanel Orientation="Vertical">
+                    <Label>Название</Label>
+                    <TextBox x:Name="NameConf"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label>Адресс</Label>
+                    <TextBox x:Name="AdressConf" Height="60" TextWrapping="Wrap"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label>Арендная плата</Label>
+                    <TextBox x:Name="RentPriceConf"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label>Время работы кафе</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="С "/>
+                        <TextBox x:Name="BeginTime" Text="00:00:00" Width="70"/>
+                        <TextBlock Text=" По "/>
+                        <TextBox x:Name="EndTime"  Text="00:00:00" Width="70"/>
+                    </StackPanel>
+                </StackPanel>
+            
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+                <Button x:Name="SaveConf" Content="Сохранить" Width="100"/>
+                <Button x:Name="CancelConf" Content="Отмена" Width="100"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5">
+            <Button x:Name="CloseConf" Content="Закрыть" Width="100"/>
         </StackPanel>
     </Grid>
 </Window>
