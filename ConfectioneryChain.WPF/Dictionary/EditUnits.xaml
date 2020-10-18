@@ -1,4 +1,4 @@
-﻿<Window x:Class="ConfectioneryChain.WPF.Dictionary.EditGoods"
+﻿<Window x:Class="ConfectioneryChain.WPF.Dictionary.EditUnits"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -34,23 +34,16 @@
             </Grid.RowDefinitions>
         
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+                
                 <StackPanel Orientation="Horizontal">
-                    <Label>Тип товара: </Label>
-                    <ComboBox  x:Name="TypesOfGoodsChar" Width="150" SelectedValuePath="CharTypesOfGoods" DisplayMemberPath="Name"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label >Тип подсчета товара: </Label>
-                    <ComboBox  x:Name="UnitsID" Width="150" SelectedValuePath="IDUnits" DisplayMemberPath="Name"/>
+                    <Label>Кратное значение:</Label>
+                    <ctrl:DecimalUpDown Minimum="0" Increment="0.01"  x:Name="MultipleValue"  Width="150"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <Label>Название продукта:</Label>
+                    <Label>Название Типа:</Label>
                     <TextBox x:Name="Name"></TextBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Калории:</Label>
-                    <ctrl:DecimalUpDown Increment="0.2"  x:Name="Calories"  Width="150"/>
-                </StackPanel>
-
+              
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>

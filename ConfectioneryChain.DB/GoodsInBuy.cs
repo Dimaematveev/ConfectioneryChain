@@ -22,5 +22,10 @@ namespace ConfectioneryChain.DB
         public decimal Count { get; set; }
     
         public virtual FilingTheWarehouseShop FilingTheWarehouseShop { get; set; }
+
+        public override string ToString()
+        {
+            return $"[{IDGoodsInBuy}]";
+        }
     }
 }

@@ -77,6 +77,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dictionary\EditUnits.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dictionary\EditTypeGoods.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,6 +108,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Dictionary\EditUnits.xaml.cs">
+      <DependentUpon>EditUnits.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dictionary\EditTypeGoods.xaml.cs">
       <DependentUpon>EditTypeGoods.xaml</DependentUpon>

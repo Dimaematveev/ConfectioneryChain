@@ -33,5 +33,10 @@ namespace ConfectioneryChain.DB
         public virtual ICollection<ItemInRecipe> ItemInRecipes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ToppingInRecipe> ToppingInRecipes { get; set; }
+
+        public override string ToString()
+        {
+            return $"[{TypeOfGood.ToString()}-{Name}-{Unit.ToString()}]";
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using ConfectioneryChain.DB;
 using System;
-using System.Collections;
 using System.Data.Entity;
 using System.Windows;
 
@@ -9,16 +8,15 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditGoods : Window
+    public partial class EditUnits : Window
     {
         Action Save;
         DbSet Data;
         int ID;
-        public EditGoods(DbSet data,Action save, IEnumerable TypeGoods, IEnumerable Units)
+        public EditUnits(DbSet data,Action save)
         {
             InitializeComponent();
-            TypesOfGoodsChar.ItemsSource = TypeGoods;
-            UnitsID.ItemsSource = Units;
+
             Data = data;
             Save = save;
             LoadValue();
@@ -59,12 +57,10 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private void FillingFields()
         {
-            var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Good;
-            
-            TypesOfGoodsChar.SelectedValue = str.TypesOfGoodsChar;
-            UnitsID.SelectedValue = str.UnitsID;
+            var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Unit;
+
+            MultipleValue.Value = str.MultipleValue;
             Name.Text = str.Name;
-            Calories.Value = str.Calories;
         }
 
         private void AddConf_Click(object sender, RoutedEventArgs e)
@@ -83,10 +79,8 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void DefaultValue()
         {
             ID = -1;
-            TypesOfGoodsChar.SelectedIndex = -1;
-            UnitsID.SelectedIndex = -1;
+            MultipleValue.Value = 0;
             Name.Text = "";
-            Calories.Value = 0;
         }
 
         private void SaveConf_Click(object sender, RoutedEventArgs e)
@@ -99,7 +93,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             else
             {
                 var conf = New();
-                conf.IDGoods = (Data.Local[ID] as Good).IDGoods;
+                conf.IDUnits = (Data.Local[ID] as Unit).IDUnits;
                 Data.Local[ID] = conf;
             }
 
@@ -132,14 +126,12 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         }
 
-        private Good New()
+        private Unit New()
         {
-            var obj = new Good();
+            var obj = new Unit();
 
-            obj.TypesOfGoodsChar = (string)TypesOfGoodsChar.SelectedValue;
-            obj.UnitsID = (int)UnitsID.SelectedValue;
+            obj.MultipleValue = MultipleValue.Value.Value;
             obj.Name = Name.Text;
-            obj.Calories = Calories.Value;
             return obj;
         }
         private void CloseConf_Click(object sender, RoutedEventArgs e)

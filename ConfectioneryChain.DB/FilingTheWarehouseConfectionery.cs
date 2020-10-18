@@ -21,5 +21,10 @@ namespace ConfectioneryChain.DB
         public System.DateTime ShelfLife { get; set; }
     
         public virtual Confectionery Confectionery { get; set; }
+
+        public override string ToString()
+        {
+            return $"[{ConfectioneryID}-{GoodsID}]";
+        }
     }
 }

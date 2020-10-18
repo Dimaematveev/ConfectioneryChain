@@ -21,27 +21,32 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" >
-            <Label>Кол-во Кафе</Label>
+            <Label>Кафе</Label>
             <Label x:Name="LableConf">0</Label>
             <Button x:Name="EditConf" Height="20" Click="EditConf_Click" >Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" >
-            <Label>Кол-во сотрудников</Label>
+            <Label>Сотрудники</Label>
             <Label x:Name="LableEmpl">0</Label>
             <Button x:Name="EditEmpl" Height="20" Click="EditEmpl_Click"  >Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" >
-            <Label>Кол-во должностей</Label>
+            <Label>Должности</Label>
             <Label x:Name="LablePos">0</Label>
             <Button x:Name="EditPos" Height="20" Click="EditPos_Click">Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" >
-            <Label>Кол-во типов Продуктов</Label>
+            <Label>Типы продуктов</Label>
             <Label x:Name="LableTypeGoods">0</Label>
             <Button x:Name="EditTypeGoods" Height="20" Click="EditTypeGoods_Click">Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="4" Grid.Row="0" >
-            <Label>Кол-во Продуктов</Label>
+            <Label >Типы подсчета товара</Label>
+            <Label x:Name="LableTypeUnits">0</Label>
+            <Button x:Name="EditTypeUnits" Height="20" Click="EditTypeUnits_Click">Изменить</Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" >
+            <Label>Продукты</Label>
             <Label x:Name="LableGoods">0</Label>
             <Button x:Name="EditGoods" Height="20" Click="EditGoods_Click">Изменить</Button>
         </StackPanel>

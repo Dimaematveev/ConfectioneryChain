@@ -20,5 +20,11 @@ namespace ConfectioneryChain.DB
         public System.DateTime DateTime { get; set; }
     
         public virtual DistributionOfEmployee DistributionOfEmployee { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"[{IDBuyGoods}]";
+        }
     }
 }
