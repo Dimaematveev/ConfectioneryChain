@@ -37,7 +37,7 @@ namespace ConfectioneryChain.WPF
         private void EditConf_Click(object sender, RoutedEventArgs e)
         {
 
-            Window edit = new EditConf(db.Confectioneries, ()=>db.SaveChanges());
+            Window edit = new EditConf(db);
             edit.ShowDialog();
             Init();
             
@@ -46,14 +46,14 @@ namespace ConfectioneryChain.WPF
 
         private void EditEmpl_Click(object sender, RoutedEventArgs e)
         {
-            Window edit = new EditEmpl(db.Employees, () => db.SaveChanges());
+            Window edit = new EditEmpl(db);
             edit.ShowDialog();
             Init();
         }
 
         private void EditPos_Click(object sender, RoutedEventArgs e)
         {
-            Window edit = new EditPos(db.Positions, () => db.SaveChanges());
+            Window edit = new EditPos(db);
             edit.ShowDialog();
             Init();
         }
@@ -62,7 +62,7 @@ namespace ConfectioneryChain.WPF
 
         private void EditTypeGoods_Click(object sender, RoutedEventArgs e)
         {
-            Window edit = new EditTypeGoods(db.TypeOfGoods, () => db.SaveChanges());
+            Window edit = new EditTypeGoods(db);
             edit.ShowDialog();
             Init();
         }
@@ -71,14 +71,14 @@ namespace ConfectioneryChain.WPF
 
         private void EditTypeUnits_Click(object sender, RoutedEventArgs e)
         {
-            Window edit = new EditUnits(db.Units, () => db.SaveChanges());
+            Window edit = new EditUnits(db);
             edit.ShowDialog();
             Init();
         }
 
         private void EditGoods_Click(object sender, RoutedEventArgs e)
         {
-            Window edit = new EditGoods(db.Goods, () => db.SaveChanges(), db.TypeOfGoods.Local,db.Units.Local);
+            Window edit = new EditGoods(db);
             edit.ShowDialog();
             Init();
         }

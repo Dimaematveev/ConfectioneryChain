@@ -13,12 +13,12 @@ namespace ConfectioneryChain.WPF.Dictionary
         Action Save;
         DbSet Data;
         int ID;
-        public EditUnits(DbSet data,Action save)
+        public EditUnits(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
 
-            Data = data;
-            Save = save;
+            Data = db.Units;
+            Save = () => db.SaveChanges();
             LoadValue();
             //Общее
             CloseGeneral.Click += CloseConf_Click;

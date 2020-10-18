@@ -14,13 +14,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         Action Save;
         DbSet Data;
         int ID;
-        public EditGoods(DbSet data,Action save, IEnumerable TypeGoods, IEnumerable Units)
+        public EditGoods(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
-            TypesOfGoodsChar.ItemsSource = TypeGoods;
-            UnitsID.ItemsSource = Units;
-            Data = data;
-            Save = save;
+
+            Data = db.Goods;
+            Save = () => db.SaveChanges();
+
+
+            TypesOfGoodsChar.ItemsSource = db.TypeOfGoods.Local;
+            UnitsID.ItemsSource = db.Units.Local;
+
             LoadValue();
             //Общее
             CloseGeneral.Click += CloseConf_Click;

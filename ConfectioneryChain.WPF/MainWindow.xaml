@@ -21,34 +21,39 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" >
-            <Label>Кафе</Label>
+            <TextBlock>Кафе</TextBlock>
             <Label x:Name="LableConf">0</Label>
             <Button x:Name="EditConf" Height="20" Click="EditConf_Click" >Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" >
-            <Label>Сотрудники</Label>
+            <TextBlock>Сотрудники</TextBlock>
             <Label x:Name="LableEmpl">0</Label>
             <Button x:Name="EditEmpl" Height="20" Click="EditEmpl_Click"  >Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" >
-            <Label>Должности</Label>
+            <TextBlock>Должности</TextBlock>
             <Label x:Name="LablePos">0</Label>
             <Button x:Name="EditPos" Height="20" Click="EditPos_Click">Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="0" >
-            <Label>Типы продуктов</Label>
+            <TextBlock>Типы продуктов</TextBlock>
             <Label x:Name="LableTypeGoods">0</Label>
             <Button x:Name="EditTypeGoods" Height="20" Click="EditTypeGoods_Click">Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="4" Grid.Row="0" >
-            <Label >Типы подсчета товара</Label>
+            <TextBlock >Типы подсчета товара</TextBlock>
             <Label x:Name="LableTypeUnits">0</Label>
             <Button x:Name="EditTypeUnits" Height="20" Click="EditTypeUnits_Click">Изменить</Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" >
-            <Label>Продукты</Label>
+            <TextBlock>Продукты</TextBlock>
             <Label x:Name="LableGoods">0</Label>
             <Button x:Name="EditGoods" Height="20" Click="EditGoods_Click">Изменить</Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" >
+            <TextBlock TextWrapping="Wrap">Распределение сотрудников</TextBlock>
+            <Label x:Name="LableDistributionOfEmployees">0</Label>
+            <Button x:Name="EditDistributionOfEmployees" Height="20">Изменить</Button>
         </StackPanel>
     </Grid>
 </Window>
