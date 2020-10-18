@@ -1,34 +1,19 @@
 ﻿using ConfectioneryChain.DB;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace ConfectioneryChain.WPF
+namespace ConfectioneryChain.WPF.Dictionary
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditConf : Window
+    public partial class EditPos : Window
     {
         Action Save;
         DbSet Data;
         int ID;
-        public EditConf(DbSet data,Action save)
+        public EditPos(DbSet data, Action save)
         {
             InitializeComponent();
 
@@ -36,14 +21,14 @@ namespace ConfectioneryChain.WPF
             Save = save;
             LoadValue();
             //Общее
-            CloseConf.Click += CloseConf_Click;
-            //Для 1 кафе
-            SaveConf.Click += SaveConf_Click;
-            CancelConf.Click += CancelConf_Click;
+            CloseGeneral.Click += CloseConf_Click;
+            //Для 1 сотрудника
+            SaveOne.Click += SaveConf_Click;
+            CancelOne.Click += CancelConf_Click;
 
-            //Для всех кафе
-            EditConfBut.Click += EditConfBut_Click;
-            AddConf.Click += AddConf_Click;
+            //Для всех сотрудников
+            EditAll.Click += EditConfBut_Click;
+            AddAll.Click += AddConf_Click;
 
         }
 
@@ -56,11 +41,11 @@ namespace ConfectioneryChain.WPF
 
         private void EditConfBut_Click(object sender, RoutedEventArgs e)
         {
-            
+
             switch (DataGrid1.SelectedIndex)
             {
                 case -1:
-                    MessageBox.Show($"Вы не выбрали поле.","Неправильно выбраны поля",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
                 default:
                     ID = DataGrid1.SelectedIndex;
@@ -72,16 +57,12 @@ namespace ConfectioneryChain.WPF
 
         private void FillingFields()
         {
-            Confectionery str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Confectionery;
-            
-            NameConf.Text = str.Name;
-            AdressConf.Text = str.Address;
-            RentPriceConf.Value = str.RentPricel;
+            var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Position;
 
-            BeginTime.Value = new DateTime(str.BeginWork.Ticks);
-            EndTime.Value = new DateTime(str.EndWork.Ticks); 
-
-
+            Name.Text = str.Name;
+            MinimumHours.Value = str.MinimumHours;
+            WorkHourRate.Value = str.WorkHourRate;
+          
         }
 
         private void AddConf_Click(object sender, RoutedEventArgs e)
@@ -100,24 +81,22 @@ namespace ConfectioneryChain.WPF
         private void DefaultValue()
         {
             ID = -1;
-            NameConf.Text = "";
-            AdressConf.Text = "";
-            RentPriceConf.Value = 0;
-            BeginTime.Value = new DateTime();
-            EndTime.Value = new DateTime();
+            Name.Text = "";
+            MinimumHours.Value = 0;
+            WorkHourRate.Value = 0;
         }
 
         private void SaveConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            if (ID==-1)
+            if (ID == -1)
             {
-                Data.Local.Add(NewConfectionery());
+                Data.Local.Add(New());
             }
             else
             {
-                var conf = NewConfectionery();
-                conf.IDConfectionery = (Data.Local[ID] as Confectionery).IDConfectionery;
+                var conf = New();
+                conf.IDPosition = (Data.Local[ID] as Position).IDPosition;
                 Data.Local[ID] = conf;
             }
 
@@ -133,32 +112,32 @@ namespace ConfectioneryChain.WPF
                 }
                 Exception ex1 = ex;
                 string err = "";
-                while(ex1 != null)
+                while (ex1 != null)
                 {
                     err += "\n";
-                    err += new string('-',30);
+                    err += new string('-', 30);
                     err += "\n";
                     err += ex1.Source;
                     err += "\n";
                     err += ex1.Message;
                     ex1 = ex1.InnerException;
-                } 
-                
+                }
+
                 MessageBox.Show(err, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
         }
 
-        private Confectionery NewConfectionery()
+        private Position New()
         {
-            Confectionery conf = new Confectionery();
-            conf.Name = NameConf.Text;
-            conf.Address = AdressConf.Text;
-            conf.RentPricel = RentPriceConf.Value.Value;
-            conf.BeginWork = new TimeSpan(BeginTime.Value.Value.Ticks);
-            conf.EndWork = new TimeSpan(EndTime.Value.Value.Ticks);
-            return conf;
+            var obj = new Position();
+
+            obj.Name = Name.Text;
+            obj.MinimumHours = MinimumHours.Value.Value;
+            obj.WorkHourRate = WorkHourRate.Value.Value;
+
+            return obj;
         }
         private void CloseConf_Click(object sender, RoutedEventArgs e)
         {

@@ -1,20 +1,7 @@
 ﻿using ConfectioneryChain.DB;
-using System;
-using System.Collections.Generic;
+using ConfectioneryChain.WPF.Dictionary;
 using System.Data.Entity;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ConfectioneryChain.WPF
 {
@@ -34,6 +21,10 @@ namespace ConfectioneryChain.WPF
             db = new ConfectioneryChain_V5Entities();
             db.Confectioneries.Load();
             LableConf.Content = db.Confectioneries.Local.Count;
+            db.Employees.Load();
+            LableEmpl.Content = db.Employees.Local.Count;
+            db.Positions.Load();
+            LablePos.Content = db.Positions.Local.Count;
         }
 
 
@@ -45,6 +36,20 @@ namespace ConfectioneryChain.WPF
             Init();
             
             
+        }
+
+        private void EditEmpl_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditEmpl(db.Employees, () => db.SaveChanges());
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditPos_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditPos(db.Positions, () => db.SaveChanges());
+            edit.ShowDialog();
+            Init();
         }
     }
 }

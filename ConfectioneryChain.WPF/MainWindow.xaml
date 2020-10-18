@@ -24,5 +24,15 @@
             <Label x:Name="LableConf">0</Label>
             <Button x:Name="EditConf" Height="20" Click="EditConf_Click" >Изменить</Button>
         </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" >
+            <Label>Кол-во сотрудников</Label>
+            <Label x:Name="LableEmpl">0</Label>
+            <Button x:Name="EditEmpl" Height="20" Click="EditEmpl_Click"  >Изменить</Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" >
+            <Label>Кол-во должностей</Label>
+            <Label x:Name="LablePos">0</Label>
+            <Button x:Name="EditPos" Height="20" Click="EditPos_Click">Изменить</Button>
+        </StackPanel>
     </Grid>
 </Window>
