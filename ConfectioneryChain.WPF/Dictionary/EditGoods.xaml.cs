@@ -1,5 +1,6 @@
 ﻿using ConfectioneryChain.DB;
 using System;
+using System.Collections;
 using System.Data.Entity;
 using System.Windows;
 
@@ -13,10 +14,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         Action Save;
         DbSet Data;
         int ID;
-        public EditGoods(DbSet data,Action save)
+        public EditGoods(DbSet data,Action save,IEnumerable TypeGoods)
         {
             InitializeComponent();
-
+            TypesOfGoodsChar.ItemsSource = TypeGoods;
             Data = data;
             Save = save;
             LoadValue();
@@ -58,8 +59,8 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void FillingFields()
         {
             var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Good;
-
-            TypesOfGoodsChar.Text = str.TypesOfGoodsChar;
+            
+            TypesOfGoodsChar.SelectedValue = str.TypesOfGoodsChar;
             UnitsID.Value = str.UnitsID;
             Name.Text = str.Name;
             Calories.Value = str.Calories;
@@ -81,7 +82,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void DefaultValue()
         {
             ID = -1;
-            TypesOfGoodsChar.Text = "";
+            TypesOfGoodsChar.SelectedIndex = -1;
             UnitsID.Value = 0;
             Name.Text = "";
             Calories.Value = 0;
@@ -134,7 +135,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             var obj = new Good();
 
-            obj.TypesOfGoodsChar = TypesOfGoodsChar.Text;
+            obj.TypesOfGoodsChar = TypesOfGoodsChar.SelectedValue.ToString();
             obj.UnitsID = UnitsID.Value.Value;
             obj.Name = Name.Text;
             obj.Calories = Calories.Value;

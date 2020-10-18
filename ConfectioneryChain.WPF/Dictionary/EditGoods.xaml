@@ -36,7 +36,7 @@
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
                 <StackPanel Orientation="Horizontal">
                     <Label>Тип товара: </Label>
-                    <TextBox  x:Name="TypesOfGoodsChar" MaxLength="1" Width="150"/>
+                    <ComboBox  x:Name="TypesOfGoodsChar" Width="150" SelectedValuePath="CharTypesOfGoods" DisplayMemberPath="Name"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label >Тип подсчета товара: </Label>

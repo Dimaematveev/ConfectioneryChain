@@ -56,16 +56,18 @@ namespace ConfectioneryChain.WPF
             Init();
         }
 
-        private void EditGoods_Click(object sender, RoutedEventArgs e)
-        {
-            Window edit = new EditGoods(db.Goods, () => db.SaveChanges());
-            edit.ShowDialog();
-            Init();
-        }
+      
 
         private void EditTypeGoods_Click(object sender, RoutedEventArgs e)
         {
             Window edit = new EditTypeGoods(db.TypeOfGoods, () => db.SaveChanges());
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditGoods_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditGoods(db.Goods, () => db.SaveChanges(), db.TypeOfGoods.Local);
             edit.ShowDialog();
             Init();
         }
