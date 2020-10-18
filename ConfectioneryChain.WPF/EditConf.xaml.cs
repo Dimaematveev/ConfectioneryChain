@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,13 +28,13 @@ namespace ConfectioneryChain.WPF
         Action Save;
         DbSet Data;
         int ID;
-        public EditConf(DbSet data,Action save) 
+        public EditConf(DbSet data,Action save)
         {
             InitializeComponent();
-            Data = data;
-            DataGrid1.ItemsSource = data.Local;
-            Save = save;
 
+            Data = data;
+            Save = save;
+            LoadValue();
             //Общее
             CloseConf.Click += CloseConf_Click;
             //Для 1 кафе
@@ -45,11 +47,16 @@ namespace ConfectioneryChain.WPF
 
         }
 
-       
+        private void LoadValue()
+        {
+            Data.Load();
+            DataGrid1.ItemsSource = Data.Local;
+        }
+
 
         private void EditConfBut_Click(object sender, RoutedEventArgs e)
         {
-            Edit.IsEnabled = true;
+            
             switch (DataGrid1.SelectedIndex)
             {
                 case -1:
@@ -57,6 +64,7 @@ namespace ConfectioneryChain.WPF
                     break;
                 default:
                     ID = DataGrid1.SelectedIndex;
+                    Edit.IsEnabled = true;
                     FillingFields();
                     break;
             }
@@ -68,7 +76,7 @@ namespace ConfectioneryChain.WPF
             
             NameConf.Text = str.Name;
             AdressConf.Text = str.Address;
-            RentPriceConf.Text = str.RentPricel.ToString();
+            RentPriceConf.Value = str.RentPricel;
 
             BeginTime.Value = new DateTime(str.BeginWork.Ticks);
             EndTime.Value = new DateTime(str.EndWork.Ticks); 
@@ -79,24 +87,24 @@ namespace ConfectioneryChain.WPF
         private void AddConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = true;
-            ID = -1;
-            NameConf.Text = "";
-            AdressConf.Text = "";
-            RentPriceConf.Text = "0";
-            BeginTime.Text = "00:00:00";
-            EndTime.Text = "00:00:00";
-            
+            DefaultValue();
+
         }
 
         private void CancelConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
+            DefaultValue();
+        }
+
+        private void DefaultValue()
+        {
             ID = -1;
             NameConf.Text = "";
             AdressConf.Text = "";
-            RentPriceConf.Text = "0";
-            BeginTime.Text = "00:00:00";
-            EndTime.Text = "00:00:00";
+            RentPriceConf.Value = 0;
+            BeginTime.Value = new DateTime();
+            EndTime.Value = new DateTime();
         }
 
         private void SaveConf_Click(object sender, RoutedEventArgs e)
@@ -112,7 +120,33 @@ namespace ConfectioneryChain.WPF
                 conf.IDConfectionery = (Data.Local[ID] as Confectionery).IDConfectionery;
                 Data.Local[ID] = conf;
             }
-            Save();
+
+            try
+            {
+                Save();
+            }
+            catch (Exception ex)
+            {
+                if (ID == -1)
+                {
+                    Data.Local.RemoveAt(Data.Local.Count - 1);
+                }
+                Exception ex1 = ex;
+                string err = "";
+                while(ex1 != null)
+                {
+                    err += "\n";
+                    err += new string('-',30);
+                    err += "\n";
+                    err += ex1.Source;
+                    err += "\n";
+                    err += ex1.Message;
+                    ex1 = ex1.InnerException;
+                } 
+                
+                MessageBox.Show(err, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
 
         }
 
@@ -121,9 +155,9 @@ namespace ConfectioneryChain.WPF
             Confectionery conf = new Confectionery();
             conf.Name = NameConf.Text;
             conf.Address = AdressConf.Text;
-            conf.RentPricel = int.Parse(RentPriceConf.Text);
-            conf.BeginWork = TimeSpan.Parse(BeginTime.Text);
-            conf.EndWork = TimeSpan.Parse(EndTime.Text);
+            conf.RentPricel = RentPriceConf.Value.Value;
+            conf.BeginWork = new TimeSpan(BeginTime.Value.Value.Ticks);
+            conf.EndWork = new TimeSpan(EndTime.Value.Value.Ticks);
             return conf;
         }
         private void CloseConf_Click(object sender, RoutedEventArgs e)

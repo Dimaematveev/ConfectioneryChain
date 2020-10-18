@@ -35,23 +35,23 @@
         
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
                 <StackPanel Orientation="Vertical">
-                    <Label>Название</Label>
+                    <Label>Название:</Label>
                     <TextBox x:Name="NameConf"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <Label>Адресс</Label>
+                    <Label>Адрес:</Label>
                     <TextBox x:Name="AdressConf" Height="60" TextWrapping="Wrap"></TextBox>
                 </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Арендная плата</Label>
-                    <TextBox x:Name="RentPriceConf"></TextBox>
+                <StackPanel Orientation="Horizontal">
+                    <Label>Арендная плата:</Label>
+                    <ctrl:DecimalUpDown Increment="1000"  x:Name="RentPriceConf" Width="150"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <Label>Время работы кафе</Label>
+                    <Label>Время работы кафе:</Label>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="С "/>
-                        <ctrl:TimePicker  x:Name="BeginTime"  Width="90" Format="Custom" FormatString="HH:mm" StartTime="00:00" EndTime="23:59" TimeInterval="00:15" />
-                        <TextBlock Text=" По "/>
+                        <ctrl:TimePicker  x:Name="BeginTime"  Width="90" Format="Custom" FormatString="HH:mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" />
+                        <TextBlock Text=" по "/>
                         <ctrl:TimePicker  x:Name="EndTime"  Width="90" Format="Custom" FormatString="HH:mm" StartTime="00:00" EndTime="23:59" TimeInterval="00:15" />
                     </StackPanel>
                 </StackPanel>
