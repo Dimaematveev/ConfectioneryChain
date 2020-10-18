@@ -53,7 +53,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddCode\PartialClass.cs" />
+    <Compile Include="ParticalClass\BuyGood.cs" />
+    <Compile Include="ParticalClass\Check.cs" />
+    <Compile Include="ParticalClass\Confectionery.cs" />
+    <Compile Include="ParticalClass\Customer.cs" />
+    <Compile Include="ParticalClass\DistributionOfEmployee.cs" />
+    <Compile Include="ParticalClass\Employee.cs" />
+    <Compile Include="ParticalClass\FilingTheWarehouseConfectionery.cs" />
+    <Compile Include="ParticalClass\FilingTheWarehouseShop.cs" />
+    <Compile Include="ParticalClass\Good.cs" />
+    <Compile Include="ParticalClass\GoodsInBuy.cs" />
+    <Compile Include="ParticalClass\HierararchyInRecipe.cs" />
+    <Compile Include="ParticalClass\ItemInRecipe.cs" />
+    <Compile Include="ParticalClass\Order.cs" />
+    <Compile Include="ParticalClass\OrderIssueOption.cs" />
+    <Compile Include="ParticalClass\Invoice.cs" />
+    <Compile Include="ParticalClass\Position.cs" />
+    <Compile Include="ParticalClass\PriceList.cs" />
+    <Compile Include="ParticalClass\PriceListRecipe.cs" />
+    <Compile Include="ParticalClass\Recipe.cs" />
+    <Compile Include="ParticalClass\RecipesInOrder.cs" />
+    <Compile Include="ParticalClass\Shop.cs" />
+    <Compile Include="ParticalClass\StaffWorkSchedule.cs" />
+    <Compile Include="ParticalClass\ToppingInOrder.cs" />
+    <Compile Include="ParticalClass\ToppingInRecipe.cs" />
+    <Compile Include="ParticalClass\TypeOfGood.cs" />
+    <Compile Include="ParticalClass\Unit.cs" />
     <Compile Include="BuyGood.cs">
       <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>
     </Compile>
