@@ -25,6 +25,10 @@ namespace ConfectioneryChain.WPF
             LableEmpl.Content = db.Employees.Local.Count;
             db.Positions.Load();
             LablePos.Content = db.Positions.Local.Count;
+            db.Goods.Load();
+            LableGoods.Content = db.Goods.Local.Count;
+            db.TypeOfGoods.Load();
+            LableTypeGoods.Content = db.TypeOfGoods.Local.Count;
         }
 
 
@@ -48,6 +52,20 @@ namespace ConfectioneryChain.WPF
         private void EditPos_Click(object sender, RoutedEventArgs e)
         {
             Window edit = new EditPos(db.Positions, () => db.SaveChanges());
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditGoods_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditGoods(db.Goods, () => db.SaveChanges());
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditTypeGoods_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditTypeGoods(db.TypeOfGoods, () => db.SaveChanges());
             edit.ShowDialog();
             Init();
         }
