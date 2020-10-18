@@ -19,10 +19,5 @@ namespace ConfectioneryChain.DB
         public int CashierID { get; set; }
     
         public virtual DistributionOfEmployee DistributionOfEmployee { get; set; }
-
-        public override string ToString()
-        {
-            return $"[{ConfectioneryID}-{OrderID}-{CashierID}]";
-        }
     }
 }

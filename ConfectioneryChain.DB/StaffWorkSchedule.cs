@@ -24,9 +24,5 @@ namespace ConfectioneryChain.DB
         public System.TimeSpan TimeEndLunch { get; set; }
     
         public virtual DistributionOfEmployee DistributionOfEmployee { get; set; }
-        public override string ToString()
-        {
-            return $"[{IDStaffWorkSchedule}]";
-        }
     }
 }

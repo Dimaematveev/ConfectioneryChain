@@ -29,10 +29,5 @@ namespace ConfectioneryChain.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsInBuy> GoodsInBuys { get; set; }
         public virtual Shop Shop { get; set; }
-
-        public override string ToString()
-        {
-            return $"[{Shop.ToString()}-{GoodsID}]";
-        }
     }
 }

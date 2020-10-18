@@ -20,9 +20,5 @@ namespace ConfectioneryChain.DB
         public int Count { get; set; }
     
         public virtual ToppingInRecipe ToppingInRecipe { get; set; }
-        public override string ToString()
-        {
-            return $"[{ToppingInRecipe.ToString()}]";
-        }
     }
 }

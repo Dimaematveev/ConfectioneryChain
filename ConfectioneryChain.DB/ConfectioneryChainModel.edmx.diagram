@@ -4,63 +4,63 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2f77e696b9ac4044a45d39663ea2f132" Name="Diagram1">
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.BuyGood" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Confectionery" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.DistributionOfEmployee" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Employee" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.FilingTheWarehouseConfectionery" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.GoodsInBuy" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.StaffWorkSchedule" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Good" Width="1.5" PointX="3.75" PointY="33.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.OrderIssueOption" Width="1.5" PointX="3.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Position" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.TypeOfGood" Width="1.5" PointX="1.5" PointY="32.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Unit" Width="1.5" PointX="1.5" PointY="34.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Check" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Customer" Width="1.5" PointX="3.75" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Invoice" Width="1.5" PointX="8.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Order" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.PriceList" Width="1.5" PointX="3" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.PriceListRecipe" Width="1.5" PointX="5.25" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.RecipesInOrder" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.ToppingInOrder" Width="1.5" PointX="8.25" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.HierararchyInRecipe" Width="1.5" PointX="6" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.ItemInRecipe" Width="1.5" PointX="6" PointY="33" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Recipe" Width="1.5" PointX="3" PointY="28.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.ToppingInRecipe" Width="1.5" PointX="6" PointY="29" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.FilingTheWarehouseShop" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Shop" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_ConfectioneryID_Confectionery" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Order_ConfectioneryID_Confectionery" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_PriceList_ConfectioneryID_Confectionery" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_EmployeeID_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_PositionID_Position" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Recipe_ChefID_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Goods_TypesOfGoodsChar_TypesOfGoods" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Goods_UnitsID_Units" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_GoodsID_Goods" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ToppingInRecipes_GoodsID_Goods" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Order_OrderIssueOptionChar_OrderIssueOption" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Order_CustomerPhone_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Invoice_IDOrder_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_OrderID_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_PriceListRecipe_PriceListID_PriceList" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_PriceListRecipe_RecipeID_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_HierararchyInRecipe_RecipeID_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ToppingInRecipes_RecipeID_Recipe" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_FilingTheWarehouseShop_ShopID_Shop" ManuallyRouted="false" />
-        <AssociationConnector Association="ConfectioneryChain_V5Model.CancelIngredientInRecipe" ManuallyRouted="false" />
+      <Diagram DiagramId="2f77e696b9ac4044a45d39663ea2f132" Name="Diagram1" ZoomLevel="61">
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.BuyGood" Width="1.5" PointX="8.25" PointY="10.75" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Confectionery" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.DistributionOfEmployee" Width="1.5" PointX="6" PointY="10.875" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Employee" Width="1.5" PointX="3.75" PointY="6.5" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.FilingTheWarehouseConfectionery" Width="1.5" PointX="3" PointY="25.125" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.GoodsInBuy" Width="1.5" PointX="12.25" PointY="1" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.StaffWorkSchedule" Width="1.5" PointX="8.25" PointY="13.5" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Good" Width="1.5" PointX="3" PointY="28.75" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.OrderIssueOption" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Position" Width="1.5" PointX="3.75" PointY="18.875" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.TypeOfGood" Width="1.5" PointX="0.75" PointY="30.625" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Unit" Width="1.5" PointX="0.75" PointY="28.125" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Check" Width="1.5" PointX="8.25" PointY="8.125" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Customer" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Invoice" Width="1.5" PointX="5.25" PointY="15.125" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Order" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.PriceList" Width="1.5" PointX="3" PointY="22" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.PriceListRecipe" Width="1.5" PointX="5.25" PointY="22" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.RecipesInOrder" Width="1.5" PointX="7.5" PointY="17.125" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.ToppingInOrder" Width="1.5" PointX="10.5" PointY="22.125" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.HierararchyInRecipe" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.ItemInRecipe" Width="1.5" PointX="5.25" PointY="28.5" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Recipe" Width="1.5" PointX="3" PointY="14.75" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.ToppingInRecipe" Width="1.5" PointX="8.25" PointY="21.875" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.FilingTheWarehouseShop" Width="1.5" PointX="10" PointY="1" />
+        <EntityTypeShape EntityType="ConfectioneryChain_V5Model.Shop" Width="1.5" PointX="7.75" PointY="1.25" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_ConfectioneryID_Confectionery" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Order_ConfectioneryID_Confectionery" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_PriceList_ConfectioneryID_Confectionery" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_EmployeeID_Employee" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_PositionID_Position" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Recipe_ChefID_Employee" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Goods_TypesOfGoodsChar_TypesOfGoods" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Goods_UnitsID_Units" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_GoodsID_Goods" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ToppingInRecipes_GoodsID_Goods" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Order_OrderIssueOptionChar_OrderIssueOption" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Order_CustomerPhone_Customer" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_Invoice_IDOrder_Order" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_OrderID_Order" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_PriceListRecipe_PriceListID_PriceList" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_PriceListRecipe_RecipeID_Recipe" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_HierararchyInRecipe_RecipeID_Recipe" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_ToppingInRecipes_RecipeID_Recipe" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.FK_FilingTheWarehouseShop_ShopID_Shop" />
+        <AssociationConnector Association="ConfectioneryChain_V5Model.CancelIngredientInRecipe" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

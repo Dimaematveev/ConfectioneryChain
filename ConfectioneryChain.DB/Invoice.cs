@@ -21,10 +21,5 @@ namespace ConfectioneryChain.DB
         public bool ReturnMARK { get; set; }
     
         public virtual Order Order { get; set; }
-
-        public override string ToString()
-        {
-            return $"[{OrderID}]";
-        }
     }
 }

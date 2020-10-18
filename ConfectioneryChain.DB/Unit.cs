@@ -26,10 +26,5 @@ namespace ConfectioneryChain.DB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Good> Goods { get; set; }
-
-        public override string ToString()
-        {
-            return $"[{Name}({MultipleValue})]";
-        }
     }
 }

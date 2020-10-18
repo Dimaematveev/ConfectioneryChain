@@ -29,10 +29,5 @@ namespace ConfectioneryChain.DB
         public virtual Recipe Recipe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipesInOrder> RecipesInOrders { get; set; }
-
-        public override string ToString()
-        {
-            return $"[{PriceList.ToString()}-{Recipe.ToString()}]";
-        }
     }
 }

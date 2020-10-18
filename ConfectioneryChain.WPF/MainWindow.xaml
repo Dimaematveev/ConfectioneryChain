@@ -53,7 +53,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" >
             <TextBlock TextWrapping="Wrap">Распределение сотрудников</TextBlock>
             <Label x:Name="LableDistributionOfEmployees">0</Label>
-            <Button x:Name="EditDistributionOfEmployees" Height="20">Изменить</Button>
+            <Button x:Name="EditDistributionOfEmployees" Height="20" Click="EditDistributionOfEmployees_Click">Изменить</Button>
         </StackPanel>
     </Grid>
 </Window>

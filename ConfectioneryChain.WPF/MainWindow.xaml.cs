@@ -19,6 +19,7 @@ namespace ConfectioneryChain.WPF
         private void Init()
         {
             db = new ConfectioneryChain_V5Entities();
+            //Словари
             db.Confectioneries.Load();
             LableConf.Content = db.Confectioneries.Local.Count;
             db.Employees.Load();
@@ -31,6 +32,11 @@ namespace ConfectioneryChain.WPF
             LableTypeGoods.Content = db.TypeOfGoods.Local.Count;
             db.Units.Load();
             LableTypeUnits.Content = db.Units.Local.Count;
+
+            //Кондитерская
+            db.DistributionOfEmployees.Load();
+            LableDistributionOfEmployees.Content = db.DistributionOfEmployees.Local.Count;
+
         }
 
 
@@ -79,6 +85,13 @@ namespace ConfectioneryChain.WPF
         private void EditGoods_Click(object sender, RoutedEventArgs e)
         {
             Window edit = new EditGoods(db);
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditDistributionOfEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditDistributionOfEmployees(db);
             edit.ShowDialog();
             Init();
         }

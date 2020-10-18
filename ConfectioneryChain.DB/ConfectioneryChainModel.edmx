@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ConfectioneryChain_V5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ConfectioneryChain_V5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BuyGoods">
           <Key>
             <PropertyRef Name="IDBuyGoods" />
@@ -374,7 +374,7 @@ warning 6035: The relationship 'FK_Check_OrderID_ConfectioneryID_Order' has colu
               <PropertyRef Name="IDPosition" />
             </Principal>
             <Dependent Role="DistributionOfEmployees">
-              <PropertyRef Name="ConfectioneryID" />
+              <PropertyRef Name="PositionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -820,11 +820,158 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
             <End Role="ToppingInRecipes" EntitySet="ToppingInRecipes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ConfectioneryChain_V5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ConfectioneryChain_V5Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BuyGoods" EntityType="ConfectioneryChain_V5Model.BuyGood" />
+          <EntitySet Name="Confectioneries" EntityType="ConfectioneryChain_V5Model.Confectionery" />
+          <EntitySet Name="DistributionOfEmployees" EntityType="ConfectioneryChain_V5Model.DistributionOfEmployee" />
+          <EntitySet Name="Employees" EntityType="ConfectioneryChain_V5Model.Employee" />
+          <EntitySet Name="FilingTheWarehouseConfectioneries" EntityType="ConfectioneryChain_V5Model.FilingTheWarehouseConfectionery" />
+          <EntitySet Name="GoodsInBuys" EntityType="ConfectioneryChain_V5Model.GoodsInBuy" />
+          <EntitySet Name="StaffWorkSchedules" EntityType="ConfectioneryChain_V5Model.StaffWorkSchedule" />
+          <EntitySet Name="Goods" EntityType="ConfectioneryChain_V5Model.Good" />
+          <EntitySet Name="OrderIssueOptions" EntityType="ConfectioneryChain_V5Model.OrderIssueOption" />
+          <EntitySet Name="Positions" EntityType="ConfectioneryChain_V5Model.Position" />
+          <EntitySet Name="TypeOfGoods" EntityType="ConfectioneryChain_V5Model.TypeOfGood" />
+          <EntitySet Name="Units" EntityType="ConfectioneryChain_V5Model.Unit" />
+          <EntitySet Name="Checks" EntityType="ConfectioneryChain_V5Model.Check" />
+          <EntitySet Name="Customers" EntityType="ConfectioneryChain_V5Model.Customer" />
+          <EntitySet Name="Invoices" EntityType="ConfectioneryChain_V5Model.Invoice" />
+          <EntitySet Name="Orders" EntityType="ConfectioneryChain_V5Model.Order" />
+          <EntitySet Name="PriceLists" EntityType="ConfectioneryChain_V5Model.PriceList" />
+          <EntitySet Name="PriceListRecipes" EntityType="ConfectioneryChain_V5Model.PriceListRecipe" />
+          <EntitySet Name="RecipesInOrders" EntityType="ConfectioneryChain_V5Model.RecipesInOrder" />
+          <EntitySet Name="ToppingInOrders" EntityType="ConfectioneryChain_V5Model.ToppingInOrder" />
+          <EntitySet Name="HierararchyInRecipes" EntityType="ConfectioneryChain_V5Model.HierararchyInRecipe" />
+          <EntitySet Name="ItemInRecipes" EntityType="ConfectioneryChain_V5Model.ItemInRecipe" />
+          <EntitySet Name="Recipes" EntityType="ConfectioneryChain_V5Model.Recipe" />
+          <EntitySet Name="ToppingInRecipes" EntityType="ConfectioneryChain_V5Model.ToppingInRecipe" />
+          <EntitySet Name="FilingTheWarehouseShops" EntityType="ConfectioneryChain_V5Model.FilingTheWarehouseShop" />
+          <EntitySet Name="Shops" EntityType="ConfectioneryChain_V5Model.Shop" />
+          <AssociationSet Name="FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" Association="ConfectioneryChain_V5Model.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees">
+            <End Role="DistributionOfEmployee" EntitySet="DistributionOfEmployees" />
+            <End Role="BuyGood" EntitySet="BuyGoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionOfEmployees_ConfectioneryID_Confectionery" Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_ConfectioneryID_Confectionery">
+            <End Role="Confectionery" EntitySet="Confectioneries" />
+            <End Role="DistributionOfEmployee" EntitySet="DistributionOfEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" Association="ConfectioneryChain_V5Model.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery">
+            <End Role="Confectionery" EntitySet="Confectioneries" />
+            <End Role="FilingTheWarehouseConfectionery" EntitySet="FilingTheWarehouseConfectioneries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ConfectioneryID_Confectionery" Association="ConfectioneryChain_V5Model.FK_Order_ConfectioneryID_Confectionery">
+            <End Role="Confectionery" EntitySet="Confectioneries" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceList_ConfectioneryID_Confectionery" Association="ConfectioneryChain_V5Model.FK_PriceList_ConfectioneryID_Confectionery">
+            <End Role="Confectionery" EntitySet="Confectioneries" />
+            <End Role="PriceList" EntitySet="PriceLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" Association="ConfectioneryChain_V5Model.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees">
+            <End Role="DistributionOfEmployee" EntitySet="DistributionOfEmployees" />
+            <End Role="Check" EntitySet="Checks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionOfEmployees_EmployeeID_Employee" Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_EmployeeID_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="DistributionOfEmployee" EntitySet="DistributionOfEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DistributionOfEmployees_PositionID_Position" Association="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_PositionID_Position">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="DistributionOfEmployee" EntitySet="DistributionOfEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" Association="ConfectioneryChain_V5Model.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees">
+            <End Role="DistributionOfEmployee" EntitySet="DistributionOfEmployees" />
+            <End Role="StaffWorkSchedule" EntitySet="StaffWorkSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_ChefID_Employee" Association="ConfectioneryChain_V5Model.FK_Recipe_ChefID_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" Association="ConfectioneryChain_V5Model.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop">
+            <End Role="FilingTheWarehouseShop" EntitySet="FilingTheWarehouseShops" />
+            <End Role="GoodsInBuy" EntitySet="GoodsInBuys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goods_TypesOfGoodsChar_TypesOfGoods" Association="ConfectioneryChain_V5Model.FK_Goods_TypesOfGoodsChar_TypesOfGoods">
+            <End Role="TypeOfGood" EntitySet="TypeOfGoods" />
+            <End Role="Good" EntitySet="Goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goods_UnitsID_Units" Association="ConfectioneryChain_V5Model.FK_Goods_UnitsID_Units">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="Good" EntitySet="Goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemInRecipe_GoodsID_Goods" Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_GoodsID_Goods">
+            <End Role="Good" EntitySet="Goods" />
+            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToppingInRecipes_GoodsID_Goods" Association="ConfectioneryChain_V5Model.FK_ToppingInRecipes_GoodsID_Goods">
+            <End Role="Good" EntitySet="Goods" />
+            <End Role="ToppingInRecipe" EntitySet="ToppingInRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderIssueOptionChar_OrderIssueOption" Association="ConfectioneryChain_V5Model.FK_Order_OrderIssueOptionChar_OrderIssueOption">
+            <End Role="OrderIssueOption" EntitySet="OrderIssueOptions" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_CustomerPhone_Customer" Association="ConfectioneryChain_V5Model.FK_Order_CustomerPhone_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_IDOrder_Order" Association="ConfectioneryChain_V5Model.FK_Invoice_IDOrder_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipesInOrders_OrderID_Order" Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_OrderID_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="RecipesInOrder" EntitySet="RecipesInOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceListRecipe_PriceListID_PriceList" Association="ConfectioneryChain_V5Model.FK_PriceListRecipe_PriceListID_PriceList">
+            <End Role="PriceList" EntitySet="PriceLists" />
+            <End Role="PriceListRecipe" EntitySet="PriceListRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceListRecipe_RecipeID_Recipe" Association="ConfectioneryChain_V5Model.FK_PriceListRecipe_RecipeID_Recipe">
+            <End Role="Recipe" EntitySet="Recipes" />
+            <End Role="PriceListRecipe" EntitySet="PriceListRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe">
+            <End Role="PriceListRecipe" EntitySet="PriceListRecipes" />
+            <End Role="RecipesInOrder" EntitySet="RecipesInOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" Association="ConfectioneryChain_V5Model.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe">
+            <End Role="HierararchyInRecipe" EntitySet="HierararchyInRecipes" />
+            <End Role="RecipesInOrder" EntitySet="RecipesInOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" Association="ConfectioneryChain_V5Model.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes">
+            <End Role="ToppingInRecipe" EntitySet="ToppingInRecipes" />
+            <End Role="ToppingInOrder" EntitySet="ToppingInOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HierararchyInRecipe_RecipeID_Recipe" Association="ConfectioneryChain_V5Model.FK_HierararchyInRecipe_RecipeID_Recipe">
+            <End Role="Recipe" EntitySet="Recipes" />
+            <End Role="HierararchyInRecipe" EntitySet="HierararchyInRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe">
+            <End Role="HierararchyInRecipe" EntitySet="HierararchyInRecipes" />
+            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" Association="ConfectioneryChain_V5Model.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe">
+            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
+            <End Role="ItemInRecipe1" EntitySet="ItemInRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToppingInRecipes_RecipeID_Recipe" Association="ConfectioneryChain_V5Model.FK_ToppingInRecipes_RecipeID_Recipe">
+            <End Role="Recipe" EntitySet="Recipes" />
+            <End Role="ToppingInRecipe" EntitySet="ToppingInRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilingTheWarehouseShop_ShopID_Shop" Association="ConfectioneryChain_V5Model.FK_FilingTheWarehouseShop_ShopID_Shop">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="FilingTheWarehouseShop" EntitySet="FilingTheWarehouseShops" />
+          </AssociationSet>
+          <AssociationSet Name="CancelIngredientInRecipe" Association="ConfectioneryChain_V5Model.CancelIngredientInRecipe">
+            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
+            <End Role="RecipesInOrder" EntitySet="RecipesInOrders" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BuyGood">
           <Key>
             <PropertyRef Name="IDBuyGoods" />
@@ -833,22 +980,22 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="ConfectioneryID" Type="Int32" Nullable="false" />
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="2" />
-          <NavigationProperty Name="DistributionOfEmployee" Relationship="Self.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="BuyGoods" ToRole="DistributionOfEmployees" />
+          <NavigationProperty Name="DistributionOfEmployee" Relationship="ConfectioneryChain_V5Model.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="BuyGood" ToRole="DistributionOfEmployee" />
         </EntityType>
         <EntityType Name="Confectionery">
           <Key>
             <PropertyRef Name="IDConfectionery" />
           </Key>
           <Property Name="IDConfectionery" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RentPricel" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RentPricel" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
           <Property Name="BeginWork" Type="Time" Nullable="false" Precision="0" />
           <Property Name="EndWork" Type="Time" Nullable="false" Precision="0" />
-          <NavigationProperty Name="DistributionOfEmployees" Relationship="Self.FK_DistributionOfEmployees_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="DistributionOfEmployees" />
-          <NavigationProperty Name="FilingTheWarehouseConfectioneries" Relationship="Self.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="FilingTheWarehouseConfectionery" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="Order" />
-          <NavigationProperty Name="PriceLists" Relationship="Self.FK_PriceList_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="PriceList" />
+          <NavigationProperty Name="DistributionOfEmployees" Relationship="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="DistributionOfEmployee" />
+          <NavigationProperty Name="FilingTheWarehouseConfectioneries" Relationship="ConfectioneryChain_V5Model.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="FilingTheWarehouseConfectionery" />
+          <NavigationProperty Name="Orders" Relationship="ConfectioneryChain_V5Model.FK_Order_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="Order" />
+          <NavigationProperty Name="PriceLists" Relationship="ConfectioneryChain_V5Model.FK_PriceList_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="PriceList" />
         </EntityType>
         <EntityType Name="DistributionOfEmployee">
           <Key>
@@ -858,12 +1005,12 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="ConfectioneryID" Type="Int32" Nullable="false" />
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
           <Property Name="PositionID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BuyGoods" Relationship="Self.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="DistributionOfEmployees" ToRole="BuyGoods" />
-          <NavigationProperty Name="Confectionery" Relationship="Self.FK_DistributionOfEmployees_ConfectioneryID_Confectionery" FromRole="DistributionOfEmployees" ToRole="Confectionery" />
-          <NavigationProperty Name="Checks" Relationship="Self.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" FromRole="DistributionOfEmployees" ToRole="Check" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_DistributionOfEmployees_EmployeeID_Employee" FromRole="DistributionOfEmployees" ToRole="Employee" />
-          <NavigationProperty Name="Position" Relationship="Self.FK_DistributionOfEmployees_PositionID_Position" FromRole="DistributionOfEmployees" ToRole="Position" />
-          <NavigationProperty Name="StaffWorkSchedules" Relationship="Self.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="DistributionOfEmployees" ToRole="StaffWorkSchedule" />
+          <NavigationProperty Name="BuyGoods" Relationship="ConfectioneryChain_V5Model.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="DistributionOfEmployee" ToRole="BuyGood" />
+          <NavigationProperty Name="Confectionery" Relationship="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_ConfectioneryID_Confectionery" FromRole="DistributionOfEmployee" ToRole="Confectionery" />
+          <NavigationProperty Name="Checks" Relationship="ConfectioneryChain_V5Model.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" FromRole="DistributionOfEmployee" ToRole="Check" />
+          <NavigationProperty Name="Employee" Relationship="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_EmployeeID_Employee" FromRole="DistributionOfEmployee" ToRole="Employee" />
+          <NavigationProperty Name="Position" Relationship="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_PositionID_Position" FromRole="DistributionOfEmployee" ToRole="Position" />
+          <NavigationProperty Name="StaffWorkSchedules" Relationship="ConfectioneryChain_V5Model.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="DistributionOfEmployee" ToRole="StaffWorkSchedule" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -872,11 +1019,11 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="IDEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PassportSeria" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="PassportNumber" Type="Int32" Nullable="false" />
-          <Property Name="Family" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Family" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="PatronymicName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DistributionOfEmployees" Relationship="Self.FK_DistributionOfEmployees_EmployeeID_Employee" FromRole="Employee" ToRole="DistributionOfEmployees" />
-          <NavigationProperty Name="Recipes" Relationship="Self.FK_Recipe_ChefID_Employee" FromRole="Employee" ToRole="Recipe" />
+          <NavigationProperty Name="DistributionOfEmployees" Relationship="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_EmployeeID_Employee" FromRole="Employee" ToRole="DistributionOfEmployee" />
+          <NavigationProperty Name="Recipes" Relationship="ConfectioneryChain_V5Model.FK_Recipe_ChefID_Employee" FromRole="Employee" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="FilingTheWarehouseConfectionery">
           <Key>
@@ -885,10 +1032,10 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </Key>
           <Property Name="ConfectioneryID" Type="Int32" Nullable="false" />
           <Property Name="GoodsID" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Decimal" Precision="11" Scale="4" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Count" Type="Decimal" Nullable="false" Precision="11" Scale="4" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
           <Property Name="ShelfLife" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Confectionery" Relationship="Self.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" FromRole="FilingTheWarehouseConfectionery" ToRole="Confectionery" />
+          <NavigationProperty Name="Confectionery" Relationship="ConfectioneryChain_V5Model.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" FromRole="FilingTheWarehouseConfectionery" ToRole="Confectionery" />
         </EntityType>
         <EntityType Name="GoodsInBuy">
           <Key>
@@ -899,8 +1046,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="ShopID" Type="Int32" Nullable="false" />
           <Property Name="GoodsID" Type="Int32" Nullable="false" />
           <Property Name="ConfectioneryID" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Decimal" Precision="11" Scale="4" Nullable="false" />
-          <NavigationProperty Name="FilingTheWarehouseShop" Relationship="Self.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" FromRole="GoodsInBuy" ToRole="FilingTheWarehouseShop" />
+          <Property Name="Count" Type="Decimal" Nullable="false" Precision="11" Scale="4" />
+          <NavigationProperty Name="FilingTheWarehouseShop" Relationship="ConfectioneryChain_V5Model.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" FromRole="GoodsInBuy" ToRole="FilingTheWarehouseShop" />
         </EntityType>
         <EntityType Name="StaffWorkSchedule">
           <Key>
@@ -914,56 +1061,56 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="TimeEndWork" Type="Time" Nullable="false" Precision="0" />
           <Property Name="TimeBeginLunch" Type="Time" Nullable="false" Precision="0" />
           <Property Name="TimeEndLunch" Type="Time" Nullable="false" Precision="0" />
-          <NavigationProperty Name="DistributionOfEmployee" Relationship="Self.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="StaffWorkSchedule" ToRole="DistributionOfEmployees" />
+          <NavigationProperty Name="DistributionOfEmployee" Relationship="ConfectioneryChain_V5Model.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" FromRole="StaffWorkSchedule" ToRole="DistributionOfEmployee" />
         </EntityType>
         <EntityType Name="Good">
           <Key>
             <PropertyRef Name="IDGoods" />
           </Key>
           <Property Name="IDGoods" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypesOfGoodsChar" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TypesOfGoodsChar" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="UnitsID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Calories" Type="Decimal" Precision="9" Scale="4" />
-          <NavigationProperty Name="TypeOfGood" Relationship="Self.FK_Goods_TypesOfGoodsChar_TypesOfGoods" FromRole="Goods" ToRole="TypeOfGood" />
-          <NavigationProperty Name="Unit" Relationship="Self.FK_Goods_UnitsID_Units" FromRole="Goods" ToRole="Units" />
-          <NavigationProperty Name="ItemInRecipes" Relationship="Self.FK_ItemInRecipe_GoodsID_Goods" FromRole="Goods" ToRole="ItemInRecipe" />
-          <NavigationProperty Name="ToppingInRecipes" Relationship="Self.FK_ToppingInRecipes_GoodsID_Goods" FromRole="Goods" ToRole="ToppingInRecipes" />
+          <NavigationProperty Name="TypeOfGood" Relationship="ConfectioneryChain_V5Model.FK_Goods_TypesOfGoodsChar_TypesOfGoods" FromRole="Good" ToRole="TypeOfGood" />
+          <NavigationProperty Name="Unit" Relationship="ConfectioneryChain_V5Model.FK_Goods_UnitsID_Units" FromRole="Good" ToRole="Unit" />
+          <NavigationProperty Name="ItemInRecipes" Relationship="ConfectioneryChain_V5Model.FK_ItemInRecipe_GoodsID_Goods" FromRole="Good" ToRole="ItemInRecipe" />
+          <NavigationProperty Name="ToppingInRecipes" Relationship="ConfectioneryChain_V5Model.FK_ToppingInRecipes_GoodsID_Goods" FromRole="Good" ToRole="ToppingInRecipe" />
         </EntityType>
         <EntityType Name="OrderIssueOption">
           <Key>
             <PropertyRef Name="CharOrderIssueOption" />
           </Key>
-          <Property Name="CharOrderIssueOption" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_OrderIssueOptionChar_OrderIssueOption" FromRole="OrderIssueOption" ToRole="Order" />
+          <Property Name="CharOrderIssueOption" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="ConfectioneryChain_V5Model.FK_Order_OrderIssueOptionChar_OrderIssueOption" FromRole="OrderIssueOption" ToRole="Order" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
             <PropertyRef Name="IDPosition" />
           </Key>
           <Property Name="IDPosition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="MinimumHours" Type="Int32" Nullable="false" />
-          <Property Name="WorkHourRate" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
-          <NavigationProperty Name="DistributionOfEmployees" Relationship="Self.FK_DistributionOfEmployees_PositionID_Position" FromRole="Position" ToRole="DistributionOfEmployees" />
+          <Property Name="WorkHourRate" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <NavigationProperty Name="DistributionOfEmployees" Relationship="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_PositionID_Position" FromRole="Position" ToRole="DistributionOfEmployee" />
         </EntityType>
         <EntityType Name="TypeOfGood">
           <Key>
             <PropertyRef Name="CharTypesOfGoods" />
           </Key>
-          <Property Name="CharTypesOfGoods" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Goods" Relationship="Self.FK_Goods_TypesOfGoodsChar_TypesOfGoods" FromRole="TypeOfGood" ToRole="Goods" />
+          <Property Name="CharTypesOfGoods" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Goods" Relationship="ConfectioneryChain_V5Model.FK_Goods_TypesOfGoodsChar_TypesOfGoods" FromRole="TypeOfGood" ToRole="Good" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
             <PropertyRef Name="IDUnits" />
           </Key>
           <Property Name="IDUnits" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MultipleValue" Type="Decimal" Precision="6" Scale="4" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Goods" Relationship="Self.FK_Goods_UnitsID_Units" FromRole="Units" ToRole="Goods" />
+          <Property Name="MultipleValue" Type="Decimal" Nullable="false" Precision="6" Scale="4" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Goods" Relationship="ConfectioneryChain_V5Model.FK_Goods_UnitsID_Units" FromRole="Unit" ToRole="Good" />
         </EntityType>
         <EntityType Name="Check">
           <Key>
@@ -972,28 +1119,28 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ConfectioneryID" Type="Int32" Nullable="false" />
           <Property Name="CashierID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DistributionOfEmployee" Relationship="Self.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" FromRole="Check" ToRole="DistributionOfEmployees" />
+          <NavigationProperty Name="DistributionOfEmployee" Relationship="ConfectioneryChain_V5Model.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" FromRole="Check" ToRole="DistributionOfEmployee" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Phone" />
           </Key>
-          <Property Name="Phone" Type="Decimal" Precision="11" Scale="0" Nullable="false" />
-          <Property Name="Family" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="Decimal" Nullable="false" Precision="11" Scale="0" />
+          <Property Name="Family" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="PatronymicName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_CustomerPhone_Customer" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="Orders" Relationship="ConfectioneryChain_V5Model.FK_Order_CustomerPhone_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MarkBuyerSignature" Type="Boolean" Nullable="false" />
           <Property Name="ClaimText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ReturnMARK" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Invoice_IDOrder_Order" FromRole="Invoice" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="ConfectioneryChain_V5Model.FK_Invoice_IDOrder_Order" FromRole="Invoice" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -1001,14 +1148,14 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </Key>
           <Property Name="IDOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ConfectioneryID" Type="Int32" Nullable="false" />
-          <Property Name="CustomerPhone" Type="Decimal" Precision="11" Scale="0" Nullable="false" />
-          <Property Name="OrderIssueOptionChar" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPhone" Type="Decimal" Nullable="false" Precision="11" Scale="0" />
+          <Property Name="OrderIssueOptionChar" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="2" />
-          <NavigationProperty Name="Confectionery" Relationship="Self.FK_Order_ConfectioneryID_Confectionery" FromRole="Order" ToRole="Confectionery" />
-          <NavigationProperty Name="OrderIssueOption" Relationship="Self.FK_Order_OrderIssueOptionChar_OrderIssueOption" FromRole="Order" ToRole="OrderIssueOption" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_CustomerPhone_Customer" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="Invoice" Relationship="Self.FK_Invoice_IDOrder_Order" FromRole="Order" ToRole="Invoice" />
-          <NavigationProperty Name="RecipesInOrders" Relationship="Self.FK_RecipesInOrders_OrderID_Order" FromRole="Order" ToRole="RecipesInOrders" />
+          <NavigationProperty Name="Confectionery" Relationship="ConfectioneryChain_V5Model.FK_Order_ConfectioneryID_Confectionery" FromRole="Order" ToRole="Confectionery" />
+          <NavigationProperty Name="OrderIssueOption" Relationship="ConfectioneryChain_V5Model.FK_Order_OrderIssueOptionChar_OrderIssueOption" FromRole="Order" ToRole="OrderIssueOption" />
+          <NavigationProperty Name="Customer" Relationship="ConfectioneryChain_V5Model.FK_Order_CustomerPhone_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Invoice" Relationship="ConfectioneryChain_V5Model.FK_Invoice_IDOrder_Order" FromRole="Order" ToRole="Invoice" />
+          <NavigationProperty Name="RecipesInOrders" Relationship="ConfectioneryChain_V5Model.FK_RecipesInOrders_OrderID_Order" FromRole="Order" ToRole="RecipesInOrder" />
         </EntityType>
         <EntityType Name="PriceList">
           <Key>
@@ -1019,8 +1166,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="DateTimeEnd" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsWorks" Type="Boolean" Nullable="false" />
           <Property Name="ConfectioneryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Confectionery" Relationship="Self.FK_PriceList_ConfectioneryID_Confectionery" FromRole="PriceList" ToRole="Confectionery" />
-          <NavigationProperty Name="PriceListRecipes" Relationship="Self.FK_PriceListRecipe_PriceListID_PriceList" FromRole="PriceList" ToRole="PriceListRecipe" />
+          <NavigationProperty Name="Confectionery" Relationship="ConfectioneryChain_V5Model.FK_PriceList_ConfectioneryID_Confectionery" FromRole="PriceList" ToRole="Confectionery" />
+          <NavigationProperty Name="PriceListRecipes" Relationship="ConfectioneryChain_V5Model.FK_PriceListRecipe_PriceListID_PriceList" FromRole="PriceList" ToRole="PriceListRecipe" />
         </EntityType>
         <EntityType Name="PriceListRecipe">
           <Key>
@@ -1030,10 +1177,10 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="PriceListID" Type="Int32" Nullable="false" />
           <Property Name="RecipeID" Type="Int32" Nullable="false" />
           <Property Name="TimeForPreparing" Type="Time" Nullable="false" Precision="0" />
-          <Property Name="Price" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
-          <NavigationProperty Name="PriceList" Relationship="Self.FK_PriceListRecipe_PriceListID_PriceList" FromRole="PriceListRecipe" ToRole="PriceList" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_PriceListRecipe_RecipeID_Recipe" FromRole="PriceListRecipe" ToRole="Recipe" />
-          <NavigationProperty Name="RecipesInOrders" Relationship="Self.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" FromRole="PriceListRecipe" ToRole="RecipesInOrders" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <NavigationProperty Name="PriceList" Relationship="ConfectioneryChain_V5Model.FK_PriceListRecipe_PriceListID_PriceList" FromRole="PriceListRecipe" ToRole="PriceList" />
+          <NavigationProperty Name="Recipe" Relationship="ConfectioneryChain_V5Model.FK_PriceListRecipe_RecipeID_Recipe" FromRole="PriceListRecipe" ToRole="Recipe" />
+          <NavigationProperty Name="RecipesInOrders" Relationship="ConfectioneryChain_V5Model.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" FromRole="PriceListRecipe" ToRole="RecipesInOrder" />
         </EntityType>
         <EntityType Name="RecipesInOrder">
           <Key>
@@ -1045,10 +1192,10 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="Hierarchy" Type="Int32" Nullable="false" />
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="MarkCancel" Type="Boolean" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_RecipesInOrders_OrderID_Order" FromRole="RecipesInOrders" ToRole="Order" />
-          <NavigationProperty Name="PriceListRecipe" Relationship="Self.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" FromRole="RecipesInOrders" ToRole="PriceListRecipe" />
-          <NavigationProperty Name="HierararchyInRecipe" Relationship="Self.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="RecipesInOrders" ToRole="HierararchyInRecipe" />
-          <NavigationProperty Name="ItemInRecipes" Relationship="Self.CancelIngredientInRecipe" FromRole="RecipesInOrders" ToRole="ItemInRecipe" />
+          <NavigationProperty Name="Order" Relationship="ConfectioneryChain_V5Model.FK_RecipesInOrders_OrderID_Order" FromRole="RecipesInOrder" ToRole="Order" />
+          <NavigationProperty Name="PriceListRecipe" Relationship="ConfectioneryChain_V5Model.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" FromRole="RecipesInOrder" ToRole="PriceListRecipe" />
+          <NavigationProperty Name="HierararchyInRecipe" Relationship="ConfectioneryChain_V5Model.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="RecipesInOrder" ToRole="HierararchyInRecipe" />
+          <NavigationProperty Name="ItemInRecipes" Relationship="ConfectioneryChain_V5Model.CancelIngredientInRecipe" FromRole="RecipesInOrder" ToRole="ItemInRecipe" />
         </EntityType>
         <EntityType Name="ToppingInOrder">
           <Key>
@@ -1060,7 +1207,7 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="RecipeID" Type="Int32" Nullable="false" />
           <Property Name="GoodsID" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ToppingInRecipe" Relationship="Self.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" FromRole="ToppingInOrders" ToRole="ToppingInRecipes" />
+          <NavigationProperty Name="ToppingInRecipe" Relationship="ConfectioneryChain_V5Model.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" FromRole="ToppingInOrder" ToRole="ToppingInRecipe" />
         </EntityType>
         <EntityType Name="HierararchyInRecipe">
           <Key>
@@ -1069,10 +1216,10 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </Key>
           <Property Name="RecipeID" Type="Int32" Nullable="false" />
           <Property Name="Hierarchy" Type="Int32" Nullable="false" />
-          <Property Name="PercentageOfInfluenceOnTaste" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <NavigationProperty Name="RecipesInOrders" Relationship="Self.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="HierararchyInRecipe" ToRole="RecipesInOrders" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_HierararchyInRecipe_RecipeID_Recipe" FromRole="HierararchyInRecipe" ToRole="Recipe" />
-          <NavigationProperty Name="ItemInRecipes" Relationship="Self.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="HierararchyInRecipe" ToRole="ItemInRecipe" />
+          <Property Name="PercentageOfInfluenceOnTaste" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="RecipesInOrders" Relationship="ConfectioneryChain_V5Model.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="HierararchyInRecipe" ToRole="RecipesInOrder" />
+          <NavigationProperty Name="Recipe" Relationship="ConfectioneryChain_V5Model.FK_HierararchyInRecipe_RecipeID_Recipe" FromRole="HierararchyInRecipe" ToRole="Recipe" />
+          <NavigationProperty Name="ItemInRecipes" Relationship="ConfectioneryChain_V5Model.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="HierararchyInRecipe" ToRole="ItemInRecipe" />
         </EntityType>
         <EntityType Name="ItemInRecipe">
           <Key>
@@ -1083,13 +1230,13 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="RecipeID" Type="Int32" Nullable="false" />
           <Property Name="Hierarchy" Type="Int32" Nullable="false" />
           <Property Name="GoodsID" Type="Int32" />
-          <Property Name="Count" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
-          <Property Name="PercentageOfInfluenceOnTaste" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Good" Relationship="Self.FK_ItemInRecipe_GoodsID_Goods" FromRole="ItemInRecipe" ToRole="Goods" />
-          <NavigationProperty Name="HierararchyInRecipe" Relationship="Self.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="ItemInRecipe" ToRole="HierararchyInRecipe" />
-          <NavigationProperty Name="ItemInRecipe1" Relationship="Self.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" FromRole="ItemInRecipe" ToRole="ItemInRecipe1" />
-          <NavigationProperty Name="ItemInRecipe2" Relationship="Self.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" FromRole="ItemInRecipe1" ToRole="ItemInRecipe" />
-          <NavigationProperty Name="RecipesInOrders" Relationship="Self.CancelIngredientInRecipe" FromRole="ItemInRecipe" ToRole="RecipesInOrders" />
+          <Property Name="Count" Type="Decimal" Nullable="false" Precision="9" Scale="4" />
+          <Property Name="PercentageOfInfluenceOnTaste" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="Good" Relationship="ConfectioneryChain_V5Model.FK_ItemInRecipe_GoodsID_Goods" FromRole="ItemInRecipe" ToRole="Good" />
+          <NavigationProperty Name="HierararchyInRecipe" Relationship="ConfectioneryChain_V5Model.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" FromRole="ItemInRecipe" ToRole="HierararchyInRecipe" />
+          <NavigationProperty Name="ItemInRecipe1" Relationship="ConfectioneryChain_V5Model.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" FromRole="ItemInRecipe" ToRole="ItemInRecipe1" />
+          <NavigationProperty Name="ItemInRecipe2" Relationship="ConfectioneryChain_V5Model.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" FromRole="ItemInRecipe1" ToRole="ItemInRecipe" />
+          <NavigationProperty Name="RecipesInOrders" Relationship="ConfectioneryChain_V5Model.CancelIngredientInRecipe" FromRole="ItemInRecipe" ToRole="RecipesInOrder" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -1099,12 +1246,12 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="2" />
           <Property Name="MarkIsWork" Type="Boolean" Nullable="false" />
           <Property Name="ChefID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Recipe_ChefID_Employee" FromRole="Recipe" ToRole="Employee" />
-          <NavigationProperty Name="PriceListRecipes" Relationship="Self.FK_PriceListRecipe_RecipeID_Recipe" FromRole="Recipe" ToRole="PriceListRecipe" />
-          <NavigationProperty Name="HierararchyInRecipes" Relationship="Self.FK_HierararchyInRecipe_RecipeID_Recipe" FromRole="Recipe" ToRole="HierararchyInRecipe" />
-          <NavigationProperty Name="ToppingInRecipes" Relationship="Self.FK_ToppingInRecipes_RecipeID_Recipe" FromRole="Recipe" ToRole="ToppingInRecipes" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="ConfectioneryChain_V5Model.FK_Recipe_ChefID_Employee" FromRole="Recipe" ToRole="Employee" />
+          <NavigationProperty Name="PriceListRecipes" Relationship="ConfectioneryChain_V5Model.FK_PriceListRecipe_RecipeID_Recipe" FromRole="Recipe" ToRole="PriceListRecipe" />
+          <NavigationProperty Name="HierararchyInRecipes" Relationship="ConfectioneryChain_V5Model.FK_HierararchyInRecipe_RecipeID_Recipe" FromRole="Recipe" ToRole="HierararchyInRecipe" />
+          <NavigationProperty Name="ToppingInRecipes" Relationship="ConfectioneryChain_V5Model.FK_ToppingInRecipes_RecipeID_Recipe" FromRole="Recipe" ToRole="ToppingInRecipe" />
         </EntityType>
         <EntityType Name="ToppingInRecipe">
           <Key>
@@ -1113,12 +1260,12 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </Key>
           <Property Name="RecipeID" Type="Int32" Nullable="false" />
           <Property Name="GoodsID" Type="Int32" Nullable="false" />
-          <Property Name="PercentageOfInfluenceOnTaste" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="Count" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="PercentageOfInfluenceOnTaste" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Count" Type="Decimal" Nullable="false" Precision="9" Scale="4" />
           <Property Name="MaxCount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Good" Relationship="Self.FK_ToppingInRecipes_GoodsID_Goods" FromRole="ToppingInRecipes" ToRole="Goods" />
-          <NavigationProperty Name="ToppingInOrders" Relationship="Self.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" FromRole="ToppingInRecipes" ToRole="ToppingInOrders" />
-          <NavigationProperty Name="Recipe" Relationship="Self.FK_ToppingInRecipes_RecipeID_Recipe" FromRole="ToppingInRecipes" ToRole="Recipe" />
+          <NavigationProperty Name="Good" Relationship="ConfectioneryChain_V5Model.FK_ToppingInRecipes_GoodsID_Goods" FromRole="ToppingInRecipe" ToRole="Good" />
+          <NavigationProperty Name="ToppingInOrders" Relationship="ConfectioneryChain_V5Model.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" FromRole="ToppingInRecipe" ToRole="ToppingInOrder" />
+          <NavigationProperty Name="Recipe" Relationship="ConfectioneryChain_V5Model.FK_ToppingInRecipes_RecipeID_Recipe" FromRole="ToppingInRecipe" ToRole="Recipe" />
         </EntityType>
         <EntityType Name="FilingTheWarehouseShop">
           <Key>
@@ -1127,50 +1274,50 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </Key>
           <Property Name="ShopID" Type="Int32" Nullable="false" />
           <Property Name="GoodsID" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Decimal" Precision="11" Scale="4" Nullable="false" />
+          <Property Name="Count" Type="Decimal" Nullable="false" Precision="11" Scale="4" />
           <Property Name="PriceBuy" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="PriceSell" Type="Decimal" Precision="9" Scale="2" />
-          <NavigationProperty Name="GoodsInBuys" Relationship="Self.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" FromRole="FilingTheWarehouseShop" ToRole="GoodsInBuy" />
-          <NavigationProperty Name="Shop" Relationship="Self.FK_FilingTheWarehouseShop_ShopID_Shop" FromRole="FilingTheWarehouseShop" ToRole="Shop" />
+          <NavigationProperty Name="GoodsInBuys" Relationship="ConfectioneryChain_V5Model.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" FromRole="FilingTheWarehouseShop" ToRole="GoodsInBuy" />
+          <NavigationProperty Name="Shop" Relationship="ConfectioneryChain_V5Model.FK_FilingTheWarehouseShop_ShopID_Shop" FromRole="FilingTheWarehouseShop" ToRole="Shop" />
         </EntityType>
         <EntityType Name="Shop">
           <Key>
             <PropertyRef Name="IDShop" />
           </Key>
           <Property Name="IDShop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="FilingTheWarehouseShops" Relationship="Self.FK_FilingTheWarehouseShop_ShopID_Shop" FromRole="Shop" ToRole="FilingTheWarehouseShop" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FilingTheWarehouseShops" Relationship="ConfectioneryChain_V5Model.FK_FilingTheWarehouseShop_ShopID_Shop" FromRole="Shop" ToRole="FilingTheWarehouseShop" />
         </EntityType>
         <Association Name="FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees">
-          <End Role="DistributionOfEmployees" Type="Self.DistributionOfEmployee" Multiplicity="1" />
-          <End Role="BuyGoods" Type="Self.BuyGood" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.DistributionOfEmployee" Role="DistributionOfEmployee" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.BuyGood" Role="BuyGood" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DistributionOfEmployees">
+            <Principal Role="DistributionOfEmployee">
               <PropertyRef Name="ConfectioneryID" />
               <PropertyRef Name="EmployeeID" />
             </Principal>
-            <Dependent Role="BuyGoods">
+            <Dependent Role="BuyGood">
               <PropertyRef Name="ConfectioneryID" />
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DistributionOfEmployees_ConfectioneryID_Confectionery">
-          <End Role="Confectionery" Type="Self.Confectionery" Multiplicity="1" />
-          <End Role="DistributionOfEmployees" Type="Self.DistributionOfEmployee" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Confectionery" Role="Confectionery" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.DistributionOfEmployee" Role="DistributionOfEmployee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Confectionery">
               <PropertyRef Name="IDConfectionery" />
             </Principal>
-            <Dependent Role="DistributionOfEmployees">
+            <Dependent Role="DistributionOfEmployee">
               <PropertyRef Name="ConfectioneryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery">
-          <End Role="Confectionery" Type="Self.Confectionery" Multiplicity="1" />
-          <End Role="FilingTheWarehouseConfectionery" Type="Self.FilingTheWarehouseConfectionery" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Confectionery" Role="Confectionery" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.FilingTheWarehouseConfectionery" Role="FilingTheWarehouseConfectionery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Confectionery">
               <PropertyRef Name="IDConfectionery" />
@@ -1181,8 +1328,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_ConfectioneryID_Confectionery">
-          <End Role="Confectionery" Type="Self.Confectionery" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Confectionery" Role="Confectionery" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Confectionery">
               <PropertyRef Name="IDConfectionery" />
@@ -1193,8 +1340,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PriceList_ConfectioneryID_Confectionery">
-          <End Role="Confectionery" Type="Self.Confectionery" Multiplicity="1" />
-          <End Role="PriceList" Type="Self.PriceList" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Confectionery" Role="Confectionery" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.PriceList" Role="PriceList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Confectionery">
               <PropertyRef Name="IDConfectionery" />
@@ -1205,10 +1352,10 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees">
-          <End Role="DistributionOfEmployees" Type="Self.DistributionOfEmployee" Multiplicity="1" />
-          <End Role="Check" Type="Self.Check" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.DistributionOfEmployee" Role="DistributionOfEmployee" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Check" Role="Check" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DistributionOfEmployees">
+            <Principal Role="DistributionOfEmployee">
               <PropertyRef Name="ConfectioneryID" />
               <PropertyRef Name="EmployeeID" />
             </Principal>
@@ -1219,34 +1366,34 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DistributionOfEmployees_EmployeeID_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="DistributionOfEmployees" Type="Self.DistributionOfEmployee" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.DistributionOfEmployee" Role="DistributionOfEmployee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="IDEmployee" />
             </Principal>
-            <Dependent Role="DistributionOfEmployees">
+            <Dependent Role="DistributionOfEmployee">
               <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DistributionOfEmployees_PositionID_Position">
-          <End Role="Position" Type="Self.Position" Multiplicity="1" />
-          <End Role="DistributionOfEmployees" Type="Self.DistributionOfEmployee" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Position" Role="Position" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.DistributionOfEmployee" Role="DistributionOfEmployee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Position">
               <PropertyRef Name="IDPosition" />
             </Principal>
-            <Dependent Role="DistributionOfEmployees">
-              <PropertyRef Name="ConfectioneryID" />
+            <Dependent Role="DistributionOfEmployee">
+              <PropertyRef Name="PositionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees">
-          <End Role="DistributionOfEmployees" Type="Self.DistributionOfEmployee" Multiplicity="1" />
-          <End Role="StaffWorkSchedule" Type="Self.StaffWorkSchedule" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.DistributionOfEmployee" Role="DistributionOfEmployee" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.StaffWorkSchedule" Role="StaffWorkSchedule" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DistributionOfEmployees">
+            <Principal Role="DistributionOfEmployee">
               <PropertyRef Name="ConfectioneryID" />
               <PropertyRef Name="EmployeeID" />
             </Principal>
@@ -1257,8 +1404,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recipe_ChefID_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Recipe" Role="Recipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="IDEmployee" />
@@ -1269,8 +1416,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop">
-          <End Role="FilingTheWarehouseShop" Type="Self.FilingTheWarehouseShop" Multiplicity="1" />
-          <End Role="GoodsInBuy" Type="Self.GoodsInBuy" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.FilingTheWarehouseShop" Role="FilingTheWarehouseShop" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.GoodsInBuy" Role="GoodsInBuy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FilingTheWarehouseShop">
               <PropertyRef Name="ShopID" />
@@ -1283,34 +1430,34 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Goods_TypesOfGoodsChar_TypesOfGoods">
-          <End Role="TypeOfGood" Type="Self.TypeOfGood" Multiplicity="1" />
-          <End Role="Goods" Type="Self.Good" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.TypeOfGood" Role="TypeOfGood" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Good" Role="Good" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeOfGood">
               <PropertyRef Name="CharTypesOfGoods" />
             </Principal>
-            <Dependent Role="Goods">
+            <Dependent Role="Good">
               <PropertyRef Name="TypesOfGoodsChar" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Goods_UnitsID_Units">
-          <End Role="Units" Type="Self.Unit" Multiplicity="1" />
-          <End Role="Goods" Type="Self.Good" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Good" Role="Good" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Units">
+            <Principal Role="Unit">
               <PropertyRef Name="IDUnits" />
             </Principal>
-            <Dependent Role="Goods">
+            <Dependent Role="Good">
               <PropertyRef Name="UnitsID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemInRecipe_GoodsID_Goods">
-          <End Role="Goods" Type="Self.Good" Multiplicity="0..1" />
-          <End Role="ItemInRecipe" Type="Self.ItemInRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Good" Role="Good" Multiplicity="0..1" />
+          <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Goods">
+            <Principal Role="Good">
               <PropertyRef Name="IDGoods" />
             </Principal>
             <Dependent Role="ItemInRecipe">
@@ -1319,20 +1466,20 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToppingInRecipes_GoodsID_Goods">
-          <End Role="Goods" Type="Self.Good" Multiplicity="1" />
-          <End Role="ToppingInRecipes" Type="Self.ToppingInRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Good" Role="Good" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.ToppingInRecipe" Role="ToppingInRecipe" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Goods">
+            <Principal Role="Good">
               <PropertyRef Name="IDGoods" />
             </Principal>
-            <Dependent Role="ToppingInRecipes">
+            <Dependent Role="ToppingInRecipe">
               <PropertyRef Name="GoodsID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_OrderIssueOptionChar_OrderIssueOption">
-          <End Role="OrderIssueOption" Type="Self.OrderIssueOption" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.OrderIssueOption" Role="OrderIssueOption" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrderIssueOption">
               <PropertyRef Name="CharOrderIssueOption" />
@@ -1343,8 +1490,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_CustomerPhone_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="Phone" />
@@ -1355,8 +1502,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Invoice_IDOrder_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Type="ConfectioneryChain_V5Model.Order" Role="Order" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.Invoice" Role="Invoice" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="IDOrder" />
@@ -1367,20 +1514,20 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RecipesInOrders_OrderID_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="RecipesInOrders" Type="Self.RecipesInOrder" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Order" Role="Order" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.RecipesInOrder" Role="RecipesInOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="IDOrder" />
             </Principal>
-            <Dependent Role="RecipesInOrders">
+            <Dependent Role="RecipesInOrder">
               <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PriceListRecipe_PriceListID_PriceList">
-          <End Role="PriceList" Type="Self.PriceList" Multiplicity="1" />
-          <End Role="PriceListRecipe" Type="Self.PriceListRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.PriceList" Role="PriceList" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.PriceListRecipe" Role="PriceListRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PriceList">
               <PropertyRef Name="IDPriceList" />
@@ -1391,8 +1538,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PriceListRecipe_RecipeID_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="PriceListRecipe" Type="Self.PriceListRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.PriceListRecipe" Role="PriceListRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="IDRecipe" />
@@ -1403,50 +1550,50 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe">
-          <End Role="PriceListRecipe" Type="Self.PriceListRecipe" Multiplicity="1" />
-          <End Role="RecipesInOrders" Type="Self.RecipesInOrder" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.PriceListRecipe" Role="PriceListRecipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.RecipesInOrder" Role="RecipesInOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PriceListRecipe">
               <PropertyRef Name="PriceListID" />
               <PropertyRef Name="RecipeID" />
             </Principal>
-            <Dependent Role="RecipesInOrders">
+            <Dependent Role="RecipesInOrder">
               <PropertyRef Name="PriceListID" />
               <PropertyRef Name="RecipeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe">
-          <End Role="HierararchyInRecipe" Type="Self.HierararchyInRecipe" Multiplicity="1" />
-          <End Role="RecipesInOrders" Type="Self.RecipesInOrder" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.HierararchyInRecipe" Role="HierararchyInRecipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.RecipesInOrder" Role="RecipesInOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HierararchyInRecipe">
               <PropertyRef Name="RecipeID" />
               <PropertyRef Name="Hierarchy" />
             </Principal>
-            <Dependent Role="RecipesInOrders">
+            <Dependent Role="RecipesInOrder">
               <PropertyRef Name="RecipeID" />
               <PropertyRef Name="Hierarchy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes">
-          <End Role="ToppingInRecipes" Type="Self.ToppingInRecipe" Multiplicity="1" />
-          <End Role="ToppingInOrders" Type="Self.ToppingInOrder" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.ToppingInRecipe" Role="ToppingInRecipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.ToppingInOrder" Role="ToppingInOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ToppingInRecipes">
+            <Principal Role="ToppingInRecipe">
               <PropertyRef Name="RecipeID" />
               <PropertyRef Name="GoodsID" />
             </Principal>
-            <Dependent Role="ToppingInOrders">
+            <Dependent Role="ToppingInOrder">
               <PropertyRef Name="RecipeID" />
               <PropertyRef Name="GoodsID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HierararchyInRecipe_RecipeID_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="HierararchyInRecipe" Type="Self.HierararchyInRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.HierararchyInRecipe" Role="HierararchyInRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="IDRecipe" />
@@ -1457,8 +1604,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe">
-          <End Role="HierararchyInRecipe" Type="Self.HierararchyInRecipe" Multiplicity="1" />
-          <End Role="ItemInRecipe" Type="Self.ItemInRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.HierararchyInRecipe" Role="HierararchyInRecipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HierararchyInRecipe">
               <PropertyRef Name="RecipeID" />
@@ -1471,8 +1618,8 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe">
-          <End Role="ItemInRecipe" Type="Self.ItemInRecipe" Multiplicity="1" />
-          <End Role="ItemInRecipe1" Type="Self.ItemInRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ItemInRecipe">
               <PropertyRef Name="IDItemInRecipe" />
@@ -1483,20 +1630,20 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ToppingInRecipes_RecipeID_Recipe">
-          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
-          <End Role="ToppingInRecipes" Type="Self.ToppingInRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.ToppingInRecipe" Role="ToppingInRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recipe">
               <PropertyRef Name="IDRecipe" />
             </Principal>
-            <Dependent Role="ToppingInRecipes">
+            <Dependent Role="ToppingInRecipe">
               <PropertyRef Name="RecipeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FilingTheWarehouseShop_ShopID_Shop">
-          <End Role="Shop" Type="Self.Shop" Multiplicity="1" />
-          <End Role="FilingTheWarehouseShop" Type="Self.FilingTheWarehouseShop" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.Shop" Role="Shop" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.FilingTheWarehouseShop" Role="FilingTheWarehouseShop" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Shop">
               <PropertyRef Name="IDShop" />
@@ -1507,157 +1654,9 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="CancelIngredientInRecipe">
-          <End Role="ItemInRecipe" Type="Self.ItemInRecipe" Multiplicity="*" />
-          <End Role="RecipesInOrders" Type="Self.RecipesInOrder" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe" Multiplicity="*" />
+          <End Type="ConfectioneryChain_V5Model.RecipesInOrder" Role="RecipesInOrder" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ConfectioneryChain_V5Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BuyGoods" EntityType="Self.BuyGood" />
-          <EntitySet Name="Confectioneries" EntityType="Self.Confectionery" />
-          <EntitySet Name="DistributionOfEmployees" EntityType="Self.DistributionOfEmployee" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="FilingTheWarehouseConfectioneries" EntityType="Self.FilingTheWarehouseConfectionery" />
-          <EntitySet Name="GoodsInBuys" EntityType="Self.GoodsInBuy" />
-          <EntitySet Name="StaffWorkSchedules" EntityType="Self.StaffWorkSchedule" />
-          <EntitySet Name="Goods" EntityType="Self.Good" />
-          <EntitySet Name="OrderIssueOptions" EntityType="Self.OrderIssueOption" />
-          <EntitySet Name="Positions" EntityType="Self.Position" />
-          <EntitySet Name="TypeOfGoods" EntityType="Self.TypeOfGood" />
-          <EntitySet Name="Units" EntityType="Self.Unit" />
-          <EntitySet Name="Checks" EntityType="Self.Check" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="PriceLists" EntityType="Self.PriceList" />
-          <EntitySet Name="PriceListRecipes" EntityType="Self.PriceListRecipe" />
-          <EntitySet Name="RecipesInOrders" EntityType="Self.RecipesInOrder" />
-          <EntitySet Name="ToppingInOrders" EntityType="Self.ToppingInOrder" />
-          <EntitySet Name="HierararchyInRecipes" EntityType="Self.HierararchyInRecipe" />
-          <EntitySet Name="ItemInRecipes" EntityType="Self.ItemInRecipe" />
-          <EntitySet Name="Recipes" EntityType="Self.Recipe" />
-          <EntitySet Name="ToppingInRecipes" EntityType="Self.ToppingInRecipe" />
-          <EntitySet Name="FilingTheWarehouseShops" EntityType="Self.FilingTheWarehouseShop" />
-          <EntitySet Name="Shops" EntityType="Self.Shop" />
-          <AssociationSet Name="FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees" Association="Self.FK_BuyGoods_ConfectioneryID_EmployeeID_DistributionOfEmployees">
-            <End Role="DistributionOfEmployees" EntitySet="DistributionOfEmployees" />
-            <End Role="BuyGoods" EntitySet="BuyGoods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DistributionOfEmployees_ConfectioneryID_Confectionery" Association="Self.FK_DistributionOfEmployees_ConfectioneryID_Confectionery">
-            <End Role="Confectionery" EntitySet="Confectioneries" />
-            <End Role="DistributionOfEmployees" EntitySet="DistributionOfEmployees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" Association="Self.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery">
-            <End Role="Confectionery" EntitySet="Confectioneries" />
-            <End Role="FilingTheWarehouseConfectionery" EntitySet="FilingTheWarehouseConfectioneries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_ConfectioneryID_Confectionery" Association="Self.FK_Order_ConfectioneryID_Confectionery">
-            <End Role="Confectionery" EntitySet="Confectioneries" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PriceList_ConfectioneryID_Confectionery" Association="Self.FK_PriceList_ConfectioneryID_Confectionery">
-            <End Role="Confectionery" EntitySet="Confectioneries" />
-            <End Role="PriceList" EntitySet="PriceLists" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees" Association="Self.FK_Check_ConfectioneryID_CashierID_DistributionOfEmployees">
-            <End Role="DistributionOfEmployees" EntitySet="DistributionOfEmployees" />
-            <End Role="Check" EntitySet="Checks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DistributionOfEmployees_EmployeeID_Employee" Association="Self.FK_DistributionOfEmployees_EmployeeID_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="DistributionOfEmployees" EntitySet="DistributionOfEmployees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DistributionOfEmployees_PositionID_Position" Association="Self.FK_DistributionOfEmployees_PositionID_Position">
-            <End Role="Position" EntitySet="Positions" />
-            <End Role="DistributionOfEmployees" EntitySet="DistributionOfEmployees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees" Association="Self.FK_StaffWorkSchedule_ConfectioneryID_EmployeeID_DistributionOfEmployees">
-            <End Role="DistributionOfEmployees" EntitySet="DistributionOfEmployees" />
-            <End Role="StaffWorkSchedule" EntitySet="StaffWorkSchedules" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Recipe_ChefID_Employee" Association="Self.FK_Recipe_ChefID_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Recipe" EntitySet="Recipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop" Association="Self.FK_GoodsInBuy_ShopID_GoodsID_FilingTheWarehouseShop">
-            <End Role="FilingTheWarehouseShop" EntitySet="FilingTheWarehouseShops" />
-            <End Role="GoodsInBuy" EntitySet="GoodsInBuys" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Goods_TypesOfGoodsChar_TypesOfGoods" Association="Self.FK_Goods_TypesOfGoodsChar_TypesOfGoods">
-            <End Role="TypeOfGood" EntitySet="TypeOfGoods" />
-            <End Role="Goods" EntitySet="Goods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Goods_UnitsID_Units" Association="Self.FK_Goods_UnitsID_Units">
-            <End Role="Units" EntitySet="Units" />
-            <End Role="Goods" EntitySet="Goods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemInRecipe_GoodsID_Goods" Association="Self.FK_ItemInRecipe_GoodsID_Goods">
-            <End Role="Goods" EntitySet="Goods" />
-            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ToppingInRecipes_GoodsID_Goods" Association="Self.FK_ToppingInRecipes_GoodsID_Goods">
-            <End Role="Goods" EntitySet="Goods" />
-            <End Role="ToppingInRecipes" EntitySet="ToppingInRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_OrderIssueOptionChar_OrderIssueOption" Association="Self.FK_Order_OrderIssueOptionChar_OrderIssueOption">
-            <End Role="OrderIssueOption" EntitySet="OrderIssueOptions" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_CustomerPhone_Customer" Association="Self.FK_Order_CustomerPhone_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Invoice_IDOrder_Order" Association="Self.FK_Invoice_IDOrder_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="Invoice" EntitySet="Invoices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RecipesInOrders_OrderID_Order" Association="Self.FK_RecipesInOrders_OrderID_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="RecipesInOrders" EntitySet="RecipesInOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PriceListRecipe_PriceListID_PriceList" Association="Self.FK_PriceListRecipe_PriceListID_PriceList">
-            <End Role="PriceList" EntitySet="PriceLists" />
-            <End Role="PriceListRecipe" EntitySet="PriceListRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PriceListRecipe_RecipeID_Recipe" Association="Self.FK_PriceListRecipe_RecipeID_Recipe">
-            <End Role="Recipe" EntitySet="Recipes" />
-            <End Role="PriceListRecipe" EntitySet="PriceListRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe" Association="Self.FK_RecipesInOrders_PriceListID_RecipeID_PriceListRecipe">
-            <End Role="PriceListRecipe" EntitySet="PriceListRecipes" />
-            <End Role="RecipesInOrders" EntitySet="RecipesInOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe" Association="Self.FK_RecipesInOrders_RecipeID_Hierarchy_HierararchyInRecipe">
-            <End Role="HierararchyInRecipe" EntitySet="HierararchyInRecipes" />
-            <End Role="RecipesInOrders" EntitySet="RecipesInOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes" Association="Self.FK_CancelIngredientInRecipe_RecipeID_GoodsID_ToppingInRecipes">
-            <End Role="ToppingInRecipes" EntitySet="ToppingInRecipes" />
-            <End Role="ToppingInOrders" EntitySet="ToppingInOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HierararchyInRecipe_RecipeID_Recipe" Association="Self.FK_HierararchyInRecipe_RecipeID_Recipe">
-            <End Role="Recipe" EntitySet="Recipes" />
-            <End Role="HierararchyInRecipe" EntitySet="HierararchyInRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe" Association="Self.FK_ItemInRecipe_RecipeID_Hierarchy_HierararchyInRecipe">
-            <End Role="HierararchyInRecipe" EntitySet="HierararchyInRecipes" />
-            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe" Association="Self.FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe">
-            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
-            <End Role="ItemInRecipe1" EntitySet="ItemInRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ToppingInRecipes_RecipeID_Recipe" Association="Self.FK_ToppingInRecipes_RecipeID_Recipe">
-            <End Role="Recipe" EntitySet="Recipes" />
-            <End Role="ToppingInRecipes" EntitySet="ToppingInRecipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FilingTheWarehouseShop_ShopID_Shop" Association="Self.FK_FilingTheWarehouseShop_ShopID_Shop">
-            <End Role="Shop" EntitySet="Shops" />
-            <End Role="FilingTheWarehouseShop" EntitySet="FilingTheWarehouseShops" />
-          </AssociationSet>
-          <AssociationSet Name="CancelIngredientInRecipe" Association="Self.CancelIngredientInRecipe">
-            <End Role="ItemInRecipe" EntitySet="ItemInRecipes" />
-            <End Role="RecipesInOrders" EntitySet="RecipesInOrders" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1667,284 +1666,284 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <EntitySetMapping Name="BuyGoods">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.BuyGood">
               <MappingFragment StoreEntitySet="BuyGoods">
-                <ScalarProperty Name="IDBuyGoods" ColumnName="IDBuyGoods" />
-                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
+                <ScalarProperty Name="IDBuyGoods" ColumnName="IDBuyGoods" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Confectioneries">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Confectionery">
               <MappingFragment StoreEntitySet="Confectionery">
-                <ScalarProperty Name="IDConfectionery" ColumnName="IDConfectionery" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="RentPricel" ColumnName="RentPricel" />
-                <ScalarProperty Name="BeginWork" ColumnName="BeginWork" />
                 <ScalarProperty Name="EndWork" ColumnName="EndWork" />
+                <ScalarProperty Name="BeginWork" ColumnName="BeginWork" />
+                <ScalarProperty Name="RentPricel" ColumnName="RentPricel" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDConfectionery" ColumnName="IDConfectionery" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DistributionOfEmployees">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.DistributionOfEmployee">
               <MappingFragment StoreEntitySet="DistributionOfEmployees">
-                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="IDEmployee" ColumnName="IDEmployee" />
-                <ScalarProperty Name="PassportSeria" ColumnName="PassportSeria" />
-                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
-                <ScalarProperty Name="Family" ColumnName="Family" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PatronymicName" ColumnName="PatronymicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="PassportSeria" ColumnName="PassportSeria" />
+                <ScalarProperty Name="IDEmployee" ColumnName="IDEmployee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FilingTheWarehouseConfectioneries">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.FilingTheWarehouseConfectionery">
               <MappingFragment StoreEntitySet="FilingTheWarehouseConfectionery">
-                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
-                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ShelfLife" ColumnName="ShelfLife" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GoodsInBuys">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.GoodsInBuy">
               <MappingFragment StoreEntitySet="GoodsInBuy">
-                <ScalarProperty Name="IDGoodsInBuy" ColumnName="IDGoodsInBuy" />
-                <ScalarProperty Name="BuyGoodsID" ColumnName="BuyGoodsID" />
-                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
-                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
-                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="BuyGoodsID" ColumnName="BuyGoodsID" />
+                <ScalarProperty Name="IDGoodsInBuy" ColumnName="IDGoodsInBuy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StaffWorkSchedules">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.StaffWorkSchedule">
               <MappingFragment StoreEntitySet="StaffWorkSchedule">
-                <ScalarProperty Name="IDStaffWorkSchedule" ColumnName="IDStaffWorkSchedule" />
-                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="WorkDay" ColumnName="WorkDay" />
-                <ScalarProperty Name="TimeBeginWork" ColumnName="TimeBeginWork" />
-                <ScalarProperty Name="TimeEndWork" ColumnName="TimeEndWork" />
-                <ScalarProperty Name="TimeBeginLunch" ColumnName="TimeBeginLunch" />
                 <ScalarProperty Name="TimeEndLunch" ColumnName="TimeEndLunch" />
+                <ScalarProperty Name="TimeBeginLunch" ColumnName="TimeBeginLunch" />
+                <ScalarProperty Name="TimeEndWork" ColumnName="TimeEndWork" />
+                <ScalarProperty Name="TimeBeginWork" ColumnName="TimeBeginWork" />
+                <ScalarProperty Name="WorkDay" ColumnName="WorkDay" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
+                <ScalarProperty Name="IDStaffWorkSchedule" ColumnName="IDStaffWorkSchedule" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Goods">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Good">
               <MappingFragment StoreEntitySet="Goods">
-                <ScalarProperty Name="IDGoods" ColumnName="IDGoods" />
-                <ScalarProperty Name="TypesOfGoodsChar" ColumnName="TypesOfGoodsChar" />
-                <ScalarProperty Name="UnitsID" ColumnName="UnitsID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnitsID" ColumnName="UnitsID" />
+                <ScalarProperty Name="TypesOfGoodsChar" ColumnName="TypesOfGoodsChar" />
+                <ScalarProperty Name="IDGoods" ColumnName="IDGoods" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderIssueOptions">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.OrderIssueOption">
               <MappingFragment StoreEntitySet="OrderIssueOption">
-                <ScalarProperty Name="CharOrderIssueOption" ColumnName="CharOrderIssueOption" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CharOrderIssueOption" ColumnName="CharOrderIssueOption" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Positions">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Position">
               <MappingFragment StoreEntitySet="Position">
-                <ScalarProperty Name="IDPosition" ColumnName="IDPosition" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MinimumHours" ColumnName="MinimumHours" />
                 <ScalarProperty Name="WorkHourRate" ColumnName="WorkHourRate" />
+                <ScalarProperty Name="MinimumHours" ColumnName="MinimumHours" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDPosition" ColumnName="IDPosition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeOfGoods">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.TypeOfGood">
               <MappingFragment StoreEntitySet="TypeOfGood">
-                <ScalarProperty Name="CharTypesOfGoods" ColumnName="CharTypesOfGoods" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CharTypesOfGoods" ColumnName="CharTypesOfGoods" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Units">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Unit">
               <MappingFragment StoreEntitySet="Units">
-                <ScalarProperty Name="IDUnits" ColumnName="IDUnits" />
-                <ScalarProperty Name="MultipleValue" ColumnName="MultipleValue" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MultipleValue" ColumnName="MultipleValue" />
+                <ScalarProperty Name="IDUnits" ColumnName="IDUnits" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Checks">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Check">
               <MappingFragment StoreEntitySet="Check">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
                 <ScalarProperty Name="CashierID" ColumnName="CashierID" />
+                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Family" ColumnName="Family" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PatronymicName" ColumnName="PatronymicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="MarkBuyerSignature" ColumnName="MarkBuyerSignature" />
-                <ScalarProperty Name="ClaimText" ColumnName="ClaimText" />
                 <ScalarProperty Name="ReturnMARK" ColumnName="ReturnMARK" />
+                <ScalarProperty Name="ClaimText" ColumnName="ClaimText" />
+                <ScalarProperty Name="MarkBuyerSignature" ColumnName="MarkBuyerSignature" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
-                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
-                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
-                <ScalarProperty Name="OrderIssueOptionChar" ColumnName="OrderIssueOptionChar" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="OrderIssueOptionChar" ColumnName="OrderIssueOptionChar" />
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+                <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PriceLists">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.PriceList">
               <MappingFragment StoreEntitySet="PriceList">
-                <ScalarProperty Name="IDPriceList" ColumnName="IDPriceList" />
-                <ScalarProperty Name="DateTimeBegin" ColumnName="DateTimeBegin" />
-                <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
-                <ScalarProperty Name="IsWorks" ColumnName="IsWorks" />
                 <ScalarProperty Name="ConfectioneryID" ColumnName="ConfectioneryID" />
+                <ScalarProperty Name="IsWorks" ColumnName="IsWorks" />
+                <ScalarProperty Name="DateTimeEnd" ColumnName="DateTimeEnd" />
+                <ScalarProperty Name="DateTimeBegin" ColumnName="DateTimeBegin" />
+                <ScalarProperty Name="IDPriceList" ColumnName="IDPriceList" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PriceListRecipes">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.PriceListRecipe">
               <MappingFragment StoreEntitySet="PriceListRecipe">
-                <ScalarProperty Name="PriceListID" ColumnName="PriceListID" />
-                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
-                <ScalarProperty Name="TimeForPreparing" ColumnName="TimeForPreparing" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TimeForPreparing" ColumnName="TimeForPreparing" />
+                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
+                <ScalarProperty Name="PriceListID" ColumnName="PriceListID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RecipesInOrders">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.RecipesInOrder">
               <MappingFragment StoreEntitySet="RecipesInOrders">
-                <ScalarProperty Name="IDRecipesInOrders" ColumnName="IDRecipesInOrders" />
-                <ScalarProperty Name="PriceListID" ColumnName="PriceListID" />
-                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
-                <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="MarkCancel" ColumnName="MarkCancel" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
+                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
+                <ScalarProperty Name="PriceListID" ColumnName="PriceListID" />
+                <ScalarProperty Name="IDRecipesInOrders" ColumnName="IDRecipesInOrders" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ToppingInOrders">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.ToppingInOrder">
               <MappingFragment StoreEntitySet="ToppingInOrders">
-                <ScalarProperty Name="RecipesInOrdersID" ColumnName="RecipesInOrdersID" />
-                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
-                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
+                <ScalarProperty Name="RecipesInOrdersID" ColumnName="RecipesInOrdersID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HierararchyInRecipes">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.HierararchyInRecipe">
               <MappingFragment StoreEntitySet="HierararchyInRecipe">
-                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
-                <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
                 <ScalarProperty Name="PercentageOfInfluenceOnTaste" ColumnName="PercentageOfInfluenceOnTaste" />
+                <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
+                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ItemInRecipes">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.ItemInRecipe">
               <MappingFragment StoreEntitySet="ItemInRecipe">
-                <ScalarProperty Name="IDItemInRecipe" ColumnName="IDItemInRecipe" />
-                <ScalarProperty Name="ItemInRecipeID" ColumnName="ItemInRecipeID" />
-                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
-                <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
-                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="PercentageOfInfluenceOnTaste" ColumnName="PercentageOfInfluenceOnTaste" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
+                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
+                <ScalarProperty Name="ItemInRecipeID" ColumnName="ItemInRecipeID" />
+                <ScalarProperty Name="IDItemInRecipe" ColumnName="IDItemInRecipe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recipes">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Recipe">
               <MappingFragment StoreEntitySet="Recipe">
-                <ScalarProperty Name="IDRecipe" ColumnName="IDRecipe" />
-                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="MarkIsWork" ColumnName="MarkIsWork" />
-                <ScalarProperty Name="ChefID" ColumnName="ChefID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ChefID" ColumnName="ChefID" />
+                <ScalarProperty Name="MarkIsWork" ColumnName="MarkIsWork" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IDRecipe" ColumnName="IDRecipe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ToppingInRecipes">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.ToppingInRecipe">
               <MappingFragment StoreEntitySet="ToppingInRecipes">
-                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
-                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
-                <ScalarProperty Name="PercentageOfInfluenceOnTaste" ColumnName="PercentageOfInfluenceOnTaste" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="MaxCount" ColumnName="MaxCount" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="PercentageOfInfluenceOnTaste" ColumnName="PercentageOfInfluenceOnTaste" />
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FilingTheWarehouseShops">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.FilingTheWarehouseShop">
               <MappingFragment StoreEntitySet="FilingTheWarehouseShop">
-                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
-                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="PriceBuy" ColumnName="PriceBuy" />
                 <ScalarProperty Name="PriceSell" ColumnName="PriceSell" />
+                <ScalarProperty Name="PriceBuy" ColumnName="PriceBuy" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Shops">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Shop">
               <MappingFragment StoreEntitySet="Shop">
-                <ScalarProperty Name="IDShop" ColumnName="IDShop" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDShop" ColumnName="IDShop" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="CancelIngredientInRecipe" TypeName="ConfectioneryChain_V5Model.CancelIngredientInRecipe" StoreEntitySet="CancelIngredientInRecipe">
+            <EndProperty Name="RecipesInOrder">
+              <ScalarProperty Name="IDRecipesInOrders" ColumnName="RecipesInOrdersID" />
+            </EndProperty>
             <EndProperty Name="ItemInRecipe">
               <ScalarProperty Name="IDItemInRecipe" ColumnName="ItemInRecipeID" />
-            </EndProperty>
-            <EndProperty Name="RecipesInOrders">
-              <ScalarProperty Name="IDRecipesInOrders" ColumnName="RecipesInOrdersID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

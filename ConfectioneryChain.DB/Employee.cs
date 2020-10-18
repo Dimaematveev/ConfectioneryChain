@@ -32,10 +32,5 @@ namespace ConfectioneryChain.DB
         public virtual ICollection<DistributionOfEmployee> DistributionOfEmployees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Recipe> Recipes { get; set; }
-
-        public override string ToString()
-        {
-            return $"[{Family} {Name} {PatronymicName}]";
-        }
     }
 }
