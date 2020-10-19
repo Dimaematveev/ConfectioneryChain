@@ -36,36 +36,35 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-
+        
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
-                
                 <StackPanel Orientation="Vertical">
-                    <Label>Название кофейни:</Label>
-                    <TextBox x:Name="NameConfectionery" />
+                    <Label>Название:</Label>
+                    <TextBox x:Name="NameConf"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Label>Адрес:</Label>
-                    <ctrl:TimePicker Format="Custom" FormatString="HH: mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" x:Name="AddressConfectionery" />
+                    <TextBox x:Name="AdressConf" Height="60" TextWrapping="Wrap"></TextBox>
                 </StackPanel>
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
                     <Label>Арендная плата:</Label>
-                    <ctrl:DecimalUpDown Increment = "1000" x:Name="RentPricelConfectionery" />
+                    <ctrl:DecimalUpDown Increment="1000"  x:Name="RentPriceConf" Width="150"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <Label>Время работы:</Label>
-                    <ctrl:TimePicker Format="Custom" FormatString="HH: mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" x:Name="BeginWorkConfectionery" />
+                    <Label>Время работы кафе:</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="С "/>
+                        <ctrl:TimePicker  x:Name="BeginTime"  Width="90" Format="Custom" FormatString="HH:mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" />
+                        <TextBlock Text=" по "/>
+                        <ctrl:TimePicker  x:Name="EndTime"  Width="90" Format="Custom" FormatString="HH:mm" StartTime="00:00" EndTime="23:59" TimeInterval="00:15" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Денег:</Label>
+                        <ctrl:DecimalUpDown Increment="1000"  x:Name="Money" Width="150"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Время работы:</Label>
-                    <ctrl:TimePicker Format="Custom" FormatString="HH: mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" x:Name="EndWorkConfectionery" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Кол-во денег:</Label>
-                    <ctrl:DecimalUpDown Increment = "1000" x:Name="MoneyConfectionery" />
-                </StackPanel>
+            
             </StackPanel>
-
-
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
                 <Button x:Name="CancelOne" Content="Отмена" Width="100"/>

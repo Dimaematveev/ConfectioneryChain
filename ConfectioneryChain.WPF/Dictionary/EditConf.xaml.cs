@@ -55,17 +55,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             }
         }
 
-        private void FillingFields(Confectionery str)
-        {
-            NameConf.Text = str.Name;
-            AdressConf.Text = str.Address;
-            RentPriceConf.Value = str.RentPricel;
-
-            BeginTime.Value = new DateTime(str.BeginWork.Ticks);
-            EndTime.Value = new DateTime(str.EndWork.Ticks);
-
-            Money.Value = str.Money;
-        }
+       
 
         private void AddConf_Click(object sender, RoutedEventArgs e)
         {
@@ -123,6 +113,19 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         }
 
+        private void FillingFields(Confectionery str)
+        {
+            NameConf.Text = str.Name;
+            AdressConf.Text = str.Address;
+            RentPriceConf.Value = str.RentPricel;
+
+            BeginTime.Value = new DateTime(str.BeginWork.Ticks);
+            EndTime.Value = new DateTime(str.EndWork.Ticks);
+
+            Money.Value = str.Money;
+        }
+
+
         private Confectionery New()
         {
             var obj = new Confectionery
@@ -136,6 +139,8 @@ namespace ConfectioneryChain.WPF.Dictionary
             };
             return obj;
         }
+
+
         private void CloseConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
