@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="ParticalClass\BuyGood.cs" />
     <Compile Include="ParticalClass\Check.cs" />
-    <Compile Include="ParticalClass\Class1.cs" />
+    <Compile Include="Inheritance\General.cs" />
     <Compile Include="ParticalClass\Confectionery.cs" />
     <Compile Include="ParticalClass\Customer.cs" />
     <Compile Include="ParticalClass\DistributionOfEmployee.cs" />
