@@ -10,10 +10,12 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general = new Unit();
-            general.IDUnits = -1;
-            general.MultipleValue = -1;
-            general.Name = null;
+            var general = new Unit
+            {
+                IDUnits = -1,
+                MultipleValue = -1,
+                Name = null
+            };
             return general;
         }
 

@@ -10,9 +10,9 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditConf : Window
     {
-        Action Save;
-        DbSet Data;
-        int ID;
+        private readonly Action Save;
+        private readonly DbSet Data;
+        private int ID;
         public EditConf(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
@@ -41,11 +41,11 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private void EditConfBut_Click(object sender, RoutedEventArgs e)
         {
-            
+
             switch (DataGrid1.SelectedIndex)
             {
                 case -1:
-                    MessageBox.Show($"Вы не выбрали поле.","Неправильно выбраны поля",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
                 default:
                     ID = DataGrid1.SelectedIndex;
@@ -62,7 +62,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             RentPriceConf.Value = str.RentPricel;
 
             BeginTime.Value = new DateTime(str.BeginWork.Ticks);
-            EndTime.Value = new DateTime(str.EndWork.Ticks); 
+            EndTime.Value = new DateTime(str.EndWork.Ticks);
 
 
         }
@@ -83,7 +83,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void SaveConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            if (ID==-1)
+            if (ID == -1)
             {
                 Data.Local.Add(New());
             }
@@ -106,17 +106,17 @@ namespace ConfectioneryChain.WPF.Dictionary
                 }
                 Exception ex1 = ex;
                 string err = "";
-                while(ex1 != null)
+                while (ex1 != null)
                 {
                     err += "\n";
-                    err += new string('-',30);
+                    err += new string('-', 30);
                     err += "\n";
                     err += ex1.Source;
                     err += "\n";
                     err += ex1.Message;
                     ex1 = ex1.InnerException;
-                } 
-                
+                }
+
                 MessageBox.Show(err, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -125,12 +125,14 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private Confectionery New()
         {
-            var obj = new Confectionery();
-            obj.Name = NameConf.Text;
-            obj.Address = AdressConf.Text;
-            obj.RentPricel = RentPriceConf.Value.Value;
-            obj.BeginWork = new TimeSpan(BeginTime.Value.Value.Ticks);
-            obj.EndWork = new TimeSpan(EndTime.Value.Value.Ticks);
+            var obj = new Confectionery
+            {
+                Name = NameConf.Text,
+                Address = AdressConf.Text,
+                RentPricel = RentPriceConf.Value.Value,
+                BeginWork = new TimeSpan(BeginTime.Value.Value.Ticks),
+                EndWork = new TimeSpan(EndTime.Value.Value.Ticks)
+            };
             return obj;
         }
         private void CloseConf_Click(object sender, RoutedEventArgs e)

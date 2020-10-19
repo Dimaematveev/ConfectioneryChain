@@ -13,11 +13,13 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general = new BuyGood();
-            general.IDBuyGoods = -1;
-            general.ConfectioneryID = -1;
-            general.EmployeeID = -1;
-            general.DateTime = new DateTime();
+            var general = new BuyGood
+            {
+                IDBuyGoods = -1,
+                ConfectioneryID = -1,
+                EmployeeID = -1,
+                DateTime = new DateTime()
+            };
             return general;
         }
 

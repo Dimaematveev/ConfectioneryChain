@@ -7,17 +7,19 @@ namespace ConfectioneryChain.DB
     {
         public override string ToString()
         {
-            return $"[{Name}-{Employee.ToString()}]";
+            return $"[{Name}-{Employee}]";
         }
         public override General CreateNew()
         {
-            var general = new Recipe();
-            general.IDRecipe = -1;
-            general.DateCreate = DateTime.Now;
-            general.MarkIsWork = false;
-            general.ChefID = -1;
-            general.Name = null;
-            general.Description = null;
+            var general = new Recipe
+            {
+                IDRecipe = -1,
+                DateCreate = DateTime.Now,
+                MarkIsWork = false,
+                ChefID = -1,
+                Name = null,
+                Description = null
+            };
             return general;
         }
 

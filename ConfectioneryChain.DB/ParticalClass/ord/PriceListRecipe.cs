@@ -7,15 +7,17 @@ namespace ConfectioneryChain.DB
     {
         public override string ToString()
         {
-            return $"[{PriceList.ToString()}-{Recipe.ToString()}]";
+            return $"[{PriceList}-{Recipe}]";
         }
         public override General CreateNew()
         {
-            var general = new PriceListRecipe();
-            general.PriceListID = -1;
-            general.RecipeID = -1;
-            general.TimeForPreparing = new TimeSpan(0,15,0);
-            general.Price = -1;
+            var general = new PriceListRecipe
+            {
+                PriceListID = -1,
+                RecipeID = -1,
+                TimeForPreparing = new TimeSpan(0, 15, 0),
+                Price = -1
+            };
             return general;
         }
 

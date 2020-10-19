@@ -10,12 +10,14 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general = new Good();
-            general.IDGoods = -1;
-            general.TypesOfGoodsChar = null;
-            general.UnitsID = -1;
-            general.Name = null;
-            general.Calories = null;
+            var general = new Good
+            {
+                IDGoods = -1,
+                TypesOfGoodsChar = null,
+                UnitsID = -1,
+                Name = null,
+                Calories = null
+            };
             return general;
         }
 

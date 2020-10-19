@@ -1,5 +1,4 @@
 ﻿using ConfectioneryChain.DB.Inheritance;
-using System;
 
 namespace ConfectioneryChain.DB
 {
@@ -7,16 +6,18 @@ namespace ConfectioneryChain.DB
     {
         public override string ToString()
         {
-            return $"[{Shop.ToString()}-{GoodsID}]";
+            return $"[{Shop}-{GoodsID}]";
         }
         public override General CreateNew()
         {
-            var general = new FilingTheWarehouseShop();
-            general.ShopID = -1;
-            general.GoodsID = -1;
-            general.Count = -1;
-            general.PriceBuy = null;
-            general.PriceSell = null;
+            var general = new FilingTheWarehouseShop
+            {
+                ShopID = -1,
+                GoodsID = -1,
+                Count = -1,
+                PriceBuy = null,
+                PriceSell = null
+            };
             return general;
         }
 

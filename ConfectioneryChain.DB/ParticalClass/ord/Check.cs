@@ -10,10 +10,12 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general= new Check();
-            general.OrderID = -1;
-            general.ConfectioneryID = -1;
-            general.CashierID = -1;
+            var general = new Check
+            {
+                OrderID = -1,
+                ConfectioneryID = -1,
+                CashierID = -1
+            };
             return general;
         }
 

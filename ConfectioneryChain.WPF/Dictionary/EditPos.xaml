@@ -37,7 +37,7 @@
                 
                 <StackPanel Orientation="Vertical">
                     <Label>Название должности:</Label>
-                    <TextBox x:Name="Name"></TextBox>
+                    <TextBox x:Name="NamePosition"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label>Минимальное кол-во часов в месяц:</Label>

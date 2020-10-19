@@ -1,14 +1,13 @@
 ﻿using ConfectioneryChain.DB.Inheritance;
-using System;
 
 namespace ConfectioneryChain.DB
 {
     public partial class Employee : General
     {
         //Полное имя
-        public string FullName 
+        public string FullName
         {
-            get 
+            get
             {
                 return $"{Family} {Name} {PatronymicName}";
             }
@@ -20,15 +19,17 @@ namespace ConfectioneryChain.DB
 
         public override General CreateNew()
         {
-            var general= new Employee();
-            general.IDEmployee = -1;
+            var general = new Employee
+            {
+                IDEmployee = -1,
 
-            general.PassportSeria = null; 
-            general.PassportNumber = 0;
+                PassportSeria = null,
+                PassportNumber = 0,
 
-            general.Family = null;
-            general.Name = null;
-            general.PatronymicName = null;
+                Family = null,
+                Name = null,
+                PatronymicName = null
+            };
 
             return general;
         }

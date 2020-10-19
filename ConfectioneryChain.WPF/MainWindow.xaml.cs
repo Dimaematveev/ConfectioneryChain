@@ -10,7 +10,7 @@ namespace ConfectioneryChain.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        ConfectioneryChain_V5Entities db;
+        private ConfectioneryChain_V5Entities db;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,8 +46,8 @@ namespace ConfectioneryChain.WPF
             Window edit = new EditConf(db);
             edit.ShowDialog();
             Init();
-            
-            
+
+
         }
 
         private void EditEmpl_Click(object sender, RoutedEventArgs e)
@@ -64,7 +64,7 @@ namespace ConfectioneryChain.WPF
             Init();
         }
 
-      
+
 
         private void EditTypeGoods_Click(object sender, RoutedEventArgs e)
         {
@@ -73,7 +73,7 @@ namespace ConfectioneryChain.WPF
             Init();
         }
 
-        
+
 
         private void EditTypeUnits_Click(object sender, RoutedEventArgs e)
         {

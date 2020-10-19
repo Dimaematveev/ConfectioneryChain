@@ -6,14 +6,16 @@ namespace ConfectioneryChain.DB
     {
         public override string ToString()
         {
-            return $"[{Confectionery.ToString()}-{Employee.ToString()}-{Position.ToString()}]";
+            return $"[{Confectionery}-{Employee}-{Position}]";
         }
         public override General CreateNew()
         {
-            var general= new DistributionOfEmployee();
-            general.ConfectioneryID = -1;
-            general.EmployeeID = -1;
-            general.PositionID = -1;
+            var general = new DistributionOfEmployee
+            {
+                ConfectioneryID = -1,
+                EmployeeID = -1,
+                PositionID = -1
+            };
             return general;
         }
 

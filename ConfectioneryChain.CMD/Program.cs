@@ -1,16 +1,13 @@
 ﻿using ConfectioneryChain.DB;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConfectioneryChain.CMD
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             ConfectioneryChain_V5Entities db = new ConfectioneryChain_V5Entities();
             db.Confectioneries.Load();

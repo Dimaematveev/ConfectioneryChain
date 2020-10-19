@@ -10,9 +10,9 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditUnits : Window
     {
-        Action Save;
-        DbSet Data;
-        int ID;
+        private readonly Action Save;
+        private readonly DbSet Data;
+        private int ID;
         public EditUnits(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
@@ -41,11 +41,11 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private void EditConfBut_Click(object sender, RoutedEventArgs e)
         {
-            
+
             switch (DataGrid1.SelectedIndex)
             {
                 case -1:
-                    MessageBox.Show($"Вы не выбрали поле.","Неправильно выбраны поля",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
                 default:
                     ID = DataGrid1.SelectedIndex;
@@ -60,7 +60,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Unit;
 
             MultipleValue.Value = str.MultipleValue;
-            Name.Text = str.Name;
+            NameUnits.Text = str.Name;
         }
 
         private void AddConf_Click(object sender, RoutedEventArgs e)
@@ -80,13 +80,13 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             ID = -1;
             MultipleValue.Value = 0;
-            Name.Text = "";
+            NameUnits.Text = "";
         }
 
         private void SaveConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            if (ID==-1)
+            if (ID == -1)
             {
                 Data.Local.Add(New());
             }
@@ -109,17 +109,17 @@ namespace ConfectioneryChain.WPF.Dictionary
                 }
                 Exception ex1 = ex;
                 string err = "";
-                while(ex1 != null)
+                while (ex1 != null)
                 {
                     err += "\n";
-                    err += new string('-',30);
+                    err += new string('-', 30);
                     err += "\n";
                     err += ex1.Source;
                     err += "\n";
                     err += ex1.Message;
                     ex1 = ex1.InnerException;
-                } 
-                
+                }
+
                 MessageBox.Show(err, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -128,10 +128,11 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private Unit New()
         {
-            var obj = new Unit();
-
-            obj.MultipleValue = MultipleValue.Value.Value;
-            obj.Name = Name.Text;
+            var obj = new Unit
+            {
+                MultipleValue = MultipleValue.Value.Value,
+                Name = NameUnits.Text
+            };
             return obj;
         }
         private void CloseConf_Click(object sender, RoutedEventArgs e)

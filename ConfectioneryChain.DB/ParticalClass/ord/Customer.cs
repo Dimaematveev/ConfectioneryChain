@@ -17,11 +17,13 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general= new Customer();
-            general.Phone = -1;
-            general.Family = null;
-            general.Name = null;
-            general.PatronymicName = null;
+            var general = new Customer
+            {
+                Phone = -1,
+                Family = null,
+                Name = null,
+                PatronymicName = null
+            };
             return general;
         }
 

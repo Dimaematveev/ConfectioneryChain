@@ -11,12 +11,14 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general= new FilingTheWarehouseConfectionery();
-            general.ConfectioneryID = -1;
-            general.GoodsID = -1;
-            general.Count = -1;
-            general.Price = -1;
-            general.ShelfLife = new DateTime();
+            var general = new FilingTheWarehouseConfectionery
+            {
+                ConfectioneryID = -1,
+                GoodsID = -1,
+                Count = -1,
+                Price = -1,
+                ShelfLife = new DateTime()
+            };
             return general;
         }
 

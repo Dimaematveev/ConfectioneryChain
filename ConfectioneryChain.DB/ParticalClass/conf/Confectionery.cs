@@ -1,6 +1,5 @@
 ﻿using ConfectioneryChain.DB.Inheritance;
 using System;
-using System.Configuration;
 
 namespace ConfectioneryChain.DB
 {
@@ -12,13 +11,15 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general= new Confectionery();
-            general.IDConfectionery = -1;
-            general.Name = null;
-            general.Address = null;
-            general.RentPricel = 0;
-            general.BeginWork = new TimeSpan(7,0,0);
-            general.EndWork = new TimeSpan(23,0,0);
+            var general = new Confectionery
+            {
+                IDConfectionery = -1,
+                Name = null,
+                Address = null,
+                RentPricel = 0,
+                BeginWork = new TimeSpan(7, 0, 0),
+                EndWork = new TimeSpan(23, 0, 0)
+            };
             return general;
         }
 

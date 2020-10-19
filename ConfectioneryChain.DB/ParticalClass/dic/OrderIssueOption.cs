@@ -11,7 +11,10 @@ namespace ConfectioneryChain.DB
         public override General CreateNew()
         {
             var general = new OrderIssueOption();
-
+            {
+                CharOrderIssueOption = null;
+                Name = null;
+            }
             return general;
         }
 
@@ -19,7 +22,7 @@ namespace ConfectioneryChain.DB
         {
             if (copy is OrderIssueOption general)
             {
-
+                Name = general.Name;
             }
 
 
@@ -30,7 +33,7 @@ namespace ConfectioneryChain.DB
             if (copy is OrderIssueOption general)
             {
                 Fill(general);
-
+                CharOrderIssueOption = general.CharOrderIssueOption;
             }
 
 

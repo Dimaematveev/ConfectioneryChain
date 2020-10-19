@@ -6,16 +6,18 @@ namespace ConfectioneryChain.DB
     {
         public override string ToString()
         {
-            return $"[{Recipe.ToString()}-{Good.ToString()}]";
+            return $"[{Recipe}-{Good}]";
         }
         public override General CreateNew()
         {
-            var general = new ToppingInRecipe();
-            general.RecipeID = -1;
-            general.GoodsID = -1;
-            general.PercentageOfInfluenceOnTaste = -1;
-            general.Count = -1;
-            general.MaxCount = -1;
+            var general = new ToppingInRecipe
+            {
+                RecipeID = -1,
+                GoodsID = -1,
+                PercentageOfInfluenceOnTaste = -1,
+                Count = -1,
+                MaxCount = -1
+            };
             return general;
         }
 

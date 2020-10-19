@@ -10,9 +10,9 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditEmpl : Window
     {
-        Action Save;
-        DbSet Data;
-        int ID;
+        private readonly Action Save;
+        private readonly DbSet Data;
+        private int ID;
         public EditEmpl(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
@@ -41,11 +41,11 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private void EditConfBut_Click(object sender, RoutedEventArgs e)
         {
-            
+
             switch (DataGrid1.SelectedIndex)
             {
                 case -1:
-                    MessageBox.Show($"Вы не выбрали поле.","Неправильно выбраны поля",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
                 default:
                     ID = DataGrid1.SelectedIndex;
@@ -58,11 +58,11 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void FillingFields()
         {
             var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Employee;
-            
+
             PassportSeria.Text = str.PassportSeria;
             PassportNumber.Value = str.PassportNumber;
             Family.Text = str.Family;
-            Name.Text = str.Name;
+            NameEmp.Text = str.Name;
             PatronymicName.Text = str.PatronymicName;
         }
 
@@ -85,14 +85,14 @@ namespace ConfectioneryChain.WPF.Dictionary
             PassportSeria.Text = "";
             PassportNumber.Value = 0;
             Family.Text = "";
-            Name.Text = "";
+            NameEmp.Text = "";
             PatronymicName.Text = "";
         }
 
         private void SaveConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            if (ID==-1)
+            if (ID == -1)
             {
                 Data.Local.Add(New());
             }
@@ -115,17 +115,17 @@ namespace ConfectioneryChain.WPF.Dictionary
                 }
                 Exception ex1 = ex;
                 string err = "";
-                while(ex1 != null)
+                while (ex1 != null)
                 {
                     err += "\n";
-                    err += new string('-',30);
+                    err += new string('-', 30);
                     err += "\n";
                     err += ex1.Source;
                     err += "\n";
                     err += ex1.Message;
                     ex1 = ex1.InnerException;
-                } 
-                
+                }
+
                 MessageBox.Show(err, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -134,13 +134,14 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private Employee New()
         {
-            var obj = new Employee();
-
-            obj.PassportSeria = PassportSeria.Text;
-            obj.PassportNumber = PassportNumber.Value.Value;
-            obj.Family = Family.Text;
-            obj.Name = Name.Text;
-            obj.PatronymicName = PatronymicName.Text;
+            var obj = new Employee
+            {
+                PassportSeria = PassportSeria.Text,
+                PassportNumber = PassportNumber.Value.Value,
+                Family = Family.Text,
+                Name = NameEmp.Text,
+                PatronymicName = PatronymicName.Text
+            };
 
             return obj;
         }

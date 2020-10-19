@@ -10,9 +10,9 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditDistributionOfEmployees : Window
     {
-        Action Save;
-        DbSet Data;
-        int ID;
+        private readonly Action Save;
+        private readonly DbSet Data;
+        private int ID;
         public EditDistributionOfEmployees(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
@@ -44,11 +44,11 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private void EditConfBut_Click(object sender, RoutedEventArgs e)
         {
-            
+
             switch (DataGrid1.SelectedIndex)
             {
                 case -1:
-                    MessageBox.Show($"Вы не выбрали поле.","Неправильно выбраны поля",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
                 default:
                     ID = DataGrid1.SelectedIndex;
@@ -93,7 +93,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void SaveConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            if (ID==-1)
+            if (ID == -1)
             {
                 Data.Local.Add(New());
             }
@@ -115,17 +115,17 @@ namespace ConfectioneryChain.WPF.Dictionary
                 }
                 Exception ex1 = ex;
                 string err = "";
-                while(ex1 != null)
+                while (ex1 != null)
                 {
                     err += "\n";
-                    err += new string('-',30);
+                    err += new string('-', 30);
                     err += "\n";
                     err += ex1.Source;
                     err += "\n";
                     err += ex1.Message;
                     ex1 = ex1.InnerException;
-                } 
-                
+                }
+
                 MessageBox.Show(err, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -134,10 +134,12 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private DistributionOfEmployee New()
         {
-            var obj = new DistributionOfEmployee();
-            obj.ConfectioneryID = (int)ConfectioneryID.SelectedValue;
-            obj.EmployeeID = (int)EmployeeID.SelectedValue;
-            obj.PositionID = (int)PositionID.SelectedValue;
+            var obj = new DistributionOfEmployee
+            {
+                ConfectioneryID = (int)ConfectioneryID.SelectedValue,
+                EmployeeID = (int)EmployeeID.SelectedValue,
+                PositionID = (int)PositionID.SelectedValue
+            };
             return obj;
         }
         private void CloseConf_Click(object sender, RoutedEventArgs e)

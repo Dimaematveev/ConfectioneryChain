@@ -10,11 +10,13 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general = new Position();
-            general.IDPosition = -1;
-            general.Name = null;
-            general.MinimumHours = -1;
-            general.WorkHourRate = -1;
+            var general = new Position
+            {
+                IDPosition = -1,
+                Name = null,
+                MinimumHours = -1,
+                WorkHourRate = -1
+            };
             return general;
         }
 

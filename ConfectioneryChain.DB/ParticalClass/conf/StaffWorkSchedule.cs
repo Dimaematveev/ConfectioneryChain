@@ -11,15 +11,17 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general = new StaffWorkSchedule();
-            general.IDStaffWorkSchedule = -1;
-            general.ConfectioneryID = -1;
-            general.EmployeeID = -1;
-            general.WorkDay = DateTime.Now;
-            general.TimeBeginWork = new TimeSpan(8, 0, 0);
-            general.TimeEndWork = new TimeSpan(23, 0, 0);
-            general.TimeBeginLunch = new TimeSpan(13, 0, 0);
-            general.TimeEndLunch = new TimeSpan(13, 45, 0);
+            var general = new StaffWorkSchedule
+            {
+                IDStaffWorkSchedule = -1,
+                ConfectioneryID = -1,
+                EmployeeID = -1,
+                WorkDay = DateTime.Now,
+                TimeBeginWork = new TimeSpan(8, 0, 0),
+                TimeEndWork = new TimeSpan(23, 0, 0),
+                TimeBeginLunch = new TimeSpan(13, 0, 0),
+                TimeEndLunch = new TimeSpan(13, 45, 0)
+            };
             return general;
         }
 

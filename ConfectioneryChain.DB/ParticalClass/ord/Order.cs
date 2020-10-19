@@ -10,12 +10,14 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general = new Order();
-            general.IDOrder = -1;
-            general.ConfectioneryID = -1;
-            general.CustomerPhone = -1;
-            general.OrderIssueOptionChar = null;
-            general.DateTime = System.DateTime.Now;
+            var general = new Order
+            {
+                IDOrder = -1,
+                ConfectioneryID = -1,
+                CustomerPhone = -1,
+                OrderIssueOptionChar = null,
+                DateTime = System.DateTime.Now
+            };
             return general;
         }
 

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConfectioneryChain.DB.Inheritance
+﻿namespace ConfectioneryChain.DB.Inheritance
 {
-    public abstract class General 
+    public abstract class General
     {
 
 

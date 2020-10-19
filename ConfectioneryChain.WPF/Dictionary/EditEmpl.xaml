@@ -48,7 +48,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Label>Имя:</Label>
-                    <TextBox x:Name="Name"></TextBox>
+                    <TextBox x:Name="NameEmp"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Label>Отчество:</Label>

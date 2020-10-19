@@ -10,9 +10,9 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditPos : Window
     {
-        Action Save;
-        DbSet Data;
-        int ID;
+        private readonly Action Save;
+        private readonly DbSet Data;
+        private int ID;
         public EditPos(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
@@ -59,10 +59,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Position;
 
-            Name.Text = str.Name;
+            NamePosition.Text = str.Name;
             MinimumHours.Value = str.MinimumHours;
             WorkHourRate.Value = str.WorkHourRate;
-          
+
         }
 
         private void AddConf_Click(object sender, RoutedEventArgs e)
@@ -81,7 +81,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void DefaultValue()
         {
             ID = -1;
-            Name.Text = "";
+            NamePosition.Text = "";
             MinimumHours.Value = 0;
             WorkHourRate.Value = 0;
         }
@@ -131,11 +131,12 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private Position New()
         {
-            var obj = new Position();
-
-            obj.Name = Name.Text;
-            obj.MinimumHours = MinimumHours.Value.Value;
-            obj.WorkHourRate = WorkHourRate.Value.Value;
+            var obj = new Position
+            {
+                Name = NamePosition.Text,
+                MinimumHours = MinimumHours.Value.Value,
+                WorkHourRate = WorkHourRate.Value.Value
+            };
 
             return obj;
         }

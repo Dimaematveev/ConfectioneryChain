@@ -11,12 +11,14 @@ namespace ConfectioneryChain.DB
         }
         public override General CreateNew()
         {
-            var general = new PriceList();
-            general.IDPriceList = -1;
-            general.DateTimeBegin = DateTime.Now.AddDays(1).Date;
-            general.DateTimeEnd = DateTime.Now.AddDays(2).Date;
-            general.IsWorks =false;
-            general.ConfectioneryID = -1;
+            var general = new PriceList
+            {
+                IDPriceList = -1,
+                DateTimeBegin = DateTime.Now.AddDays(1).Date,
+                DateTimeEnd = DateTime.Now.AddDays(2).Date,
+                IsWorks = false,
+                ConfectioneryID = -1
+            };
 
             return general;
         }
