@@ -50,15 +50,13 @@ namespace ConfectioneryChain.WPF.Dictionary
                 default:
                     ID = DataGrid1.SelectedIndex;
                     Edit.IsEnabled = true;
-                    FillingFields();
+                    FillingFields((DataGrid1.Items[DataGrid1.SelectedIndex]) as Confectionery);
                     break;
             }
         }
 
-        private void FillingFields()
+        private void FillingFields(Confectionery str)
         {
-            var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Confectionery;
-            
             NameConf.Text = str.Name;
             AdressConf.Text = str.Address;
             RentPriceConf.Value = str.RentPricel;
@@ -72,24 +70,14 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void AddConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = true;
-            DefaultValue();
+            FillingFields(new Confectionery().CreateNew() as Confectionery);
 
         }
 
         private void CancelConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            DefaultValue();
-        }
-
-        private void DefaultValue()
-        {
-            ID = -1;
-            NameConf.Text = "";
-            AdressConf.Text = "";
-            RentPriceConf.Value = 0;
-            BeginTime.Value = new DateTime();
-            EndTime.Value = new DateTime();
+            FillingFields(new Confectionery().CreateNew() as Confectionery);
         }
 
         private void SaveConf_Click(object sender, RoutedEventArgs e)

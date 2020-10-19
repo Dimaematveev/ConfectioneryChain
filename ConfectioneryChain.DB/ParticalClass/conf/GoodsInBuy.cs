@@ -39,7 +39,7 @@ namespace ConfectioneryChain.DB
             if (copy is GoodsInBuy general)
             {
                 Fill(general);
-                IDGoodsInBuy = general.IDGoodsInBuy
+                IDGoodsInBuy = general.IDGoodsInBuy;
             }
 
 

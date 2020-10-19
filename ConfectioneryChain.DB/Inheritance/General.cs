@@ -8,6 +8,8 @@ namespace ConfectioneryChain.DB.Inheritance
 {
     public abstract class General 
     {
+
+
         /// <summary>
         /// Получить новый класс General
         /// </summary>
