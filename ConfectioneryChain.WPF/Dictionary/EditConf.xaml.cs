@@ -1,6 +1,7 @@
 ﻿using ConfectioneryChain.DB;
 using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 
 namespace ConfectioneryChain.WPF.Dictionary
@@ -10,15 +11,12 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditConf : Window
     {
-        private readonly Action Save;
-        private readonly DbSet Data;
+        private readonly ConfectioneryChain_V5Entities DB;
         private int ID;
         public EditConf(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
-            db.Positions.Load();
-            Data = db.Confectioneries;
-            Save = () => db.SaveChanges();
+            DB = db;
             LoadValue();
             //Общее
             CloseGeneral.Click += CloseConf_Click;
@@ -34,8 +32,8 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         private void LoadValue()
         {
-            Data.Load();
-            DataGrid1.ItemsSource = Data.Local;
+            DB.Confectioneries.Load();
+            DataGrid1.ItemsSource = DB.Confectioneries.Local;
         }
 
 
@@ -60,6 +58,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void AddConf_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = true;
+            ID = -1;
             FillingFields(new Confectionery().CreateNew() as Confectionery);
 
         }
@@ -75,24 +74,24 @@ namespace ConfectioneryChain.WPF.Dictionary
             Edit.IsEnabled = false;
             if (ID == -1)
             {
-                Data.Local.Add(New());
+                DB.Confectioneries.Local.Add(New());
             }
             else
             {
                 var conf = New();
-                conf.IDConfectionery = (Data.Local[ID] as Confectionery).IDConfectionery;
-                Data.Local[ID] = conf;
+                conf.IDConfectionery = (DB.Confectioneries.Local[ID]).IDConfectionery;
+                DB.Confectioneries.Local[ID] = conf;
             }
 
             try
             {
-                Save();
+                DB.SaveChanges();
             }
             catch (Exception ex)
             {
                 if (ID == -1)
                 {
-                    Data.Local.RemoveAt(Data.Local.Count - 1);
+                    DB.Confectioneries.Local.RemoveAt(DB.Confectioneries.Count() - 1);
                 }
                 Exception ex1 = ex;
                 string err = "";
