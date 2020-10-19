@@ -18,7 +18,8 @@ namespace ConfectioneryChain.DB
                 Address = null,
                 RentPricel = 0,
                 BeginWork = new TimeSpan(7, 0, 0),
-                EndWork = new TimeSpan(23, 0, 0)
+                EndWork = new TimeSpan(23, 0, 0),
+                Money = 500000,
             };
             return general;
         }
@@ -32,6 +33,7 @@ namespace ConfectioneryChain.DB
                 RentPricel = general.RentPricel;
                 BeginWork = general.BeginWork;
                 EndWork = general.EndWork;
+                Money = general.Money;
             }
 
 

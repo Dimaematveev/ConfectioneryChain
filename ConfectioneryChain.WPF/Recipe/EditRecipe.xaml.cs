@@ -8,15 +8,15 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditConf : Window
+    public partial class EditRecipe : Window
     {
         private readonly Action Save;
         private readonly DbSet Data;
         private int ID;
-        public EditConf(ConfectioneryChain_V5Entities db)
+        public EditRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
-            db.Positions.Load();
+            db.Recipes.Load();
             Data = db.Confectioneries;
             Save = () => db.SaveChanges();
             LoadValue();

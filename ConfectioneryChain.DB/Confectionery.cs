@@ -29,6 +29,7 @@ namespace ConfectioneryChain.DB
         public decimal RentPricel { get; set; }
         public System.TimeSpan BeginWork { get; set; }
         public System.TimeSpan EndWork { get; set; }
+        public Nullable<decimal> Money { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DistributionOfEmployee> DistributionOfEmployees { get; set; }

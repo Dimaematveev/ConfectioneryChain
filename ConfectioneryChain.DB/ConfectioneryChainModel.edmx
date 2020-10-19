@@ -24,6 +24,7 @@
           <Property Name="RentPricel" Type="numeric" Precision="9" Scale="0" Nullable="false" />
           <Property Name="BeginWork" Type="time" Precision="0" Nullable="false" />
           <Property Name="EndWork" Type="time" Precision="0" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="11" Scale="0" />
         </EntityType>
         <EntityType Name="DistributionOfEmployees">
           <Key>
@@ -996,6 +997,7 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <NavigationProperty Name="FilingTheWarehouseConfectioneries" Relationship="ConfectioneryChain_V5Model.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="FilingTheWarehouseConfectionery" />
           <NavigationProperty Name="Orders" Relationship="ConfectioneryChain_V5Model.FK_Order_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="Order" />
           <NavigationProperty Name="PriceLists" Relationship="ConfectioneryChain_V5Model.FK_PriceList_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="PriceList" />
+          <Property Name="Money" Type="Decimal" Precision="11" Scale="0" />
         </EntityType>
         <EntityType Name="DistributionOfEmployee">
           <Key>
@@ -1676,6 +1678,7 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <EntitySetMapping Name="Confectioneries">
             <EntityTypeMapping TypeName="ConfectioneryChain_V5Model.Confectionery">
               <MappingFragment StoreEntitySet="Confectionery">
+                <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="EndWork" ColumnName="EndWork" />
                 <ScalarProperty Name="BeginWork" ColumnName="BeginWork" />
                 <ScalarProperty Name="RentPricel" ColumnName="RentPricel" />
