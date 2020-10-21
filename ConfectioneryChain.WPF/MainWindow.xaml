@@ -75,5 +75,11 @@
             <Label x:Name="LableToppingInRecipes">0</Label>
             <Button x:Name="EditToppingInRecipes" Height="20" Click="EditToppingInRecipes_Click" >Изменить</Button>
         </StackPanel>
+
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="3" >
+            <TextBlock TextWrapping="Wrap">Изменить рецепты(хороший)</TextBlock>
+            <Button x:Name="EditRealRecipes" Height="20" Click="EditRealRecipes_Click">Изменить</Button>
+        </StackPanel>
     </Grid>
 </Window>

@@ -9,7 +9,7 @@ namespace ConfectioneryChain.WPF.GoodRecipe
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditRecipe : Window
+    public partial class EditGoodRecipe : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,7 +17,7 @@ namespace ConfectioneryChain.WPF.GoodRecipe
         DbSet Data;
         private int ID;
         General General;
-        public EditRecipe(ConfectioneryChain_V5Entities db)
+        public EditGoodRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;

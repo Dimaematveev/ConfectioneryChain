@@ -1,6 +1,7 @@
 ﻿using ConfectioneryChain.DB;
 using ConfectioneryChain.WPF.Conf;
 using ConfectioneryChain.WPF.Dic;
+using ConfectioneryChain.WPF.GoodRecipe;
 using ConfectioneryChain.WPF.Rec;
 using System.Data.Entity;
 using System.Windows;
@@ -132,6 +133,13 @@ namespace ConfectioneryChain.WPF
         private void EditToppingInRecipes_Click(object sender, RoutedEventArgs e)
         {
             Window edit = new EditToppingInRecipe(db);
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditRealRecipes_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditGoodRecipe(db);
             edit.ShowDialog();
             Init();
         }
