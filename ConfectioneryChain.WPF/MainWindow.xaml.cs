@@ -40,6 +40,8 @@ namespace ConfectioneryChain.WPF
             //Рецепт
             db.Recipes.Load();
             LableRecipes.Content = db.Recipes.Local.Count;
+            db.HierararchyInRecipes.Load();
+            LableHierararchyInRecipe.Content = db.HierararchyInRecipes.Local.Count;
 
 
         }
@@ -104,6 +106,13 @@ namespace ConfectioneryChain.WPF
         private void EditRecipes_Click(object sender, RoutedEventArgs e)
         {
             Window edit = new EditRecipe(db);
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditHierararchyInRecipe_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditHierararchyInRecipe(db);
             edit.ShowDialog();
             Init();
         }

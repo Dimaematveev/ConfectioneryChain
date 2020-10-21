@@ -21,7 +21,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="DataGrid1" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
+            <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="EditAll" Content="Изменить" Width="100"/>
                 <Button x:Name="AddAll" Content="Добавить" Width="100"/>
@@ -32,32 +32,41 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-        
-            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
-                <StackPanel Orientation="Horizontal">
-                    <Label Width="110">Серия паспорта: </Label>
-                    <TextBox  x:Name="PassportSeria" MaxLength="4" Width="150"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Width="110">Номер паспорта: </Label>
-                    <ctrl:IntegerUpDown Increment="1"  x:Name="PassportNumber" Minimum="000000" Maximum="999999" Width="150"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Фамилия:</Label>
-                    <TextBox x:Name="Family"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Имя:</Label>
-                    <TextBox x:Name="NameEmp"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Отчество:</Label>
-                    <TextBox x:Name="PatronymicName"></TextBox>
-                </StackPanel>
-              
-            
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+            <!-- #region Изменяемое -->
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+                        <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                            <Label>Код:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="IDEmployeeEmployee" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Серия паспорта:</Label>
+                            <TextBox MaxLength="6"  x:Name="PassportSeriaEmployee" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Номер паспорта:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="PassportNumberEmployee" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Фамилия:</Label>
+                            <TextBox MaxLength="20"  x:Name="FamilyEmployee" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Имя:</Label>
+                            <TextBox MaxLength="20"  x:Name="NameEmployee" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Отчество:</Label>
+                            <TextBox MaxLength="30"  x:Name="PatronymicNameEmployee" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <!--#endregion-->
+
+
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
                 <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
             </StackPanel>

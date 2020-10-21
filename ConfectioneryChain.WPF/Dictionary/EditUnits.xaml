@@ -21,7 +21,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="DataGrid1" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
+            <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="EditAll" Content="Изменить" Width="100"/>
                 <Button x:Name="AddAll" Content="Добавить" Width="100"/>
@@ -32,20 +32,30 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-        
-            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
-                
-                <StackPanel Orientation="Horizontal">
-                    <Label>Кратное значение:</Label>
-                    <ctrl:DecimalUpDown Minimum="0" Increment="0.01"  x:Name="MultipleValue"  Width="150"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Название Типа:</Label>
-                    <TextBox x:Name="NameUnits"></TextBox>
-                </StackPanel>
-              
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+
+            <!-- #region Изменяемое -->
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+                    <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                            <Label>Код:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="IDUnitsUnit" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Кратное значение:</Label>
+                            <ctrl:DecimalUpDown Increment = "1000" x:Name="MultipleValueUnit" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Название:</Label>
+                            <TextBox MaxLength="20"  x:Name="NameUnit" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <!--#endregion-->
+
+
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
                 <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
             </StackPanel>

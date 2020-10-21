@@ -1,10 +1,7 @@
 ﻿using ConfectioneryChain.DB;
 using ConfectioneryChain.DB.Inheritance;
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data.Entity;
-using System.Linq;
 using System.Windows;
 
 namespace ConfectioneryChain.WPF.Dictionary
@@ -68,7 +65,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             }
         }
 
-       
+
         /// <summary>
         /// Добавить новый
         /// </summary>
@@ -171,7 +168,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             {
                 General = general;
 
-               
+                IDRecipeRecipe.Value = general.IDRecipe;
                 DateCreateRecipe.Value = general.DateCreate;
                 MarkIsWorkRecipe.IsChecked = general.MarkIsWork;
                 ChefIDRecipe.SelectedValue = general.ChefID;
@@ -189,7 +186,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (General is Recipe general)
             {
-                
+                general.IDRecipe = IDRecipeRecipe.Value.Value;
                 general.DateCreate = DateCreateRecipe.Value.Value;
                 general.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
                 general.ChefID = (int)ChefIDRecipe.SelectedValue;
@@ -197,10 +194,8 @@ namespace ConfectioneryChain.WPF.Dictionary
                 general.Description = DescriptionRecipe.Text;
             }
         }
+        #endregion
 
-
-
-        #endregion 
 
 
 

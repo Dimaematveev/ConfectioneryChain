@@ -1,4 +1,5 @@
 ﻿using ConfectioneryChain.DB;
+using ConfectioneryChain.DB.Inheritance;
 using System;
 using System.Data.Entity;
 using System.Windows;
@@ -10,106 +11,116 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditPos : Window
     {
-        private readonly Action Save;
-        private readonly DbSet Data;
+        private readonly ConfectioneryChain_V5Entities DB;
+
+
+        DbSet Data;
         private int ID;
+        General General;
         public EditPos(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
+            DB = db;
 
-            Data = db.Positions;
-            Save = () => db.SaveChanges();
-            LoadValue();
+            Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
-            CloseGeneral.Click += CloseConf_Click;
-            //Для 1 сотрудника
-            SaveOne.Click += SaveConf_Click;
-            CancelOne.Click += CancelConf_Click;
+            CloseGeneral.Click += CloseGeneral_Click;
+            //Для 1 кафе
+            SaveOne.Click += SaveOne_Click;
+            CancelOne.Click += CancelOne_Click;
 
-            //Для всех сотрудников
-            EditAll.Click += EditConfBut_Click;
-            AddAll.Click += AddConf_Click;
-
-        }
-
-        private void LoadValue()
-        {
-            Data.Load();
-            DataGrid1.ItemsSource = Data.Local;
-        }
-
-
-        private void EditConfBut_Click(object sender, RoutedEventArgs e)
-        {
-
-            switch (DataGrid1.SelectedIndex)
-            {
-                case -1:
-                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    break;
-                default:
-                    ID = DataGrid1.SelectedIndex;
-                    Edit.IsEnabled = true;
-                    FillingFields();
-                    break;
-            }
-        }
-
-        private void FillingFields()
-        {
-            var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as Position;
-
-            NamePosition.Text = str.Name;
-            MinimumHours.Value = str.MinimumHours;
-            WorkHourRate.Value = str.WorkHourRate;
+            //Для всех кафе
+            EditAll.Click += EditAll_Click;
+            AddAll.Click += AddAll_Click;
 
         }
 
-        private void AddConf_Click(object sender, RoutedEventArgs e)
-        {
-            Edit.IsEnabled = true;
-            DefaultValue();
-
-        }
-
-        private void CancelConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Закрыть
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseGeneral_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            DefaultValue();
+            DialogResult = true;
         }
 
-        private void DefaultValue()
-        {
-            ID = -1;
-            NamePosition.Text = "";
-            MinimumHours.Value = 0;
-            WorkHourRate.Value = 0;
-        }
 
-        private void SaveConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Редактировать
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditAll_Click(object sender, RoutedEventArgs e)
         {
-            Edit.IsEnabled = false;
+            ID = TableGeneral.SelectedIndex;
             if (ID == -1)
             {
-                Data.Local.Add(New());
+                MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                var conf = New();
-                conf.IDPosition = (Data.Local[ID] as Position).IDPosition;
-                Data.Local[ID] = conf;
+                Edit.IsEnabled = true;
+                FillingFielsFromGeneral(Data.Local[TableGeneral.SelectedIndex]);
+            }
+        }
+
+
+        /// <summary>
+        /// Добавить новый
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddAll_Click(object sender, RoutedEventArgs e)
+        {
+            Edit.IsEnabled = true;
+            ID = -1;
+            FillingFielsFromGeneral(null);
+
+        }
+
+        /// <summary>
+        /// Отмена
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelOne_Click(object sender, RoutedEventArgs e)
+        {
+            Edit.IsEnabled = false;
+            FillingFielsFromGeneral(null);
+        }
+
+        /// <summary>
+        /// Сохранить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveOne_Click(object sender, RoutedEventArgs e)
+        {
+            FillingGeneralFromFields();
+            if (ID == -1)
+            {
+                Data.Add(General);
+            }
+            else
+            {
+                ((General)Data.Local[ID]).Fill(General);
             }
 
             try
             {
-                Save();
+                DB.SaveChanges();
+                Edit.IsEnabled = false;
+                Edit_Loaded();
             }
             catch (Exception ex)
             {
                 if (ID == -1)
                 {
-                    Data.Local.RemoveAt(Data.Local.Count - 1);
+                    Data.Remove(General);
                 }
+
                 Exception ex1 = ex;
                 string err = "";
                 while (ex1 != null)
@@ -129,22 +140,60 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         }
 
-        private Position New()
+        #region Изменяемое
+        /// <summary>
+        /// Действия при загрузке
+        /// </summary>
+        private void Edit_Loaded()
         {
-            var obj = new Position
+            TableGeneral.ItemsSource = null;
+            DB.Positions.Load();
+            Data = DB.Positions;
+            TableGeneral.ItemsSource = Data.Local;
+        }
+
+
+        /// <summary>
+        /// Заполнить Поля из Объекта
+        /// </summary>
+        /// <param name="str"></param>
+        private void FillingFielsFromGeneral(object str)
+        {
+            if (str is null)
             {
-                Name = NamePosition.Text,
-                MinimumHours = MinimumHours.Value.Value,
-                WorkHourRate = WorkHourRate.Value.Value
+                str = new Position().CreateNew();
+            }
+            if (str is Position general)
+            {
+                General = general;
+
+                IDPositionPosition.Value = general.IDPosition;
+                NamePosition.Text = general.Name;
+                MinimumHoursPosition.Value = general.MinimumHours;
+                WorkHourRatePosition.Value = general.WorkHourRate;
             };
 
-            return obj;
         }
-        private void CloseConf_Click(object sender, RoutedEventArgs e)
+
+
+        /// <summary>
+        /// Заполнить объект из полей
+        /// </summary>
+        private void FillingGeneralFromFields()
         {
-            Edit.IsEnabled = false;
-            DialogResult = true;
+            if (General is Position general)
+            {
+                general.IDPosition = IDPositionPosition.Value.Value;
+                general.Name = NamePosition.Text;
+                general.MinimumHours = MinimumHoursPosition.Value.Value;
+                general.WorkHourRate = WorkHourRatePosition.Value.Value;
+            }
         }
+        #endregion
+
+
+
+
 
 
     }

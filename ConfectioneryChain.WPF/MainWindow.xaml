@@ -54,11 +54,16 @@
             <TextBlock TextWrapping="Wrap">Распределение сотрудников</TextBlock>
             <Label x:Name="LableDistributionOfEmployees">0</Label>
             <Button x:Name="EditDistributionOfEmployees" Height="20" Click="EditDistributionOfEmployees_Click">Изменить</Button>
-        </StackPanel> 
+        </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="2" >
             <TextBlock TextWrapping="Wrap">Рецепты</TextBlock>
             <Label x:Name="LableRecipes">0</Label>
             <Button x:Name="EditRecipes" Height="20" Click="EditRecipes_Click">Изменить</Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="2" >
+            <TextBlock TextWrapping="Wrap">Иерархия в рецепте</TextBlock>
+            <Label x:Name="LableHierararchyInRecipe">0</Label>
+            <Button x:Name="EditHierararchyInRecipe" Height="20" Click="EditHierararchyInRecipe_Click" >Изменить</Button>
         </StackPanel>
     </Grid>
 </Window>

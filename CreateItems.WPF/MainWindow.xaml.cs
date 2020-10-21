@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CreateItems.WPF
 {
@@ -32,29 +23,41 @@ namespace CreateItems.WPF
         private void Pre_Click(object sender, RoutedEventArgs e)
         {
             string richText = new TextRange(Text.Document.ContentStart, Text.Document.ContentEnd).Text;
-            
+
 
             richText = richText.Replace("\r", "");
             TheOneClass theOneClass = new TheOneClass(richText);
-            
 
-            string wpf= theOneClass.RetItemsWPF();
+
+            string wpf = "";
+            wpf += "< !-- #region Изменяемое -->\n";
+            wpf += " <ScrollViewer>\n";
+
+            wpf += theOneClass.RetItemsWPF();
+
+            wpf += " </ScrollViewer>\n";
+            wpf += "< !--#endregion-->\n";
             NameWPF.Document.Blocks.Clear();
             NameWPF.Document.Blocks.Add(new Paragraph(new Run(wpf)));
 
             string clas = "";
+            clas += "\t\t#region Изменяемое\n";
+
             clas += theOneClass.RetEdit_Loaded();
-            clas +="\n\n";
+            clas += "\n\n";
             clas += theOneClass.RetFillingFielsFromGeneral();
-            clas +="\n\n";
+            clas += "\n\n";
             clas += theOneClass.RetFillingGeneralFromFields();
+
+            clas += "\t\t#endregion\n";
+
             NameCLASS.Document.Blocks.Clear();
             NameCLASS.Document.Blocks.Add(new Paragraph(new Run(clas)));
 
         }
 
 
-        
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -107,11 +110,11 @@ namespace CreateItems.WPF
             str += $"\t\t\tDB.{ListName}.Load();\n";
 
 
-            foreach (var item in items.Where(x=>!string.IsNullOrWhiteSpace(x.RefToType)))
+            foreach (var item in items.Where(x => !string.IsNullOrWhiteSpace(x.RefToType)))
             {
                 str += $"\t\t\tDB.{item.RefToType}.Load();\n";
                 str += $"\t\t\t{item.Name}.ItemsSource = DB.{item.RefToType}.Local;\n";
-                
+
             }
 
 
@@ -172,7 +175,7 @@ namespace CreateItems.WPF
         public Item(string all)
         {
             var items = all.Split('\t');
-            if (items.Length!=6)
+            if (items.Length < 4)
             {
                 return;
             }
@@ -180,8 +183,8 @@ namespace CreateItems.WPF
             Name = items[1];
             NameSQL = items[2];
             Type = items[3].ToLower();
-            RefToType = items[4];
-            IDRef = items[5];
+            RefToType = items.ElementAtOrDefault(4);
+            IDRef = items.ElementAtOrDefault(5);
 
             GetTypes();
         }
@@ -192,14 +195,14 @@ namespace CreateItems.WPF
         public string RefToType { get; set; }
         public string IDRef { get; set; }
 
-        
+
         private string NameUIElement { get; set; }
         private string ValueToUIElement { get; set; }
         private string ValueFromUIElement { get; set; }
 
         private string ValueToSQL { get; set; }
         private string ValueFromSQL { get; set; }
-        
+
 
         public string GetWPF()
         {
@@ -222,9 +225,9 @@ namespace CreateItems.WPF
 
         void GetTypes()
         {
-            if (!string.IsNullOrWhiteSpace(RefToType)) 
+            if (!string.IsNullOrWhiteSpace(RefToType))
             {
-                NameUIElement= $"ComboBox  SelectedValuePath = \"{IDRef}\" ";
+                NameUIElement = $"ComboBox  SelectedValuePath = \"{IDRef}\" ";
 
                 ValueToUIElement = $"{Name}.SelectedValue";
                 ValueFromUIElement = $"(int){Name}.SelectedValue";
@@ -257,10 +260,10 @@ namespace CreateItems.WPF
                 ValueFromSQL = $"general.{NameSQL}";
                 return;
             }
-            if (Type.StartsWith("time")) 
+            if (Type.StartsWith("time"))
             {
-                NameUIElement= "ctrl:TimePicker Format=\"Custom\" FormatString=\"HH: mm\" StartTime=\"00:00\" EndTime=\"23:59\"  TimeInterval=\"00:15\"";
-                
+                NameUIElement = "ctrl:TimePicker Format=\"Custom\" FormatString=\"HH: mm\" StartTime=\"00:00\" EndTime=\"23:59\"  TimeInterval=\"00:15\"";
+
                 ValueToUIElement = $"{Name}.Value";
                 ValueFromUIElement = $"new TimeSpan({Name}.Value.Value.Ticks)";
 
@@ -268,9 +271,21 @@ namespace CreateItems.WPF
                 ValueFromSQL = $"new DateTime(general.{NameSQL}.Ticks)";
                 return;
             }
+            if (Type.StartsWith("char"))
+            {
+                int k = Convert.ToInt32(Type.Substring(Type.IndexOf('(') + 1, Type.IndexOf(')') - Type.IndexOf('(') - 1).Trim());
+                NameUIElement = $"TextBox MaxLength=\"{k}\" ";
+
+                ValueToUIElement = $"{Name}.Text";
+                ValueFromUIElement = $"{Name}.Text";
+
+                ValueToSQL = $"general.{NameSQL}";
+                ValueFromSQL = $"general.{NameSQL}";
+                return;
+            }
             if (Type.StartsWith("nvarchar(max)"))
             {
-                NameUIElement= "TextBox TextWrapping=\"Wrap\" Height=\"60\" ";
+                NameUIElement = "TextBox TextWrapping=\"Wrap\" Height=\"60\" ";
 
                 ValueToUIElement = $"{Name}.Text";
                 ValueFromUIElement = $"{Name}.Text";
@@ -279,9 +294,10 @@ namespace CreateItems.WPF
                 ValueFromSQL = $"general.{NameSQL}";
                 return;
             }
-            if (Type.StartsWith("nvarchar")) 
+            if (Type.StartsWith("nvarchar"))
             {
-                NameUIElement= "TextBox";
+                int k = Convert.ToInt32(Type.Substring(Type.IndexOf('(') + 1, Type.IndexOf(')') - Type.IndexOf('(') - 1).Trim());
+                NameUIElement = $"TextBox MaxLength=\"{k}\" ";
 
                 ValueToUIElement = $"{Name}.Text";
                 ValueFromUIElement = $"{Name}.Text";
@@ -292,11 +308,11 @@ namespace CreateItems.WPF
             }
 
 
-            
+
 
             if (Type.StartsWith("datetime2"))
             {
-                NameUIElement = "ctrl:DateTimePicker Format=\"FullDateTime\"";
+                NameUIElement = "ctrl:DateTimePicker  Format=\"Custom\" FormatString=\"MM/dd/yyyy HH:mm\" TimeFormat=\"Custom\" TimeFormatString=\"HH:mm\"";
 
                 ValueToUIElement = $"{Name}.Value";
                 ValueFromUIElement = $"{Name}.Value.Value";

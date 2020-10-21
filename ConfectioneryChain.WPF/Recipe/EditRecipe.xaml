@@ -22,9 +22,6 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single">
-                <DataGrid.Columns >
-                    <DataGridTextColumn Header="Кол-во сотрудников" Binding="{Binding DistributionOfEmployees.Count}"/>
-                </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="EditAll" Content="Изменить" Width="100"/>
@@ -37,41 +34,40 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer>
-                <!--#region Изменяемое -->
-                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+            <!-- #region Изменяемое -->
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
                     <StackPanel Orientation="Vertical" Visibility="Collapsed">
-                        <Label>Код:</Label>
-                        <ctrl:IntegerUpDown Increment = "1" x:Name="IDRecipeRecipe" />
+                            <Label>Код:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="IDRecipeRecipe" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Дата создания:</Label>
+                            <ctrl:DateTimePicker  Format="Custom" FormatString="MM/dd/yyyy HH:mm" TimeFormat="Custom" TimeFormatString="HH:mm" x:Name="DateCreateRecipe" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>В работе?:</Label>
+                            <CheckBox x:Name="MarkIsWorkRecipe" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Шеф придумавший:</Label>
+                            <ComboBox  SelectedValuePath = "IDEmployee"  x:Name="ChefIDRecipe" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Название :</Label>
+                            <TextBox MaxLength="20"  x:Name="NameRecipe" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Описание:</Label>
+                            <TextBox TextWrapping="Wrap" Height="60"  x:Name="DescriptionRecipe" />
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Дата создания:</Label>
-                        <ctrl:DateTimePicker Format="FullDateTime" x:Name="DateCreateRecipe" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>В работе?:</Label>
-                        <CheckBox x:Name="MarkIsWorkRecipe" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Шеф придумавший:</Label>
-                        <ComboBox  SelectedValuePath = "IDEmployee"  x:Name="ChefIDRecipe" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Название :</Label>
-                        <TextBox x:Name="NameRecipe" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Описание:</Label>
-                        <TextBox TextWrapping="Wrap" Height="60"  x:Name="DescriptionRecipe" />
-                    </StackPanel>
-                </StackPanel>
-
-
+                </ScrollViewer>
                 <!--#endregion-->
 
-            </ScrollViewer>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
             <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
             <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
             </StackPanel>

@@ -37,40 +37,44 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer>
-                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
-                    <StackPanel Orientation="Vertical">
-                        <Label>Код кофейни:</Label>
-                        <ctrl:IntegerUpDown Increment = "1" x:Name="IDConfectioneryConfectionery" />
+            <!-- #region Изменяемое -->
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+                        <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                            <Label>Код кофейни:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="IDConfectioneryConfectionery" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Название кофейни:</Label>
+                            <TextBox MaxLength="20"  x:Name="NameConfectionery" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Адрес:</Label>
+                            <TextBox TextWrapping="Wrap" Height="60"  x:Name="AddressConfectionery" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Арендная плата:</Label>
+                            <ctrl:DecimalUpDown Increment = "1000" x:Name="RentPricelConfectionery" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Время работы с :</Label>
+                            <ctrl:TimePicker Format="Custom" FormatString="HH: mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" x:Name="BeginWorkConfectionery" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Время работы по:</Label>
+                            <ctrl:TimePicker Format="Custom" FormatString="HH: mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" x:Name="EndWorkConfectionery" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Кол-во денег:</Label>
+                            <ctrl:DecimalUpDown Increment = "1000" x:Name="MoneyConfectionery" />
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Название кофейни:</Label>
-                        <TextBox x:Name="NameConfectionery" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Адрес:</Label>
-                        <TextBox TextWrapping="Wrap" Height="60"  x:Name="AddressConfectionery" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Арендная плата:</Label>
-                        <ctrl:DecimalUpDown Increment = "1000" x:Name="RentPricelConfectionery" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Время работы с :</Label>
-                        <ctrl:TimePicker Format="Custom" FormatString="HH: mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" x:Name="BeginWorkConfectionery" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Время работы по:</Label>
-                        <ctrl:TimePicker Format="Custom" FormatString="HH: mm" StartTime="00:00" EndTime="23:59"  TimeInterval="00:15" x:Name="EndWorkConfectionery" />
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Кол-во денег:</Label>
-                        <ctrl:DecimalUpDown Increment = "1000" x:Name="MoneyConfectionery" />
-                    </StackPanel>
-                </StackPanel>
-            </ScrollViewer>
+                </ScrollViewer>
+                <!--#endregion-->
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
             <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
             <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
             </StackPanel>

@@ -77,6 +77,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Recipe\EditHierararchyInRecipe.xaml.cs">
+      <DependentUpon>EditHierararchyInRecipe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Recipe\EditRecipe.xaml.cs">
       <DependentUpon>EditRecipe.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Recipe\EditHierararchyInRecipe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Recipe\EditRecipe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

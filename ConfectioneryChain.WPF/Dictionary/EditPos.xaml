@@ -21,7 +21,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="DataGrid1" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
+            <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="EditAll" Content="Изменить" Width="100"/>
                 <Button x:Name="AddAll" Content="Добавить" Width="100"/>
@@ -32,25 +32,35 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-        
-            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
-                
-                <StackPanel Orientation="Vertical">
-                    <Label>Название должности:</Label>
-                    <TextBox x:Name="NamePosition"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Минимальное кол-во часов в месяц:</Label>
-                    <ctrl:IntegerUpDown x:Name="MinimumHours" Width="70"></ctrl:IntegerUpDown>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Ставка за час:</Label>
-                    <ctrl:DecimalUpDown Increment="0.5" x:Name="WorkHourRate" Width="80"></ctrl:DecimalUpDown>
-                </StackPanel>
-              
-            
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+
+            <!-- #region Изменяемое -->
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+                    <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                            <Label>Код:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="IDPositionPosition" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Наименование должности:</Label>
+                            <TextBox MaxLength="20"  x:Name="NamePosition" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Минимум часов в месяц:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="MinimumHoursPosition" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Ставка в час:</Label>
+                            <ctrl:DecimalUpDown Increment = "1000" x:Name="WorkHourRatePosition" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <!--#endregion-->
+
+
+
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
                 <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
             </StackPanel>

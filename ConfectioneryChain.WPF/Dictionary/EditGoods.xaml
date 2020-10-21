@@ -21,7 +21,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="DataGrid1" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
+            <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="EditAll" Content="Изменить" Width="100"/>
                 <Button x:Name="AddAll" Content="Добавить" Width="100"/>
@@ -32,27 +32,38 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-        
-            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
-                <StackPanel Orientation="Horizontal">
-                    <Label>Тип товара: </Label>
-                    <ComboBox  x:Name="TypesOfGoodsChar" Width="150" SelectedValuePath="CharTypesOfGoods" DisplayMemberPath="Name"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label >Тип подсчета товара: </Label>
-                    <ComboBox  x:Name="UnitsID" Width="150" SelectedValuePath="IDUnits"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label>Название продукта:</Label>
-                    <TextBox x:Name="NameGoods"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Калории:</Label>
-                    <ctrl:DecimalUpDown Increment="0.2"  x:Name="Calories"  Width="150"/>
-                </StackPanel>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
+            <!-- #region Изменяемое -->
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
+                    <StackPanel Orientation="Vertical"  Visibility="Collapsed">
+                            <Label>Код:</Label>
+                            <ComboBox  SelectedValuePath = "IDUnits"  x:Name="IDGoodsGood" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Тип:</Label>
+                            <ComboBox  SelectedValuePath = "CharTypesOfGoods"  x:Name="TypesOfGoodsCharGood" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Измерение:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="UnitsIDGood" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Название:</Label>
+                            <TextBox MaxLength="20"  x:Name="NameGood" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Каллории:</Label>
+                            <ctrl:DecimalUpDown Increment = "1000" x:Name="CaloriesGood" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <!--#endregion-->
+
+
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
                 <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
             </StackPanel>

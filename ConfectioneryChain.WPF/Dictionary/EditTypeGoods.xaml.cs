@@ -1,4 +1,5 @@
 ﻿using ConfectioneryChain.DB;
+using ConfectioneryChain.DB.Inheritance;
 using System;
 using System.Data.Entity;
 using System.Windows;
@@ -10,102 +11,116 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditTypeGoods : Window
     {
-        private readonly Action Save;
-        private readonly DbSet Data;
+        private readonly ConfectioneryChain_V5Entities DB;
+
+
+        DbSet Data;
         private int ID;
+        General General;
         public EditTypeGoods(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
+            DB = db;
 
-            Data = db.TypeOfGoods;
-            Save = () => db.SaveChanges();
-            LoadValue();
+            Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
-            CloseGeneral.Click += CloseConf_Click;
-            //Для 1 сотрудника
-            SaveOne.Click += SaveConf_Click;
-            CancelOne.Click += CancelConf_Click;
+            CloseGeneral.Click += CloseGeneral_Click;
+            //Для 1 кафе
+            SaveOne.Click += SaveOne_Click;
+            CancelOne.Click += CancelOne_Click;
 
-            //Для всех сотрудников
-            EditAll.Click += EditConfBut_Click;
-            AddAll.Click += AddConf_Click;
-
-        }
-
-        private void LoadValue()
-        {
-            Data.Load();
-            DataGrid1.ItemsSource = Data.Local;
-        }
-
-
-        private void EditConfBut_Click(object sender, RoutedEventArgs e)
-        {
-
-            switch (DataGrid1.SelectedIndex)
-            {
-                case -1:
-                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    break;
-                default:
-                    ID = DataGrid1.SelectedIndex;
-                    Edit.IsEnabled = true;
-                    FillingFields();
-                    break;
-            }
-        }
-
-        private void FillingFields()
-        {
-            var str = (DataGrid1.Items[DataGrid1.SelectedIndex]) as TypeOfGood;
-
-            CharTypesOfGoods.Text = str.CharTypesOfGoods;
-            NameTypeGoods.Text = str.Name;
-        }
-
-        private void AddConf_Click(object sender, RoutedEventArgs e)
-        {
-            Edit.IsEnabled = true;
-            DefaultValue();
+            //Для всех кафе
+            EditAll.Click += EditAll_Click;
+            AddAll.Click += AddAll_Click;
 
         }
 
-        private void CancelConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Закрыть
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseGeneral_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            DefaultValue();
+            DialogResult = true;
         }
 
-        private void DefaultValue()
-        {
-            ID = -1;
-            CharTypesOfGoods.Text = "";
-            NameTypeGoods.Text = "";
-        }
 
-        private void SaveConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Редактировать
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditAll_Click(object sender, RoutedEventArgs e)
         {
-            Edit.IsEnabled = false;
+            ID = TableGeneral.SelectedIndex;
             if (ID == -1)
             {
-                Data.Local.Add(New());
+                MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                var conf = New();
-                Data.Local[ID] = conf;
+                Edit.IsEnabled = true;
+                FillingFielsFromGeneral(Data.Local[TableGeneral.SelectedIndex]);
+            }
+        }
+
+
+        /// <summary>
+        /// Добавить новый
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddAll_Click(object sender, RoutedEventArgs e)
+        {
+            Edit.IsEnabled = true;
+            ID = -1;
+            FillingFielsFromGeneral(null);
+
+        }
+
+        /// <summary>
+        /// Отмена
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelOne_Click(object sender, RoutedEventArgs e)
+        {
+            Edit.IsEnabled = false;
+            FillingFielsFromGeneral(null);
+        }
+
+        /// <summary>
+        /// Сохранить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveOne_Click(object sender, RoutedEventArgs e)
+        {
+            FillingGeneralFromFields();
+            if (ID == -1)
+            {
+                Data.Add(General);
+            }
+            else
+            {
+                ((General)Data.Local[ID]).Fill(General);
             }
 
             try
             {
-                Save();
+                DB.SaveChanges();
+                Edit.IsEnabled = false;
+                Edit_Loaded();
             }
             catch (Exception ex)
             {
                 if (ID == -1)
                 {
-                    Data.Local.RemoveAt(Data.Local.Count - 1);
+                    Data.Remove(General);
                 }
+
                 Exception ex1 = ex;
                 string err = "";
                 while (ex1 != null)
@@ -125,20 +140,57 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         }
 
-        private TypeOfGood New()
+        #region Изменяемое
+        /// <summary>
+        /// Действия при загрузке
+        /// </summary>
+        private void Edit_Loaded()
         {
-            var obj = new TypeOfGood
+            TableGeneral.ItemsSource = null;
+            DB.TypeOfGoods.Load();
+            Data = DB.TypeOfGoods;
+            TableGeneral.ItemsSource = Data.Local;
+        }
+
+
+        /// <summary>
+        /// Заполнить Поля из Объекта
+        /// </summary>
+        /// <param name="str"></param>
+        private void FillingFielsFromGeneral(object str)
+        {
+            if (str is null)
             {
-                CharTypesOfGoods = CharTypesOfGoods.Text,
-                Name = NameTypeGoods.Text
+                str = new TypeOfGood().CreateNew();
+            }
+            if (str is TypeOfGood general)
+            {
+                General = general;
+
+                CharTypesOfGoodsTypeOfGood.Text = general.CharTypesOfGoods;
+                NameTypeOfGood.Text = general.Name;
             };
-            return obj;
+
         }
-        private void CloseConf_Click(object sender, RoutedEventArgs e)
+
+
+        /// <summary>
+        /// Заполнить объект из полей
+        /// </summary>
+        private void FillingGeneralFromFields()
         {
-            Edit.IsEnabled = false;
-            DialogResult = true;
+            if (General is TypeOfGood general)
+            {
+                general.CharTypesOfGoods = CharTypesOfGoodsTypeOfGood.Text;
+                general.Name = NameTypeOfGood.Text;
+            }
         }
+        #endregion
+
+
+
+
+
 
 
     }

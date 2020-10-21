@@ -1,6 +1,5 @@
 ﻿using ConfectioneryChain.DB.Inheritance;
 using System;
-using System.ComponentModel;
 
 namespace ConfectioneryChain.DB
 {

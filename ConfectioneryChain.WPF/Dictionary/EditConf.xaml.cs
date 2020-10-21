@@ -1,10 +1,7 @@
 ﻿using ConfectioneryChain.DB;
 using ConfectioneryChain.DB.Inheritance;
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data.Entity;
-using System.Linq;
 using System.Windows;
 
 namespace ConfectioneryChain.WPF.Dictionary
@@ -69,7 +66,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             }
         }
 
-       
+
         /// <summary>
         /// Добавить новый
         /// </summary>
@@ -143,7 +140,7 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         }
 
-
+        #region Изменяемое
         /// <summary>
         /// Действия при загрузке
         /// </summary>
@@ -198,6 +195,11 @@ namespace ConfectioneryChain.WPF.Dictionary
                 general.Money = MoneyConfectionery.Value.Value;
             }
         }
+        #endregion
+
+
+
+
 
 
 
