@@ -6,29 +6,16 @@
         xmlns:ctrl="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:ConfectioneryChain.WPF"
         mc:Ignorable="d"
-        Title="EditConf" Height="450" Width="800">
+        Title="EditConf" Height="450" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single">
-            </DataGrid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
-                <Button x:Name="EditAll" Content="Изменить" Width="100"/>
-                <Button x:Name="AddAll" Content="Добавить" Width="100"/>
-            </StackPanel>
-        </Grid>
-        <Grid x:Name="Edit" Grid.Row="0" Grid.Column="1" IsEnabled="False">
+        <Grid x:Name="Edit" Grid.Row="0" Grid.Column="0" IsEnabled="True">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="40"/>

@@ -139,7 +139,7 @@ namespace ConfectioneryChain.WPF
 
         private void EditRealRecipes_Click(object sender, RoutedEventArgs e)
         {
-            Window edit = new EditGoodRecipe(db);
+            Window edit = new ViewGoodRecipe(db);
             edit.ShowDialog();
             Init();
         }

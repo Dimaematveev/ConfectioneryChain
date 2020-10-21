@@ -77,6 +77,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GoodRecipe\ViewGoodRecipe.xaml.cs">
+      <DependentUpon>ViewGoodRecipe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GoodRecipe\EditGoodRecipe.xaml.cs">
       <DependentUpon>EditGoodRecipe.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,10 @@
     <Page Include="Dic\EditConf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GoodRecipe\ViewGoodRecipe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="GoodRecipe\EditGoodRecipe.xaml">
       <Generator>MSBuild:Compile</Generator>

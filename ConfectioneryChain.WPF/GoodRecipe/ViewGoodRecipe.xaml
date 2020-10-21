@@ -1,0 +1,87 @@
+﻿<Window x:Class="ConfectioneryChain.WPF.GoodRecipe.ViewGoodRecipe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrl="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:ConfectioneryChain.WPF"
+        mc:Ignorable="d"
+        Title="EditConf" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center">
+                <TextBlock Text="Рецепт"/>
+            </StackPanel>
+            <DataGrid Grid.Row="1" x:Name="TableRecipe" IsReadOnly="True" SelectionMode="Single"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0">
+                <Button x:Name="EditRecipe" Content="Изменить" Width="100"/>
+                <Button x:Name="AddRecipe" Content="Добавить" Width="100"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center">
+                    <TextBlock Text="Иерархия"/>
+                </StackPanel>
+                <DataGrid Grid.Row="1" x:Name="TableHyerarchy" IsReadOnly="True" SelectionMode="Single"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0">
+                    <Button x:Name="EditHyerarchy" Content="Изменить" Width="100"/>
+                    <Button x:Name="AddHyerarchy" Content="Добавить" Width="100"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center">
+                    <TextBlock Text="Топпинг"/>
+                </StackPanel>
+                <DataGrid Grid.Row="1" x:Name="TableTopping" IsReadOnly="True" SelectionMode="Single"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0">
+                    <Button x:Name="EditTopping" Content="Изменить" Width="100"/>
+                    <Button x:Name="AddTopping" Content="Добавить" Width="100"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center">
+                <TextBlock Text="Товары в иерархии"/>
+            </StackPanel>
+            <DataGrid Grid.Row="1" x:Name="TableItems" IsReadOnly="True" SelectionMode="Single"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0">
+                <Button x:Name="EditItems" Content="Изменить" Width="100"/>
+                <Button x:Name="AddItems" Content="Добавить" Width="100"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5">
+            <Button x:Name="CloseGeneral" Content="Закрыть" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Window>

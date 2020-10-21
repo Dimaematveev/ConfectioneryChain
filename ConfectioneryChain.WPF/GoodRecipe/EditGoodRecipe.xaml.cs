@@ -13,25 +13,18 @@ namespace ConfectioneryChain.WPF.GoodRecipe
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
-
-        DbSet Data;
-        private int ID;
-        General General;
-        public EditGoodRecipe(ConfectioneryChain_V5Entities db)
+        Recipe Recipe;
+        public EditGoodRecipe(ConfectioneryChain_V5Entities db, General general)
         {
             InitializeComponent();
             DB = db;
+            Recipe = (Recipe)general;
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
             //Для 1 кафе
             SaveOne.Click += SaveOne_Click;
             CancelOne.Click += CancelOne_Click;
-
-            //Для всех кафе
-            EditAll.Click += EditAll_Click;
-            AddAll.Click += AddAll_Click;
-
         }
 
         /// <summary>
@@ -41,43 +34,11 @@ namespace ConfectioneryChain.WPF.GoodRecipe
         /// <param name="e"></param>
         private void CloseGeneral_Click(object sender, RoutedEventArgs e)
         {
-            Edit.IsEnabled = false;
             DialogResult = true;
         }
 
 
-        /// <summary>
-        /// Редактировать
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EditAll_Click(object sender, RoutedEventArgs e)
-        {
-            ID = TableGeneral.SelectedIndex;
-            if (ID == -1)
-            {
-                MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                Edit.IsEnabled = true;
-                FillingFielsFromGeneral(Data.Local[TableGeneral.SelectedIndex]);
-            }
-        }
-
-
-        /// <summary>
-        /// Добавить новый
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddAll_Click(object sender, RoutedEventArgs e)
-        {
-            Edit.IsEnabled = true;
-            ID = -1;
-            FillingFielsFromGeneral(null);
-
-        }
+       
 
         /// <summary>
         /// Отмена
@@ -86,8 +47,7 @@ namespace ConfectioneryChain.WPF.GoodRecipe
         /// <param name="e"></param>
         private void CancelOne_Click(object sender, RoutedEventArgs e)
         {
-            Edit.IsEnabled = false;
-            FillingFielsFromGeneral(null);
+            FillingFielsFromGeneral();
         }
 
         /// <summary>
@@ -98,26 +58,22 @@ namespace ConfectioneryChain.WPF.GoodRecipe
         private void SaveOne_Click(object sender, RoutedEventArgs e)
         {
             FillingGeneralFromFields();
-            if (ID == -1)
+            if (Recipe.IDRecipe == -1)
             {
-                Data.Add(General);
+                DB.Recipes.Add(Recipe);
             }
-            else
-            {
-                ((General)Data.Local[ID]).Fill(General);
-            }
+            
 
             try
             {
                 DB.SaveChanges();
-                Edit.IsEnabled = false;
-                Edit_Loaded();
+                DialogResult = true;
             }
             catch (Exception ex)
             {
-                if (ID == -1)
+                if (Recipe.IDRecipe == -1)
                 {
-                    Data.Remove(General);
+                    DB.Recipes.Remove(Recipe);
                 }
 
                 Exception ex1 = ex;
@@ -145,36 +101,28 @@ namespace ConfectioneryChain.WPF.GoodRecipe
         /// </summary>
         private void Edit_Loaded()
         {
-            TableGeneral.ItemsSource = null;
             DB.Recipes.Load();
             DB.Employees.Load();
             ChefIDRecipe.ItemsSource = DB.Employees.Local;
-            Data = DB.Recipes;
-            TableGeneral.ItemsSource = Data.Local;
+            FillingFielsFromGeneral();
         }
 
 
         /// <summary>
         /// Заполнить Поля из Объекта
         /// </summary>
-        /// <param name="str"></param>
-        private void FillingFielsFromGeneral(object str)
+        private void FillingFielsFromGeneral()
         {
-            if (str is null)
+            if (Recipe is null)
             {
-                str = new Recipe().CreateNew();
+                Recipe = (Recipe)new Recipe().CreateNew();
             }
-            if (str is Recipe general)
-            {
-                General = general;
-
-
-                DateCreateRecipe.Value = general.DateCreate;
-                MarkIsWorkRecipe.IsChecked = general.MarkIsWork;
-                ChefIDRecipe.SelectedValue = general.ChefID;
-                NameRecipe.Text = general.Name;
-                DescriptionRecipe.Text = general.Description;
-            };
+            
+            DateCreateRecipe.Value = Recipe.DateCreate;
+            MarkIsWorkRecipe.IsChecked = Recipe.MarkIsWork;
+            ChefIDRecipe.SelectedValue = Recipe.ChefID;
+            NameRecipe.Text = Recipe.Name;
+            DescriptionRecipe.Text = Recipe.Description;
 
         }
 
@@ -184,15 +132,14 @@ namespace ConfectioneryChain.WPF.GoodRecipe
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Recipe general)
-            {
 
-                general.DateCreate = DateCreateRecipe.Value.Value;
-                general.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
-                general.ChefID = (int)ChefIDRecipe.SelectedValue;
-                general.Name = NameRecipe.Text;
-                general.Description = DescriptionRecipe.Text;
-            }
+
+            Recipe.DateCreate = DateCreateRecipe.Value.Value;
+            Recipe.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
+            Recipe.ChefID = (int)ChefIDRecipe.SelectedValue;
+            Recipe.Name = NameRecipe.Text;
+            Recipe.Description = DescriptionRecipe.Text;
+            
         }
         #endregion
 
