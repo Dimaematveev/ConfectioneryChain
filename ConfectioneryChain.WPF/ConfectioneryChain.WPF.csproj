@@ -77,45 +77,52 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Recipe\EditToppingInRecipe.xaml.cs">
-      <DependentUpon>EditToppingInRecipe.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Recipe\EditItemInRecipe.xaml.cs">
-      <DependentUpon>EditItemInRecipe.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Recipe\EditHierararchyInRecipe.xaml.cs">
-      <DependentUpon>EditHierararchyInRecipe.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Recipe\EditRecipe.xaml.cs">
+    <Compile Include="GoodRecipe\EditRecipe.xaml.cs">
       <DependentUpon>EditRecipe.xaml</DependentUpon>
     </Compile>
-    <Page Include="Confectionery\EditDistributionOfEmployees.xaml">
+    <Compile Include="Rec\EditToppingInRecipe.xaml.cs">
+      <DependentUpon>EditToppingInRecipe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rec\EditItemInRecipe.xaml.cs">
+      <DependentUpon>EditItemInRecipe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rec\EditHierararchyInRecipe.xaml.cs">
+      <DependentUpon>EditHierararchyInRecipe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rec\EditRecipe.xaml.cs">
+      <DependentUpon>EditRecipe.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Conf\EditDistributionOfEmployees.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dictionary\EditUnits.xaml">
+    <Page Include="Dic\EditUnits.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dictionary\EditTypeGoods.xaml">
+    <Page Include="Dic\EditTypeGoods.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dictionary\EditGoods.xaml">
+    <Page Include="Dic\EditGoods.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dictionary\EditPos.xaml">
+    <Page Include="Dic\EditPos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dictionary\EditEmpl.xaml">
+    <Page Include="Dic\EditEmpl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dictionary\EditConf.xaml">
+    <Page Include="Dic\EditConf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GoodRecipe\EditRecipe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -125,44 +132,44 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Confectionery\EditDistributionOfEmployees.xaml.cs">
+    <Compile Include="Conf\EditDistributionOfEmployees.xaml.cs">
       <DependentUpon>EditDistributionOfEmployees.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dictionary\EditUnits.xaml.cs">
+    <Compile Include="Dic\EditUnits.xaml.cs">
       <DependentUpon>EditUnits.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dictionary\EditTypeGoods.xaml.cs">
+    <Compile Include="Dic\EditTypeGoods.xaml.cs">
       <DependentUpon>EditTypeGoods.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dictionary\EditGoods.xaml.cs">
+    <Compile Include="Dic\EditGoods.xaml.cs">
       <DependentUpon>EditGoods.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dictionary\EditPos.cs">
+    <Compile Include="Dic\EditPos.cs">
       <DependentUpon>EditPos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dictionary\EditEmpl.xaml.cs">
+    <Compile Include="Dic\EditEmpl.xaml.cs">
       <DependentUpon>EditEmpl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dictionary\EditConf.xaml.cs">
+    <Compile Include="Dic\EditConf.xaml.cs">
       <DependentUpon>EditConf.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Recipe\EditToppingInRecipe.xaml">
+    <Page Include="Rec\EditToppingInRecipe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Recipe\EditItemInRecipe.xaml">
+    <Page Include="Rec\EditItemInRecipe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Recipe\EditHierararchyInRecipe.xaml">
+    <Page Include="Rec\EditHierararchyInRecipe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Recipe\EditRecipe.xaml">
+    <Page Include="Rec\EditRecipe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

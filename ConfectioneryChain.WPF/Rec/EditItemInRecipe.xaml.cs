@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Rec
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditToppingInRecipe : Window
+    public partial class EditItemInRecipe : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,7 +17,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditToppingInRecipe(ConfectioneryChain_V5Entities db)
+        public EditItemInRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
@@ -146,12 +146,16 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.ToppingInRecipes.Load();
-            DB.Recipes.Load();
-            RecipeIDToppingInRecipe.ItemsSource = DB.Recipes.Local;
+            DB.ItemInRecipes.Load();
+            DB.ItemInRecipes.Load();
+            ItemInRecipeIDItemInRecipe.ItemsSource = DB.ItemInRecipes.Local;
+            DB.HierararchyInRecipes.Load();
+            RecipeIDItemInRecipe.ItemsSource = DB.HierararchyInRecipes.Local;
+            DB.HierararchyInRecipes.Load();
+            HierarchyItemInRecipe.ItemsSource = DB.HierararchyInRecipes.Local;
             DB.Goods.Load();
-            GoodsIDToppingInRecipe.ItemsSource = DB.Goods.Local;
-            Data = DB.ToppingInRecipes;
+            GoodsIDItemInRecipe.ItemsSource = DB.Goods.Local;
+            Data = DB.ItemInRecipes;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -164,17 +168,18 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new ToppingInRecipe().CreateNew();
+                str = new ItemInRecipe().CreateNew();
             }
-            if (str is ToppingInRecipe general)
+            if (str is ItemInRecipe general)
             {
                 General = general;
 
-                RecipeIDToppingInRecipe.SelectedValue = general.RecipeID;
-                GoodsIDToppingInRecipe.SelectedValue = general.GoodsID;
-                PercentageOfInfluenceOnTasteToppingInRecipe.Value = general.PercentageOfInfluenceOnTaste;
-                CountToppingInRecipe.Value = general.Count;
-                MaxCountToppingInRecipe.Value = general.MaxCount;
+                ItemInRecipeIDItemInRecipe.SelectedValue = general.ItemInRecipeID;
+                RecipeIDItemInRecipe.SelectedValue = general.RecipeID;
+                HierarchyItemInRecipe.SelectedValue = general.Hierarchy;
+                GoodsIDItemInRecipe.SelectedValue = general.GoodsID;
+                CountItemInRecipe.Value = general.Count;
+                PercentageOfInfluenceOnTasteItemInRecipe.Value = general.PercentageOfInfluenceOnTaste;
             };
 
         }
@@ -185,17 +190,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is ToppingInRecipe general)
+            if (General is ItemInRecipe general)
             {
-                general.RecipeID = (int)RecipeIDToppingInRecipe.SelectedValue;
-                general.GoodsID = (int)GoodsIDToppingInRecipe.SelectedValue;
-                general.PercentageOfInfluenceOnTaste = PercentageOfInfluenceOnTasteToppingInRecipe.Value.Value;
-                general.Count = CountToppingInRecipe.Value.Value;
-                general.MaxCount = MaxCountToppingInRecipe.Value.Value;
+                general.ItemInRecipeID = ItemInRecipeIDItemInRecipe.SelectedValue as Nullable<int>;
+                general.RecipeID = (int)RecipeIDItemInRecipe.SelectedValue;
+                general.Hierarchy = (int)HierarchyItemInRecipe.SelectedValue;
+                general.GoodsID = (int)GoodsIDItemInRecipe.SelectedValue;
+                general.Count = CountItemInRecipe.Value.Value;
+                general.PercentageOfInfluenceOnTaste = PercentageOfInfluenceOnTasteItemInRecipe.Value.Value;
             }
         }
         #endregion
-
 
 
 

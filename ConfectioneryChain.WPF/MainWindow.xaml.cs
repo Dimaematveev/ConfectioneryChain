@@ -1,5 +1,7 @@
 ﻿using ConfectioneryChain.DB;
-using ConfectioneryChain.WPF.Dictionary;
+using ConfectioneryChain.WPF.Conf;
+using ConfectioneryChain.WPF.Dic;
+using ConfectioneryChain.WPF.Rec;
 using System.Data.Entity;
 using System.Windows;
 

@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.GoodRecipe
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditConf : Window
+    public partial class EditRecipe : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,11 +17,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditConf(ConfectioneryChain_V5Entities db)
+        public EditRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
-
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
@@ -147,8 +146,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.Confectioneries.Load();
-            Data = DB.Confectioneries;
+            DB.Recipes.Load();
+            DB.Employees.Load();
+            ChefIDRecipe.ItemsSource = DB.Employees.Local;
+            Data = DB.Recipes;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -161,18 +162,18 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new Confectionery().CreateNew();
+                str = new Recipe().CreateNew();
             }
-            if (str is Confectionery general)
+            if (str is Recipe general)
             {
                 General = general;
 
-                NameConfectionery.Text = general.Name;
-                AddressConfectionery.Text = general.Address;
-                RentPricelConfectionery.Value = general.RentPricel;
-                BeginWorkConfectionery.Value = new DateTime(general.BeginWork.Ticks);
-                EndWorkConfectionery.Value = new DateTime(general.EndWork.Ticks);
-                MoneyConfectionery.Value = general.Money;
+
+                DateCreateRecipe.Value = general.DateCreate;
+                MarkIsWorkRecipe.IsChecked = general.MarkIsWork;
+                ChefIDRecipe.SelectedValue = general.ChefID;
+                NameRecipe.Text = general.Name;
+                DescriptionRecipe.Text = general.Description;
             };
 
         }
@@ -183,20 +184,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Confectionery general)
+            if (General is Recipe general)
             {
-                general.Name = NameConfectionery.Text;
-                general.Address = AddressConfectionery.Text;
-                general.RentPricel = RentPricelConfectionery.Value.Value;
-                general.BeginWork = new TimeSpan(BeginWorkConfectionery.Value.Value.Ticks);
-                general.EndWork = new TimeSpan(EndWorkConfectionery.Value.Value.Ticks);
-                general.Money = MoneyConfectionery.Value.Value;
+
+                general.DateCreate = DateCreateRecipe.Value.Value;
+                general.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
+                general.ChefID = (int)ChefIDRecipe.SelectedValue;
+                general.Name = NameRecipe.Text;
+                general.Description = DescriptionRecipe.Text;
             }
         }
         #endregion
-
-
-
 
 
 

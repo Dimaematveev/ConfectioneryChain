@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Dic
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditItemInRecipe : Window
+    public partial class EditConf : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,10 +17,11 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditItemInRecipe(ConfectioneryChain_V5Entities db)
+        public EditConf(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
+
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
@@ -146,16 +147,8 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.ItemInRecipes.Load();
-            DB.ItemInRecipes.Load();
-            ItemInRecipeIDItemInRecipe.ItemsSource = DB.ItemInRecipes.Local;
-            DB.HierararchyInRecipes.Load();
-            RecipeIDItemInRecipe.ItemsSource = DB.HierararchyInRecipes.Local;
-            DB.HierararchyInRecipes.Load();
-            HierarchyItemInRecipe.ItemsSource = DB.HierararchyInRecipes.Local;
-            DB.Goods.Load();
-            GoodsIDItemInRecipe.ItemsSource = DB.Goods.Local;
-            Data = DB.ItemInRecipes;
+            DB.Confectioneries.Load();
+            Data = DB.Confectioneries;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -168,18 +161,18 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new ItemInRecipe().CreateNew();
+                str = new Confectionery().CreateNew();
             }
-            if (str is ItemInRecipe general)
+            if (str is Confectionery general)
             {
                 General = general;
 
-                ItemInRecipeIDItemInRecipe.SelectedValue = general.ItemInRecipeID;
-                RecipeIDItemInRecipe.SelectedValue = general.RecipeID;
-                HierarchyItemInRecipe.SelectedValue = general.Hierarchy;
-                GoodsIDItemInRecipe.SelectedValue = general.GoodsID;
-                CountItemInRecipe.Value = general.Count;
-                PercentageOfInfluenceOnTasteItemInRecipe.Value = general.PercentageOfInfluenceOnTaste;
+                NameConfectionery.Text = general.Name;
+                AddressConfectionery.Text = general.Address;
+                RentPricelConfectionery.Value = general.RentPricel;
+                BeginWorkConfectionery.Value = new DateTime(general.BeginWork.Ticks);
+                EndWorkConfectionery.Value = new DateTime(general.EndWork.Ticks);
+                MoneyConfectionery.Value = general.Money;
             };
 
         }
@@ -190,17 +183,19 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is ItemInRecipe general)
+            if (General is Confectionery general)
             {
-                general.ItemInRecipeID = ItemInRecipeIDItemInRecipe.SelectedValue as Nullable<int>;
-                general.RecipeID = (int)RecipeIDItemInRecipe.SelectedValue;
-                general.Hierarchy = (int)HierarchyItemInRecipe.SelectedValue;
-                general.GoodsID = (int)GoodsIDItemInRecipe.SelectedValue;
-                general.Count = CountItemInRecipe.Value.Value;
-                general.PercentageOfInfluenceOnTaste = PercentageOfInfluenceOnTasteItemInRecipe.Value.Value;
+                general.Name = NameConfectionery.Text;
+                general.Address = AddressConfectionery.Text;
+                general.RentPricel = RentPricelConfectionery.Value.Value;
+                general.BeginWork = new TimeSpan(BeginWorkConfectionery.Value.Value.Ticks);
+                general.EndWork = new TimeSpan(EndWorkConfectionery.Value.Value.Ticks);
+                general.Money = MoneyConfectionery.Value.Value;
             }
         }
         #endregion
+
+
 
 
 

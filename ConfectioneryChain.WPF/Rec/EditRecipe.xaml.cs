@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Rec
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditDistributionOfEmployees : Window
+    public partial class EditRecipe : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,7 +17,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditDistributionOfEmployees(ConfectioneryChain_V5Entities db)
+        public EditRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
@@ -146,14 +146,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.DistributionOfEmployees.Load();
-            DB.Confectioneries.Load();
-            ConfectioneryIDDistributionOfEmployee.ItemsSource = DB.Confectioneries.Local;
+            DB.Recipes.Load();
             DB.Employees.Load();
-            EmployeeIDDistributionOfEmployee.ItemsSource = DB.Employees.Local;
-            DB.Positions.Load();
-            PositionIDDistributionOfEmployee.ItemsSource = DB.Positions.Local;
-            Data = DB.DistributionOfEmployees;
+            ChefIDRecipe.ItemsSource = DB.Employees.Local;
+            Data = DB.Recipes;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -166,15 +162,18 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new DistributionOfEmployee().CreateNew();
+                str = new Recipe().CreateNew();
             }
-            if (str is DistributionOfEmployee general)
+            if (str is Recipe general)
             {
                 General = general;
 
-                ConfectioneryIDDistributionOfEmployee.SelectedValue = general.ConfectioneryID;
-                EmployeeIDDistributionOfEmployee.SelectedValue = general.EmployeeID;
-                PositionIDDistributionOfEmployee.SelectedValue = general.PositionID;
+
+                DateCreateRecipe.Value = general.DateCreate;
+                MarkIsWorkRecipe.IsChecked = general.MarkIsWork;
+                ChefIDRecipe.SelectedValue = general.ChefID;
+                NameRecipe.Text = general.Name;
+                DescriptionRecipe.Text = general.Description;
             };
 
         }
@@ -185,15 +184,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is DistributionOfEmployee general)
+            if (General is Recipe general)
             {
-                general.ConfectioneryID = (int)ConfectioneryIDDistributionOfEmployee.SelectedValue;
-                general.EmployeeID = (int)EmployeeIDDistributionOfEmployee.SelectedValue;
-                general.PositionID = (int)PositionIDDistributionOfEmployee.SelectedValue;
+
+                general.DateCreate = DateCreateRecipe.Value.Value;
+                general.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
+                general.ChefID = (int)ChefIDRecipe.SelectedValue;
+                general.Name = NameRecipe.Text;
+                general.Description = DescriptionRecipe.Text;
             }
         }
         #endregion
-
 
 
 

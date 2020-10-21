@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Dic
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditHierararchyInRecipe : Window
+    public partial class EditEmpl : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,10 +17,11 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditHierararchyInRecipe(ConfectioneryChain_V5Entities db)
+        public EditEmpl(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
+
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
@@ -146,10 +147,8 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.HierararchyInRecipes.Load();
-            DB.Recipes.Load();
-            RecipeIDHierararchyInRecipe.ItemsSource = DB.Recipes.Local;
-            Data = DB.HierararchyInRecipes;
+            DB.Employees.Load();
+            Data = DB.Employees;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -162,15 +161,18 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new HierararchyInRecipe().CreateNew();
+                str = new Employee().CreateNew();
             }
-            if (str is HierararchyInRecipe general)
+            if (str is Employee general)
             {
                 General = general;
 
-                RecipeIDHierararchyInRecipe.SelectedValue = general.RecipeID;
-                HierarchyHierararchyInRecipe.Value = general.Hierarchy;
-                PercentageOfInfluenceOnTasteHierararchyInRecipe.Value = general.PercentageOfInfluenceOnTaste;
+
+                PassportSeriaEmployee.Text = general.PassportSeria;
+                PassportNumberEmployee.Value = general.PassportNumber;
+                FamilyEmployee.Text = general.Family;
+                NameEmployee.Text = general.Name;
+                PatronymicNameEmployee.Text = general.PatronymicName;
             };
 
         }
@@ -181,14 +183,20 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is HierararchyInRecipe general)
+            if (General is Employee general)
             {
-                general.RecipeID = (int)RecipeIDHierararchyInRecipe.SelectedValue;
-                general.Hierarchy = HierarchyHierararchyInRecipe.Value.Value;
-                general.PercentageOfInfluenceOnTaste = PercentageOfInfluenceOnTasteHierararchyInRecipe.Value.Value;
+
+                general.PassportSeria = PassportSeriaEmployee.Text;
+                general.PassportNumber = PassportNumberEmployee.Value.Value;
+                general.Family = FamilyEmployee.Text;
+                general.Name = NameEmployee.Text;
+                general.PatronymicName = PatronymicNameEmployee.Text;
             }
         }
         #endregion
+
+
+
 
 
 

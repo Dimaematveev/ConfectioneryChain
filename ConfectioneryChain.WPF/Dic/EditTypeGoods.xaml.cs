@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Dic
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditUnits : Window
+    public partial class EditTypeGoods : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,7 +17,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditUnits(ConfectioneryChain_V5Entities db)
+        public EditTypeGoods(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
@@ -147,8 +147,8 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.Units.Load();
-            Data = DB.Units;
+            DB.TypeOfGoods.Load();
+            Data = DB.TypeOfGoods;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -161,15 +161,14 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new Unit().CreateNew();
+                str = new TypeOfGood().CreateNew();
             }
-            if (str is Unit general)
+            if (str is TypeOfGood general)
             {
                 General = general;
 
-                
-                MultipleValueUnit.Value = general.MultipleValue;
-                NameUnit.Text = general.Name;
+                CharTypesOfGoodsTypeOfGood.Text = general.CharTypesOfGoods;
+                NameTypeOfGood.Text = general.Name;
             };
 
         }
@@ -180,16 +179,13 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Unit general)
+            if (General is TypeOfGood general)
             {
-               
-                general.MultipleValue = MultipleValueUnit.Value.Value;
-                general.Name = NameUnit.Text;
+                general.CharTypesOfGoods = CharTypesOfGoodsTypeOfGood.Text;
+                general.Name = NameTypeOfGood.Text;
             }
         }
         #endregion
-
-
 
 
 

@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Dic
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditEmpl : Window
+    public partial class EditGoods : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,7 +17,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditEmpl(ConfectioneryChain_V5Entities db)
+        public EditGoods(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
@@ -147,8 +147,12 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.Employees.Load();
-            Data = DB.Employees;
+            DB.Goods.Load();
+            DB.Units.Load();
+            IDGoodsGood.ItemsSource = DB.Units.Local;
+            DB.TypeOfGoods.Load();
+            TypesOfGoodsCharGood.ItemsSource = DB.TypeOfGoods.Local;
+            Data = DB.Goods;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -161,18 +165,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new Employee().CreateNew();
+                str = new Good().CreateNew();
             }
-            if (str is Employee general)
+            if (str is Good general)
             {
                 General = general;
 
-                
-                PassportSeriaEmployee.Text = general.PassportSeria;
-                PassportNumberEmployee.Value = general.PassportNumber;
-                FamilyEmployee.Text = general.Family;
-                NameEmployee.Text = general.Name;
-                PatronymicNameEmployee.Text = general.PatronymicName;
+
+                TypesOfGoodsCharGood.SelectedValue = general.TypesOfGoodsChar;
+                UnitsIDGood.Value = general.UnitsID;
+                NameGood.Text = general.Name;
+                CaloriesGood.Value = general.Calories;
             };
 
         }
@@ -183,17 +186,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Employee general)
+            if (General is Good general)
             {
-               
-                general.PassportSeria = PassportSeriaEmployee.Text;
-                general.PassportNumber = PassportNumberEmployee.Value.Value;
-                general.Family = FamilyEmployee.Text;
-                general.Name = NameEmployee.Text;
-                general.PatronymicName = PatronymicNameEmployee.Text;
+
+                general.TypesOfGoodsChar = (string)TypesOfGoodsCharGood.SelectedValue;
+                general.UnitsID = UnitsIDGood.Value.Value;
+                general.Name = NameGood.Text;
+                general.Calories = CaloriesGood.Value.Value;
             }
         }
         #endregion
+
 
 
 

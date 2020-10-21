@@ -26,7 +26,7 @@ namespace CreateItems.WPF
 
 
             richText = richText.Replace("\r", "");
-            TheOneClass theOneClass = new TheOneClass(richText,Check.IsChecked.Value);
+            TheOneClass theOneClass = new TheOneClass(richText, Check.IsChecked.Value);
 
 
             string wpf = "";
@@ -55,23 +55,16 @@ namespace CreateItems.WPF
             NameCLASS.Document.Blocks.Add(new Paragraph(new Run(clas)));
 
         }
-
-
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 
     public class TheOneClass
     {
         string ClassName { get; set; }
         string ListName { get; set; }
-        List<Item> items;
 
-        public TheOneClass(string values,bool haveHeader)
+        private readonly List<Item> items;
+
+        public TheOneClass(string values, bool haveHeader)
         {
             var varible = values.Split('\n');
             if (haveHeader)

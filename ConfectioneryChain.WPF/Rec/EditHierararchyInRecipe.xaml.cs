@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Rec
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditGoods : Window
+    public partial class EditHierararchyInRecipe : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,11 +17,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditGoods(ConfectioneryChain_V5Entities db)
+        public EditHierararchyInRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
-
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
@@ -147,12 +146,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.Goods.Load();
-            DB.Units.Load();
-            IDGoodsGood.ItemsSource = DB.Units.Local;
-            DB.TypeOfGoods.Load();
-            TypesOfGoodsCharGood.ItemsSource = DB.TypeOfGoods.Local;
-            Data = DB.Goods;
+            DB.HierararchyInRecipes.Load();
+            DB.Recipes.Load();
+            RecipeIDHierararchyInRecipe.ItemsSource = DB.Recipes.Local;
+            Data = DB.HierararchyInRecipes;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -165,17 +162,15 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new Good().CreateNew();
+                str = new HierararchyInRecipe().CreateNew();
             }
-            if (str is Good general)
+            if (str is HierararchyInRecipe general)
             {
                 General = general;
 
-                
-                TypesOfGoodsCharGood.SelectedValue = general.TypesOfGoodsChar;
-                UnitsIDGood.Value = general.UnitsID;
-                NameGood.Text = general.Name;
-                CaloriesGood.Value = general.Calories;
+                RecipeIDHierararchyInRecipe.SelectedValue = general.RecipeID;
+                HierarchyHierararchyInRecipe.Value = general.Hierarchy;
+                PercentageOfInfluenceOnTasteHierararchyInRecipe.Value = general.PercentageOfInfluenceOnTaste;
             };
 
         }
@@ -186,20 +181,14 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Good general)
+            if (General is HierararchyInRecipe general)
             {
-                
-                general.TypesOfGoodsChar = (string)TypesOfGoodsCharGood.SelectedValue;
-                general.UnitsID = UnitsIDGood.Value.Value;
-                general.Name = NameGood.Text;
-                general.Calories = CaloriesGood.Value.Value;
+                general.RecipeID = (int)RecipeIDHierararchyInRecipe.SelectedValue;
+                general.Hierarchy = HierarchyHierararchyInRecipe.Value.Value;
+                general.PercentageOfInfluenceOnTaste = PercentageOfInfluenceOnTasteHierararchyInRecipe.Value.Value;
             }
         }
         #endregion
-
-
-
-
 
 
 

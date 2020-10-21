@@ -1,4 +1,4 @@
-﻿<Window x:Class="ConfectioneryChain.WPF.Dictionary.EditGoods"
+﻿<Window x:Class="ConfectioneryChain.WPF.Rec.EditToppingInRecipe"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ConfectioneryChain.WPF"
         mc:Ignorable="d"
         Title="EditConf" Height="450" Width="800">
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="300"/>
@@ -21,7 +21,8 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single"/>
+            <DataGrid x:Name="TableGeneral" Grid.Row="0" Grid.Column="0" IsReadOnly="True" SelectionMode="Single">
+            </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
                 <Button x:Name="EditAll" Content="Изменить" Width="100"/>
                 <Button x:Name="AddAll" Content="Добавить" Width="100"/>
@@ -36,25 +37,25 @@
             <!-- #region Изменяемое -->
                 <ScrollViewer>
                     <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="5">
-                    <StackPanel Orientation="Vertical"  Visibility="Collapsed">
-                            <Label>Код:</Label>
-                            <ComboBox  SelectedValuePath = "IDUnits"  x:Name="IDGoodsGood" />
+                        <StackPanel Orientation="Vertical">
+                            <Label>Рецепт:</Label>
+                            <ComboBox  SelectedValuePath = "IDRecipe"  x:Name="RecipeIDToppingInRecipe" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Label>Тип:</Label>
-                            <ComboBox  SelectedValuePath = "CharTypesOfGoods"  x:Name="TypesOfGoodsCharGood" />
+                            <Label>Продукт:</Label>
+                            <ComboBox  SelectedValuePath = "IDGoods"  x:Name="GoodsIDToppingInRecipe" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Label>Измерение:</Label>
-                            <ctrl:IntegerUpDown Increment = "1" x:Name="UnitsIDGood" />
+                            <Label>Влияние на вкус:</Label>
+                            <ctrl:DecimalUpDown Increment = "1000" x:Name="PercentageOfInfluenceOnTasteToppingInRecipe" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Label>Название:</Label>
-                            <TextBox MaxLength="20"  x:Name="NameGood" />
+                            <Label>Кол-во продукта в 1 порции:</Label>
+                            <ctrl:DecimalUpDown Increment = "1000" x:Name="CountToppingInRecipe" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <Label>Каллории:</Label>
-                            <ctrl:DecimalUpDown Increment = "1000" x:Name="CaloriesGood" />
+                            <Label>Максимально порций:</Label>
+                            <ctrl:IntegerUpDown Increment = "1" x:Name="MaxCountToppingInRecipe" />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -62,10 +63,9 @@
 
 
 
-
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="0">
-                <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
-                <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
+            <Button x:Name="SaveOne" Content="Сохранить" Width="100"/>
+            <Button x:Name="CancelOne" Content="Отмена" Width="100"/>
             </StackPanel>
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5">

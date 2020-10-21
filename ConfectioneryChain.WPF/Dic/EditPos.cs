@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Dic
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditRecipe : Window
+    public partial class EditPos : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,10 +17,11 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditRecipe(ConfectioneryChain_V5Entities db)
+        public EditPos(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
+
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
@@ -146,10 +147,8 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.Recipes.Load();
-            DB.Employees.Load();
-            ChefIDRecipe.ItemsSource = DB.Employees.Local;
-            Data = DB.Recipes;
+            DB.Positions.Load();
+            Data = DB.Positions;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -162,18 +161,16 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new Recipe().CreateNew();
+                str = new Position().CreateNew();
             }
-            if (str is Recipe general)
+            if (str is Position general)
             {
                 General = general;
 
-                
-                DateCreateRecipe.Value = general.DateCreate;
-                MarkIsWorkRecipe.IsChecked = general.MarkIsWork;
-                ChefIDRecipe.SelectedValue = general.ChefID;
-                NameRecipe.Text = general.Name;
-                DescriptionRecipe.Text = general.Description;
+
+                NamePosition.Text = general.Name;
+                MinimumHoursPosition.Value = general.MinimumHours;
+                WorkHourRatePosition.Value = general.WorkHourRate;
             };
 
         }
@@ -184,17 +181,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Recipe general)
+            if (General is Position general)
             {
-                
-                general.DateCreate = DateCreateRecipe.Value.Value;
-                general.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
-                general.ChefID = (int)ChefIDRecipe.SelectedValue;
-                general.Name = NameRecipe.Text;
-                general.Description = DescriptionRecipe.Text;
+
+                general.Name = NamePosition.Text;
+                general.MinimumHours = MinimumHoursPosition.Value.Value;
+                general.WorkHourRate = WorkHourRatePosition.Value.Value;
             }
         }
         #endregion
+
+
 
 
 

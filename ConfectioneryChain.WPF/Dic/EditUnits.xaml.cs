@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Dic
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditPos : Window
+    public partial class EditUnits : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,7 +17,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditPos(ConfectioneryChain_V5Entities db)
+        public EditUnits(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
@@ -147,8 +147,8 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.Positions.Load();
-            Data = DB.Positions;
+            DB.Units.Load();
+            Data = DB.Units;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -161,16 +161,15 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new Position().CreateNew();
+                str = new Unit().CreateNew();
             }
-            if (str is Position general)
+            if (str is Unit general)
             {
                 General = general;
 
-                
-                NamePosition.Text = general.Name;
-                MinimumHoursPosition.Value = general.MinimumHours;
-                WorkHourRatePosition.Value = general.WorkHourRate;
+
+                MultipleValueUnit.Value = general.MultipleValue;
+                NameUnit.Text = general.Name;
             };
 
         }
@@ -181,15 +180,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Position general)
+            if (General is Unit general)
             {
-               
-                general.Name = NamePosition.Text;
-                general.MinimumHours = MinimumHoursPosition.Value.Value;
-                general.WorkHourRate = WorkHourRatePosition.Value.Value;
+
+                general.MultipleValue = MultipleValueUnit.Value.Value;
+                general.Name = NameUnit.Text;
             }
         }
         #endregion
+
+
+
 
 
 

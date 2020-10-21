@@ -4,12 +4,12 @@ using System;
 using System.Data.Entity;
 using System.Windows;
 
-namespace ConfectioneryChain.WPF.Dictionary
+namespace ConfectioneryChain.WPF.Conf
 {
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditTypeGoods : Window
+    public partial class EditDistributionOfEmployees : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,11 +17,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditTypeGoods(ConfectioneryChain_V5Entities db)
+        public EditDistributionOfEmployees(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
-
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
@@ -147,8 +146,14 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.TypeOfGoods.Load();
-            Data = DB.TypeOfGoods;
+            DB.DistributionOfEmployees.Load();
+            DB.Confectioneries.Load();
+            ConfectioneryIDDistributionOfEmployee.ItemsSource = DB.Confectioneries.Local;
+            DB.Employees.Load();
+            EmployeeIDDistributionOfEmployee.ItemsSource = DB.Employees.Local;
+            DB.Positions.Load();
+            PositionIDDistributionOfEmployee.ItemsSource = DB.Positions.Local;
+            Data = DB.DistributionOfEmployees;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -161,14 +166,15 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new TypeOfGood().CreateNew();
+                str = new DistributionOfEmployee().CreateNew();
             }
-            if (str is TypeOfGood general)
+            if (str is DistributionOfEmployee general)
             {
                 General = general;
 
-                CharTypesOfGoodsTypeOfGood.Text = general.CharTypesOfGoods;
-                NameTypeOfGood.Text = general.Name;
+                ConfectioneryIDDistributionOfEmployee.SelectedValue = general.ConfectioneryID;
+                EmployeeIDDistributionOfEmployee.SelectedValue = general.EmployeeID;
+                PositionIDDistributionOfEmployee.SelectedValue = general.PositionID;
             };
 
         }
@@ -179,15 +185,14 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is TypeOfGood general)
+            if (General is DistributionOfEmployee general)
             {
-                general.CharTypesOfGoods = CharTypesOfGoodsTypeOfGood.Text;
-                general.Name = NameTypeOfGood.Text;
+                general.ConfectioneryID = (int)ConfectioneryIDDistributionOfEmployee.SelectedValue;
+                general.EmployeeID = (int)EmployeeIDDistributionOfEmployee.SelectedValue;
+                general.PositionID = (int)PositionIDDistributionOfEmployee.SelectedValue;
             }
         }
         #endregion
-
-
 
 
 
