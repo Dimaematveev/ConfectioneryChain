@@ -42,6 +42,10 @@ namespace ConfectioneryChain.WPF
             LableRecipes.Content = db.Recipes.Local.Count;
             db.HierararchyInRecipes.Load();
             LableHierararchyInRecipe.Content = db.HierararchyInRecipes.Local.Count;
+            db.ItemInRecipes.Load();
+            LableItemInRecipes.Content = db.ItemInRecipes.Local.Count;
+            db.ToppingInRecipes.Load();
+            LableToppingInRecipes.Content = db.ToppingInRecipes.Local.Count;
 
 
         }
@@ -113,6 +117,19 @@ namespace ConfectioneryChain.WPF
         private void EditHierararchyInRecipe_Click(object sender, RoutedEventArgs e)
         {
             Window edit = new EditHierararchyInRecipe(db);
+            edit.ShowDialog();
+            Init();
+        }
+        private void EditItemInRecipe_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditItemInRecipe(db);
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditToppingInRecipes_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditToppingInRecipe(db);
             edit.ShowDialog();
             Init();
         }

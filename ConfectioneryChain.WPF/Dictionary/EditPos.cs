@@ -167,7 +167,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             {
                 General = general;
 
-                IDPositionPosition.Value = general.IDPosition;
+                
                 NamePosition.Text = general.Name;
                 MinimumHoursPosition.Value = general.MinimumHours;
                 WorkHourRatePosition.Value = general.WorkHourRate;
@@ -183,7 +183,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (General is Position general)
             {
-                general.IDPosition = IDPositionPosition.Value.Value;
+               
                 general.Name = NamePosition.Text;
                 general.MinimumHours = MinimumHoursPosition.Value.Value;
                 general.WorkHourRate = WorkHourRatePosition.Value.Value;

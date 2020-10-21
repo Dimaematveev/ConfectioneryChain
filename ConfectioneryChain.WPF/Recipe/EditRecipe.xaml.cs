@@ -168,7 +168,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             {
                 General = general;
 
-                IDRecipeRecipe.Value = general.IDRecipe;
+                
                 DateCreateRecipe.Value = general.DateCreate;
                 MarkIsWorkRecipe.IsChecked = general.MarkIsWork;
                 ChefIDRecipe.SelectedValue = general.ChefID;
@@ -186,7 +186,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (General is Recipe general)
             {
-                general.IDRecipe = IDRecipeRecipe.Value.Value;
+                
                 general.DateCreate = DateCreateRecipe.Value.Value;
                 general.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
                 general.ChefID = (int)ChefIDRecipe.SelectedValue;

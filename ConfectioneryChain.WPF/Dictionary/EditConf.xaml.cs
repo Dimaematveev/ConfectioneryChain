@@ -167,7 +167,6 @@ namespace ConfectioneryChain.WPF.Dictionary
             {
                 General = general;
 
-                IDConfectioneryConfectionery.Value = general.IDConfectionery;
                 NameConfectionery.Text = general.Name;
                 AddressConfectionery.Text = general.Address;
                 RentPricelConfectionery.Value = general.RentPricel;
@@ -186,7 +185,6 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (General is Confectionery general)
             {
-                general.IDConfectionery = IDConfectioneryConfectionery.Value.Value;
                 general.Name = NameConfectionery.Text;
                 general.Address = AddressConfectionery.Text;
                 general.RentPricel = RentPricelConfectionery.Value.Value;

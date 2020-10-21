@@ -65,5 +65,15 @@
             <Label x:Name="LableHierararchyInRecipe">0</Label>
             <Button x:Name="EditHierararchyInRecipe" Height="20" Click="EditHierararchyInRecipe_Click" >Изменить</Button>
         </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="2" >
+            <TextBlock TextWrapping="Wrap">Продукты в рецепте</TextBlock>
+            <Label x:Name="LableItemInRecipes">0</Label>
+            <Button x:Name="EditItemInRecipes" Height="20" Click="EditItemInRecipe_Click" >Изменить</Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="3" Grid.Row="2" >
+            <TextBlock TextWrapping="Wrap">Топпинги в рецепте</TextBlock>
+            <Label x:Name="LableToppingInRecipes">0</Label>
+            <Button x:Name="EditToppingInRecipes" Height="20" Click="EditToppingInRecipes_Click" >Изменить</Button>
+        </StackPanel>
     </Grid>
 </Window>

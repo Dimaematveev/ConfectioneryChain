@@ -22,7 +22,7 @@ namespace ConfectioneryChain.DB
         }
     
         public int IDItemInRecipe { get; set; }
-        public int ItemInRecipeID { get; set; }
+        public Nullable<int> ItemInRecipeID { get; set; }
         public int RecipeID { get; set; }
         public int Hierarchy { get; set; }
         public Nullable<int> GoodsID { get; set; }

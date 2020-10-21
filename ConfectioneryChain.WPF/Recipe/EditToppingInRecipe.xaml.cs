@@ -9,7 +9,7 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// <summary>
     /// Interaction logic for EditConf.xaml
     /// </summary>
-    public partial class EditEmpl : Window
+    public partial class EditToppingInRecipe : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
 
@@ -17,11 +17,10 @@ namespace ConfectioneryChain.WPF.Dictionary
         DbSet Data;
         private int ID;
         General General;
-        public EditEmpl(ConfectioneryChain_V5Entities db)
+        public EditToppingInRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
-
             Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
             CloseGeneral.Click += CloseGeneral_Click;
@@ -147,8 +146,12 @@ namespace ConfectioneryChain.WPF.Dictionary
         private void Edit_Loaded()
         {
             TableGeneral.ItemsSource = null;
-            DB.Employees.Load();
-            Data = DB.Employees;
+            DB.ToppingInRecipes.Load();
+            DB.Recipes.Load();
+            RecipeIDToppingInRecipe.ItemsSource = DB.Recipes.Local;
+            DB.Goods.Load();
+            GoodsIDToppingInRecipe.ItemsSource = DB.Goods.Local;
+            Data = DB.ToppingInRecipes;
             TableGeneral.ItemsSource = Data.Local;
         }
 
@@ -161,18 +164,17 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (str is null)
             {
-                str = new Employee().CreateNew();
+                str = new ToppingInRecipe().CreateNew();
             }
-            if (str is Employee general)
+            if (str is ToppingInRecipe general)
             {
                 General = general;
 
-                
-                PassportSeriaEmployee.Text = general.PassportSeria;
-                PassportNumberEmployee.Value = general.PassportNumber;
-                FamilyEmployee.Text = general.Family;
-                NameEmployee.Text = general.Name;
-                PatronymicNameEmployee.Text = general.PatronymicName;
+                RecipeIDToppingInRecipe.SelectedValue = general.RecipeID;
+                GoodsIDToppingInRecipe.SelectedValue = general.GoodsID;
+                PercentageOfInfluenceOnTasteToppingInRecipe.Value = general.PercentageOfInfluenceOnTaste;
+                CountToppingInRecipe.Value = general.Count;
+                MaxCountToppingInRecipe.Value = general.MaxCount;
             };
 
         }
@@ -183,18 +185,16 @@ namespace ConfectioneryChain.WPF.Dictionary
         /// </summary>
         private void FillingGeneralFromFields()
         {
-            if (General is Employee general)
+            if (General is ToppingInRecipe general)
             {
-               
-                general.PassportSeria = PassportSeriaEmployee.Text;
-                general.PassportNumber = PassportNumberEmployee.Value.Value;
-                general.Family = FamilyEmployee.Text;
-                general.Name = NameEmployee.Text;
-                general.PatronymicName = PatronymicNameEmployee.Text;
+                general.RecipeID = (int)RecipeIDToppingInRecipe.SelectedValue;
+                general.GoodsID = (int)GoodsIDToppingInRecipe.SelectedValue;
+                general.PercentageOfInfluenceOnTaste = PercentageOfInfluenceOnTasteToppingInRecipe.Value.Value;
+                general.Count = CountToppingInRecipe.Value.Value;
+                general.MaxCount = MaxCountToppingInRecipe.Value.Value;
             }
         }
         #endregion
-
 
 
 

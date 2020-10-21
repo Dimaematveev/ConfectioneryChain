@@ -53,33 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParticalClass\conf\BuyGood.cs" />
-    <Compile Include="ParticalClass\ord\Check.cs" />
-    <Compile Include="Inheritance\General.cs" />
-    <Compile Include="ParticalClass\conf\Confectionery.cs" />
-    <Compile Include="ParticalClass\ord\Customer.cs" />
-    <Compile Include="ParticalClass\conf\DistributionOfEmployee.cs" />
-    <Compile Include="ParticalClass\conf\Employee.cs" />
-    <Compile Include="ParticalClass\conf\FilingTheWarehouseConfectionery.cs" />
-    <Compile Include="ParticalClass\shop\FilingTheWarehouseShop.cs" />
-    <Compile Include="ParticalClass\dic\Good.cs" />
-    <Compile Include="ParticalClass\conf\GoodsInBuy.cs" />
-    <Compile Include="ParticalClass\rec\HierararchyInRecipe.cs" />
-    <Compile Include="ParticalClass\rec\ItemInRecipe.cs" />
-    <Compile Include="ParticalClass\ord\Order.cs" />
-    <Compile Include="ParticalClass\dic\OrderIssueOption.cs" />
-    <Compile Include="ParticalClass\ord\Invoice.cs" />
-    <Compile Include="ParticalClass\dic\Position.cs" />
-    <Compile Include="ParticalClass\ord\PriceList.cs" />
-    <Compile Include="ParticalClass\ord\PriceListRecipe.cs" />
-    <Compile Include="ParticalClass\rec\Recipe.cs" />
-    <Compile Include="ParticalClass\ord\RecipesInOrder.cs" />
-    <Compile Include="ParticalClass\shop\Shop.cs" />
-    <Compile Include="ParticalClass\conf\StaffWorkSchedule.cs" />
-    <Compile Include="ParticalClass\ord\ToppingInOrder.cs" />
-    <Compile Include="ParticalClass\rec\ToppingInRecipe.cs" />
-    <Compile Include="ParticalClass\dic\TypeOfGood.cs" />
-    <Compile Include="ParticalClass\dic\Unit.cs" />
     <Compile Include="BuyGood.cs">
       <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>
     </Compile>
@@ -88,21 +61,6 @@
     </Compile>
     <Compile Include="Confectionery.cs">
       <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ConfectioneryChainModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConfectioneryChainModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ConfectioneryChainModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ConfectioneryChainModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConfectioneryChainModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>
@@ -139,6 +97,48 @@
     </Compile>
     <Compile Include="OrderIssueOption.cs">
       <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParticalClass\conf\BuyGood.cs" />
+    <Compile Include="ParticalClass\ord\Check.cs" />
+    <Compile Include="Inheritance\General.cs" />
+    <Compile Include="ParticalClass\conf\Confectionery.cs" />
+    <Compile Include="ParticalClass\ord\Customer.cs" />
+    <Compile Include="ParticalClass\conf\DistributionOfEmployee.cs" />
+    <Compile Include="ParticalClass\conf\Employee.cs" />
+    <Compile Include="ParticalClass\conf\FilingTheWarehouseConfectionery.cs" />
+    <Compile Include="ParticalClass\shop\FilingTheWarehouseShop.cs" />
+    <Compile Include="ParticalClass\dic\Good.cs" />
+    <Compile Include="ParticalClass\conf\GoodsInBuy.cs" />
+    <Compile Include="ParticalClass\rec\HierararchyInRecipe.cs" />
+    <Compile Include="ParticalClass\rec\ItemInRecipe.cs" />
+    <Compile Include="ParticalClass\ord\Order.cs" />
+    <Compile Include="ParticalClass\dic\OrderIssueOption.cs" />
+    <Compile Include="ParticalClass\ord\Invoice.cs" />
+    <Compile Include="ParticalClass\dic\Position.cs" />
+    <Compile Include="ParticalClass\ord\PriceList.cs" />
+    <Compile Include="ParticalClass\ord\PriceListRecipe.cs" />
+    <Compile Include="ParticalClass\rec\Recipe.cs" />
+    <Compile Include="ParticalClass\ord\RecipesInOrder.cs" />
+    <Compile Include="ParticalClass\shop\Shop.cs" />
+    <Compile Include="ParticalClass\conf\StaffWorkSchedule.cs" />
+    <Compile Include="ParticalClass\ord\ToppingInOrder.cs" />
+    <Compile Include="ParticalClass\rec\ToppingInRecipe.cs" />
+    <Compile Include="ParticalClass\dic\TypeOfGood.cs" />
+    <Compile Include="ParticalClass\dic\Unit.cs" />
+    <Compile Include="ConfectioneryChainModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfectioneryChainModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConfectioneryChainModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConfectioneryChainModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfectioneryChainModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Position.cs">
       <DependentUpon>ConfectioneryChainModel.tt</DependentUpon>

@@ -26,7 +26,7 @@ namespace CreateItems.WPF
 
 
             richText = richText.Replace("\r", "");
-            TheOneClass theOneClass = new TheOneClass(richText);
+            TheOneClass theOneClass = new TheOneClass(richText,Check.IsChecked.Value);
 
 
             string wpf = "";
@@ -71,9 +71,13 @@ namespace CreateItems.WPF
         string ListName { get; set; }
         List<Item> items;
 
-        public TheOneClass(string values)
+        public TheOneClass(string values,bool haveHeader)
         {
             var varible = values.Split('\n');
+            if (haveHeader)
+            {
+                varible = varible.Skip(1).ToArray();
+            }
             ClassName = varible[0].Split('\t')[1];
             ListName = varible[1].Split('\t')[1];
             items = new List<Item>();

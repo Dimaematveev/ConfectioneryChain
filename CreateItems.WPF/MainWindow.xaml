@@ -15,11 +15,13 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <RichTextBox  x:Name="Text" HorizontalScrollBarVisibility="Visible" />
-           
-            <Button x:Name="Pre" Content="Преобразовать" Grid.Column="0" Grid.Row="1" Click="Pre_Click"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="Pre" Content="Преобразовать"  Click="Pre_Click"/>
+                <CheckBox x:Name="Check" Content="Первая строка содержит заголовки"/>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">

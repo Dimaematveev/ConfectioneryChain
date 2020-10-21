@@ -223,7 +223,7 @@
             <PropertyRef Name="IDItemInRecipe" />
           </Key>
           <Property Name="IDItemInRecipe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ItemInRecipeID" Type="int" Nullable="false" />
+          <Property Name="ItemInRecipeID" Type="int" />
           <Property Name="RecipeID" Type="int" Nullable="false" />
           <Property Name="Hierarchy" Type="int" Nullable="false" />
           <Property Name="GoodsID" Type="int" />
@@ -481,7 +481,7 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe">
-          <End Role="ItemInRecipe" Type="Self.ItemInRecipe" Multiplicity="1" />
+          <End Role="ItemInRecipe" Type="Self.ItemInRecipe" Multiplicity="0..1" />
           <End Role="ItemInRecipe1" Type="Self.ItemInRecipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ItemInRecipe">
@@ -993,11 +993,11 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <Property Name="RentPricel" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
           <Property Name="BeginWork" Type="Time" Nullable="false" Precision="0" />
           <Property Name="EndWork" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Money" Type="Decimal" Precision="11" Scale="0" />
           <NavigationProperty Name="DistributionOfEmployees" Relationship="ConfectioneryChain_V5Model.FK_DistributionOfEmployees_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="DistributionOfEmployee" />
           <NavigationProperty Name="FilingTheWarehouseConfectioneries" Relationship="ConfectioneryChain_V5Model.FK_FilingTheWarehouseConfectionery_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="FilingTheWarehouseConfectionery" />
           <NavigationProperty Name="Orders" Relationship="ConfectioneryChain_V5Model.FK_Order_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="Order" />
           <NavigationProperty Name="PriceLists" Relationship="ConfectioneryChain_V5Model.FK_PriceList_ConfectioneryID_Confectionery" FromRole="Confectionery" ToRole="PriceList" />
-          <Property Name="Money" Type="Decimal" Precision="11" Scale="0" />
         </EntityType>
         <EntityType Name="DistributionOfEmployee">
           <Key>
@@ -1228,7 +1228,7 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
             <PropertyRef Name="IDItemInRecipe" />
           </Key>
           <Property Name="IDItemInRecipe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemInRecipeID" Type="Int32" Nullable="false" />
+          <Property Name="ItemInRecipeID" Type="Int32" />
           <Property Name="RecipeID" Type="Int32" Nullable="false" />
           <Property Name="Hierarchy" Type="Int32" Nullable="false" />
           <Property Name="GoodsID" Type="Int32" />
@@ -1620,7 +1620,7 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemInRecipe_IDItemInRecipe_ItemInRecipe">
-          <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe" Multiplicity="1" />
+          <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe" Multiplicity="0..1" />
           <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ItemInRecipe">
@@ -1659,7 +1659,7 @@ warning 6035: The relationship 'FK_GoodsInBuy_BuyGoodsID_ConfectioneryID_BuyGood
           <End Type="ConfectioneryChain_V5Model.ItemInRecipe" Role="ItemInRecipe" Multiplicity="*" />
           <End Type="ConfectioneryChain_V5Model.RecipesInOrder" Role="RecipesInOrder" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

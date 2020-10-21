@@ -167,7 +167,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             {
                 General = general;
 
-                IDUnitsUnit.Value = general.IDUnits;
+                
                 MultipleValueUnit.Value = general.MultipleValue;
                 NameUnit.Text = general.Name;
             };
@@ -182,7 +182,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (General is Unit general)
             {
-                general.IDUnits = IDUnitsUnit.Value.Value;
+               
                 general.MultipleValue = MultipleValueUnit.Value.Value;
                 general.Name = NameUnit.Text;
             }

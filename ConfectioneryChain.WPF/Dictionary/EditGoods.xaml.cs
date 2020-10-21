@@ -171,7 +171,7 @@ namespace ConfectioneryChain.WPF.Dictionary
             {
                 General = general;
 
-                IDGoodsGood.SelectedValue = general.IDGoods;
+                
                 TypesOfGoodsCharGood.SelectedValue = general.TypesOfGoodsChar;
                 UnitsIDGood.Value = general.UnitsID;
                 NameGood.Text = general.Name;
@@ -188,7 +188,7 @@ namespace ConfectioneryChain.WPF.Dictionary
         {
             if (General is Good general)
             {
-                general.IDGoods = (int)IDGoodsGood.SelectedValue;
+                
                 general.TypesOfGoodsChar = (string)TypesOfGoodsCharGood.SelectedValue;
                 general.UnitsID = UnitsIDGood.Value.Value;
                 general.Name = NameGood.Text;
