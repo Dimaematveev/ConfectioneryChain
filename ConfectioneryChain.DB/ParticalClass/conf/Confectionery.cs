@@ -1,10 +1,12 @@
 ﻿using ConfectioneryChain.DB.Inheritance;
 using System;
+using System.ComponentModel;
 
 namespace ConfectioneryChain.DB
 {
     public partial class Confectionery : General
     {
+
         public override string ToString()
         {
             return $"[{Name}]";

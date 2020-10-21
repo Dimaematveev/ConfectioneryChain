@@ -1,6 +1,10 @@
 ﻿using ConfectioneryChain.DB;
+using ConfectioneryChain.DB.Inheritance;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 
 namespace ConfectioneryChain.WPF.Dictionary
@@ -10,100 +14,115 @@ namespace ConfectioneryChain.WPF.Dictionary
     /// </summary>
     public partial class EditRecipe : Window
     {
-        private readonly Action Save;
-        private readonly DbSet Data;
+        private readonly ConfectioneryChain_V5Entities DB;
+
+
+        DbSet Data;
         private int ID;
+        General General;
         public EditRecipe(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
-            db.Recipes.Load();
-            Data = db.Confectioneries;
-            Save = () => db.SaveChanges();
-            LoadValue();
+            DB = db;
+            Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
-            CloseGeneral.Click += CloseConf_Click;
+            CloseGeneral.Click += CloseGeneral_Click;
             //Для 1 кафе
-            SaveOne.Click += SaveConf_Click;
-            CancelOne.Click += CancelConf_Click;
+            SaveOne.Click += SaveOne_Click;
+            CancelOne.Click += CancelOne_Click;
 
             //Для всех кафе
-            EditAll.Click += EditConfBut_Click;
-            AddAll.Click += AddConf_Click;
+            EditAll.Click += EditAll_Click;
+            AddAll.Click += AddAll_Click;
 
         }
 
-        private void LoadValue()
-        {
-            Data.Load();
-            DataGrid1.ItemsSource = Data.Local;
-        }
-
-
-        private void EditConfBut_Click(object sender, RoutedEventArgs e)
-        {
-
-            switch (DataGrid1.SelectedIndex)
-            {
-                case -1:
-                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    break;
-                default:
-                    ID = DataGrid1.SelectedIndex;
-                    Edit.IsEnabled = true;
-                    FillingFields((DataGrid1.Items[DataGrid1.SelectedIndex]) as Confectionery);
-                    break;
-            }
-        }
-
-        private void FillingFields(Confectionery str)
-        {
-            NameConf.Text = str.Name;
-            AdressConf.Text = str.Address;
-            RentPriceConf.Value = str.RentPricel;
-
-            BeginTime.Value = new DateTime(str.BeginWork.Ticks);
-            EndTime.Value = new DateTime(str.EndWork.Ticks);
-
-            Money.Value = str.Money;
-        }
-
-        private void AddConf_Click(object sender, RoutedEventArgs e)
-        {
-            Edit.IsEnabled = true;
-            FillingFields(new Confectionery().CreateNew() as Confectionery);
-
-        }
-
-        private void CancelConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Закрыть
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseGeneral_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            FillingFields(new Confectionery().CreateNew() as Confectionery);
+            DialogResult = true;
         }
 
-        private void SaveConf_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// Редактировать
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditAll_Click(object sender, RoutedEventArgs e)
         {
-            Edit.IsEnabled = false;
+            ID = TableGeneral.SelectedIndex;
             if (ID == -1)
             {
-                Data.Local.Add(New());
+                MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                var conf = New();
-                conf.IDConfectionery = (Data.Local[ID] as Confectionery).IDConfectionery;
-                Data.Local[ID] = conf;
+                Edit.IsEnabled = true;
+                FillingFielsFromGeneral(Data.Local[TableGeneral.SelectedIndex]);
+            }
+        }
+
+       
+        /// <summary>
+        /// Добавить новый
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddAll_Click(object sender, RoutedEventArgs e)
+        {
+            Edit.IsEnabled = true;
+            ID = -1;
+            FillingFielsFromGeneral(null);
+
+        }
+
+        /// <summary>
+        /// Отмена
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelOne_Click(object sender, RoutedEventArgs e)
+        {
+            Edit.IsEnabled = false;
+            FillingFielsFromGeneral(null);
+        }
+
+        /// <summary>
+        /// Сохранить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveOne_Click(object sender, RoutedEventArgs e)
+        {
+            FillingGeneralFromFields();
+            if (ID == -1)
+            {
+                Data.Add(General);
+            }
+            else
+            {
+                ((General)Data.Local[ID]).Fill(General);
             }
 
             try
             {
-                Save();
+                DB.SaveChanges();
+                Edit.IsEnabled = false;
+                Edit_Loaded();
             }
             catch (Exception ex)
             {
                 if (ID == -1)
                 {
-                    Data.Local.RemoveAt(Data.Local.Count - 1);
+                    Data.Remove(General);
                 }
+
                 Exception ex1 = ex;
                 string err = "";
                 while (ex1 != null)
@@ -123,24 +142,66 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         }
 
-        private Confectionery New()
+        #region Изменяемое
+        /// <summary>
+        /// Действия при загрузке
+        /// </summary>
+        private void Edit_Loaded()
         {
-            var obj = new Confectionery
+            TableGeneral.ItemsSource = null;
+            DB.Recipes.Load();
+            DB.Employees.Load();
+            ChefIDRecipe.ItemsSource = DB.Employees.Local;
+            Data = DB.Recipes;
+            TableGeneral.ItemsSource = Data.Local;
+        }
+
+
+        /// <summary>
+        /// Заполнить Поля из Объекта
+        /// </summary>
+        /// <param name="str"></param>
+        private void FillingFielsFromGeneral(object str)
+        {
+            if (str is null)
             {
-                Name = NameConf.Text,
-                Address = AdressConf.Text,
-                RentPricel = RentPriceConf.Value.Value,
-                BeginWork = new TimeSpan(BeginTime.Value.Value.Ticks),
-                EndWork = new TimeSpan(EndTime.Value.Value.Ticks),
-                Money = Money.Value.Value
+                str = new Recipe().CreateNew();
+            }
+            if (str is Recipe general)
+            {
+                General = general;
+
+               
+                DateCreateRecipe.Value = general.DateCreate;
+                MarkIsWorkRecipe.IsChecked = general.MarkIsWork;
+                ChefIDRecipe.SelectedValue = general.ChefID;
+                NameRecipe.Text = general.Name;
+                DescriptionRecipe.Text = general.Description;
             };
-            return obj;
+
         }
-        private void CloseConf_Click(object sender, RoutedEventArgs e)
+
+
+        /// <summary>
+        /// Заполнить объект из полей
+        /// </summary>
+        private void FillingGeneralFromFields()
         {
-            Edit.IsEnabled = false;
-            DialogResult = true;
+            if (General is Recipe general)
+            {
+                
+                general.DateCreate = DateCreateRecipe.Value.Value;
+                general.MarkIsWork = MarkIsWorkRecipe.IsChecked.Value;
+                general.ChefID = (int)ChefIDRecipe.SelectedValue;
+                general.Name = NameRecipe.Text;
+                general.Description = DescriptionRecipe.Text;
+            }
         }
+
+
+
+        #endregion 
+
 
 
     }

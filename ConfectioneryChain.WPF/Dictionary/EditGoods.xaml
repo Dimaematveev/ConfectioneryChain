@@ -40,7 +40,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label >Тип подсчета товара: </Label>
-                    <ComboBox  x:Name="UnitsID" Width="150" SelectedValuePath="IDUnits" DisplayMemberPath="Name"/>
+                    <ComboBox  x:Name="UnitsID" Width="150" SelectedValuePath="IDUnits"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Label>Название продукта:</Label>

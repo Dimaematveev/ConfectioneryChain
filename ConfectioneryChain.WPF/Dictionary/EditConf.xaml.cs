@@ -1,5 +1,8 @@
 ﻿using ConfectioneryChain.DB;
+using ConfectioneryChain.DB.Inheritance;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
@@ -12,87 +15,115 @@ namespace ConfectioneryChain.WPF.Dictionary
     public partial class EditConf : Window
     {
         private readonly ConfectioneryChain_V5Entities DB;
+
+
+        DbSet Data;
         private int ID;
+        General General;
         public EditConf(ConfectioneryChain_V5Entities db)
         {
             InitializeComponent();
             DB = db;
-            LoadValue();
+
+            Loaded += (s, e) => { Edit_Loaded(); };
             //Общее
-            CloseGeneral.Click += CloseConf_Click;
+            CloseGeneral.Click += CloseGeneral_Click;
             //Для 1 кафе
-            SaveOne.Click += SaveConf_Click;
-            CancelOne.Click += CancelConf_Click;
+            SaveOne.Click += SaveOne_Click;
+            CancelOne.Click += CancelOne_Click;
 
             //Для всех кафе
-            EditAll.Click += EditConfBut_Click;
-            AddAll.Click += AddConf_Click;
+            EditAll.Click += EditAll_Click;
+            AddAll.Click += AddAll_Click;
 
         }
 
-        private void LoadValue()
+        /// <summary>
+        /// Закрыть
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseGeneral_Click(object sender, RoutedEventArgs e)
         {
-            DB.Confectioneries.Load();
-            DataGrid1.ItemsSource = DB.Confectioneries.Local;
+            Edit.IsEnabled = false;
+            DialogResult = true;
         }
 
 
-        private void EditConfBut_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Редактировать
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditAll_Click(object sender, RoutedEventArgs e)
         {
-
-            switch (DataGrid1.SelectedIndex)
+            ID = TableGeneral.SelectedIndex;
+            if (ID == -1)
             {
-                case -1:
-                    MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    break;
-                default:
-                    ID = DataGrid1.SelectedIndex;
-                    Edit.IsEnabled = true;
-                    FillingFields((DataGrid1.Items[DataGrid1.SelectedIndex]) as Confectionery);
-                    break;
+                MessageBox.Show($"Вы не выбрали поле.", "Неправильно выбраны поля", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                Edit.IsEnabled = true;
+                FillingFielsFromGeneral(Data.Local[TableGeneral.SelectedIndex]);
             }
         }
 
        
-
-        private void AddConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Добавить новый
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddAll_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = true;
             ID = -1;
-            FillingFields(new Confectionery().CreateNew() as Confectionery);
+            FillingFielsFromGeneral(null);
 
         }
 
-        private void CancelConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Отмена
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CancelOne_Click(object sender, RoutedEventArgs e)
         {
             Edit.IsEnabled = false;
-            FillingFields(new Confectionery().CreateNew() as Confectionery);
+            FillingFielsFromGeneral(null);
         }
 
-        private void SaveConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Сохранить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveOne_Click(object sender, RoutedEventArgs e)
         {
-            Edit.IsEnabled = false;
+            FillingGeneralFromFields();
             if (ID == -1)
             {
-                DB.Confectioneries.Local.Add(New());
+                Data.Add(General);
             }
             else
             {
-                var conf = New();
-                conf.IDConfectionery = (DB.Confectioneries.Local[ID]).IDConfectionery;
-                DB.Confectioneries.Local[ID] = conf;
+                ((General)Data.Local[ID]).Fill(General);
             }
 
             try
             {
                 DB.SaveChanges();
+                Edit.IsEnabled = false;
+                Edit_Loaded();
             }
             catch (Exception ex)
             {
                 if (ID == -1)
                 {
-                    DB.Confectioneries.Local.RemoveAt(DB.Confectioneries.Count() - 1);
+                    Data.Remove(General);
                 }
+
                 Exception ex1 = ex;
                 string err = "";
                 while (ex1 != null)
@@ -112,39 +143,62 @@ namespace ConfectioneryChain.WPF.Dictionary
 
         }
 
-        private void FillingFields(Confectionery str)
+
+        /// <summary>
+        /// Действия при загрузке
+        /// </summary>
+        private void Edit_Loaded()
         {
-            NameConf.Text = str.Name;
-            AdressConf.Text = str.Address;
-            RentPriceConf.Value = str.RentPricel;
-
-            BeginTime.Value = new DateTime(str.BeginWork.Ticks);
-            EndTime.Value = new DateTime(str.EndWork.Ticks);
-
-            Money.Value = str.Money;
+            TableGeneral.ItemsSource = null;
+            DB.Confectioneries.Load();
+            Data = DB.Confectioneries;
+            TableGeneral.ItemsSource = Data.Local;
         }
 
 
-        private Confectionery New()
+        /// <summary>
+        /// Заполнить Поля из Объекта
+        /// </summary>
+        /// <param name="str"></param>
+        private void FillingFielsFromGeneral(object str)
         {
-            var obj = new Confectionery
+            if (str is null)
             {
-                Name = NameConf.Text,
-                Address = AdressConf.Text,
-                RentPricel = RentPriceConf.Value.Value,
-                BeginWork = new TimeSpan(BeginTime.Value.Value.Ticks),
-                EndWork = new TimeSpan(EndTime.Value.Value.Ticks),
-                Money = Money.Value.Value
+                str = new Confectionery().CreateNew();
+            }
+            if (str is Confectionery general)
+            {
+                General = general;
+
+                IDConfectioneryConfectionery.Value = general.IDConfectionery;
+                NameConfectionery.Text = general.Name;
+                AddressConfectionery.Text = general.Address;
+                RentPricelConfectionery.Value = general.RentPricel;
+                BeginWorkConfectionery.Value = new DateTime(general.BeginWork.Ticks);
+                EndWorkConfectionery.Value = new DateTime(general.EndWork.Ticks);
+                MoneyConfectionery.Value = general.Money;
             };
-            return obj;
+
         }
 
 
-        private void CloseConf_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Заполнить объект из полей
+        /// </summary>
+        private void FillingGeneralFromFields()
         {
-            Edit.IsEnabled = false;
-            DialogResult = true;
+            if (General is Confectionery general)
+            {
+                general.IDConfectionery = IDConfectioneryConfectionery.Value.Value;
+                general.Name = NameConfectionery.Text;
+                general.Address = AddressConfectionery.Text;
+                general.RentPricel = RentPricelConfectionery.Value.Value;
+                general.BeginWork = new TimeSpan(BeginWorkConfectionery.Value.Value.Ticks);
+                general.EndWork = new TimeSpan(EndWorkConfectionery.Value.Value.Ticks);
+                general.Money = MoneyConfectionery.Value.Value;
+            }
         }
+
 
 
     }

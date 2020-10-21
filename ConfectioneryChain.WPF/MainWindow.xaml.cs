@@ -37,6 +37,11 @@ namespace ConfectioneryChain.WPF
             db.DistributionOfEmployees.Load();
             LableDistributionOfEmployees.Content = db.DistributionOfEmployees.Local.Count;
 
+            //Рецепт
+            db.Recipes.Load();
+            LableRecipes.Content = db.Recipes.Local.Count;
+
+
         }
 
 
@@ -92,6 +97,13 @@ namespace ConfectioneryChain.WPF
         private void EditDistributionOfEmployees_Click(object sender, RoutedEventArgs e)
         {
             Window edit = new EditDistributionOfEmployees(db);
+            edit.ShowDialog();
+            Init();
+        }
+
+        private void EditRecipes_Click(object sender, RoutedEventArgs e)
+        {
+            Window edit = new EditRecipe(db);
             edit.ShowDialog();
             Init();
         }
